@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><link rel="manifest" href="/manifest.json">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="家里一直屯着两根网线，一根是低价优惠时期买的长城，另一根是旧的贵价联通。由于一些历史原因，这联通的线路经常不稳定，会莫名其妙的挂掉，一直以来当联通线路挂掉的时候，就要手动拔掉联通的网线，换成长城的，然后又要进路由器改一番 PPPoE 的拨号配置，实在是烦，看到 OpenWRT 这么强大，突发奇想的要不干脆把路由器的一个 LAN 口拿出来，当成 WAN 来用，两个口都进行拨号，经过查了一番资料之后，">
+<meta name="keywords" content="Linux基础,操作系统,OpenWRT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在网件 WNDR4300v1 上编译 OpenWRT 并实现多线多拨">
+<meta property="og:url" content="https://hexo.bangz.me/archives/openwrt-compile-and-mwan3-config-in-netgear-wndr4300.html">
+<meta property="og:site_name" content="BangZ&#39;s 梦工厂">
+<meta property="og:description" content="家里一直屯着两根网线，一根是低价优惠时期买的长城，另一根是旧的贵价联通。由于一些历史原因，这联通的线路经常不稳定，会莫名其妙的挂掉，一直以来当联通线路挂掉的时候，就要手动拔掉联通的网线，换成长城的，然后又要进路由器改一番 PPPoE 的拨号配置，实在是烦，看到 OpenWRT 这么强大，突发奇想的要不干脆把路由器的一个 LAN 口拿出来，当成 WAN 来用，两个口都进行拨号，经过查了一番资料之后，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hexo.bangz.me/images/2018/10/switch_config.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/2018/10/add_interface.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/2018/10/add_firewall_area.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/2018/10/wan_metric.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/2018/10/wanb_metric.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/2018/10/firewall_config.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/2018/10/active_mwan_interface.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/2018/10/mwan_policy.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/2018/10/mwan_statistic.png">
+<meta property="og:updated_time" content="2018-10-22T01:45:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在网件 WNDR4300v1 上编译 OpenWRT 并实现多线多拨">
+<meta name="twitter:description" content="家里一直屯着两根网线，一根是低价优惠时期买的长城，另一根是旧的贵价联通。由于一些历史原因，这联通的线路经常不稳定，会莫名其妙的挂掉，一直以来当联通线路挂掉的时候，就要手动拔掉联通的网线，换成长城的，然后又要进路由器改一番 PPPoE 的拨号配置，实在是烦，看到 OpenWRT 这么强大，突发奇想的要不干脆把路由器的一个 LAN 口拿出来，当成 WAN 来用，两个口都进行拨号，经过查了一番资料之后，">
+<meta name="twitter:image" content="https://hexo.bangz.me/images/2018/10/switch_config.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="BangZ's 梦工厂" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://hexo.bangz.me/archives/openwrt-compile-and-mwan3-config-in-netgear-wndr4300.html">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>在网件 WNDR4300v1 上编译 OpenWRT 并实现多线多拨 | BangZ's 梦工厂</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78277428-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-78277428-2');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BangZ's 梦工厂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">FutureTech Research Center</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives menu-item-active">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-pdf">
+    <a href="/pdfs/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-file"></i> <br>PDF</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hexo.bangz.me/archives/openwrt-compile-and-mwan3-config-in-netgear-wndr4300.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BangZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/icons/icon-128x128.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BangZ's 梦工厂">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">在网件 WNDR4300v1 上编译 OpenWRT 并实现多线多拨
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-20 12:18:28" itemprop="dateCreated datePublished" datetime="2018-10-20T12:18:28+08:00">2018-10-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-22 09:45:43" itemprop="dateModified" datetime="2018-10-22T09:45:43+08:00">2018-10-22</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/日常运维/" itemprop="url" rel="index"><span itemprop="name">日常运维</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术研究/" itemprop="url" rel="index"><span itemprop="name">技术研究</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/archives/openwrt-compile-and-mwan3-config-in-netgear-wndr4300.html" class="leancloud_visitors" data-flag-title="在网件 WNDR4300v1 上编译 OpenWRT 并实现多线多拨">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>家里一直屯着两根网线，一根是低价优惠时期买的长城，另一根是旧的贵价联通。由于一些历史原因，这联通的线路经常不稳定，会莫名其妙的挂掉，一直以来当联通线路挂掉的时候，就要手动拔掉联通的网线，换成长城的，然后又要进路由器改一番 PPPoE 的拨号配置，实在是烦，看到 OpenWRT 这么强大，突发奇想的要不干脆把路由器的一个 LAN 口拿出来，当成 WAN 来用，两个口都进行拨号，经过查了一番资料之后，感觉这个东西可行，就开始折腾了，不过中途一直没有找到自己想要的固件，于是打算自己编译一份，于是就这样掉进了 OpenWRT 的坑，折腾了两个星期之后终于成功的弄出来了。<br><a id="more"></a></p>
+<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><p>写这篇文章的时候 OpenWRT 18.06 才刚出不久，感觉不太成熟，笔者还是选择了用 Lean 大的 LEDE 8.x 来进行编译。  </p>
+<p>Lean 大的 LEDE 仓库地址：<a href="https://github.com/coolsnowwolf/lede" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/coolsnowwolf/lede</a>  </p>
+<p>起初在自己电脑 macOS 上进行编译，怎么编译都编译不通过，首先是 macOS 的文件系统 hfs 有大小写不敏感的问题，接着又是编译过程中的一些包有 macOS 环境的兼容性问题。  </p>
+<p>所以后来笔者为了避免编译环境差异造成这些不必要的麻烦，去找了个 Docker 的编译环境，才成功地编译了出来，在这里感谢 <a href="http://www.right.com.cn/forum/forum.php?mod=viewthread&amp;tid=256137" rel="external nofollow noopener noreferrer" target="_blank">@timiil</a> 提供的 Docker 镜像。  </p>
+<h2 id="预备措施"><a href="#预备措施" class="headerlink" title="预备措施"></a>预备措施</h2><p>由于笔者是选择了腾讯云的 CentOS 服务器来进行编译操作，所以还需要再服务器上先安装 Docker，至于 Docker 怎么安装，由于不同环境下方法不同，在此本文不做详述，仅提供一篇 <a href="https://docs.docker.com/install/linux/docker-ce/centos/#install-from-a-package" rel="external nofollow noopener noreferrer" target="_blank">教程</a> 作为参考。</p>
+<h2 id="启动-Docker-实例"><a href="#启动-Docker-实例" class="headerlink" title="启动 Docker 实例"></a>启动 Docker 实例</h2><p>安装好 Docker 之后，需要先拉取用于编译 LEDE 的 Docker 镜像<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull timiil/coolsnowwolf-lede-builder</span><br></pre></td></tr></table></figure></p>
+<p>然后创建并启动一个 Docker 实例，并挂载实例内的镜像输出目录 <code>/lede/bin</code> 到本地的 <code>~/lede_output</code> 目录下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -v ~/lede_output:/lede/bin timiil/coolsnowwolf-lede-builder</span><br></pre></td></tr></table></figure></p>
+<h2 id="更新-git-库"><a href="#更新-git-库" class="headerlink" title="更新 git 库"></a>更新 git 库</h2><p>由于 Lean 大的 github 仓库是经常更新的，而 timiil 的 docker 镜像没有随之更新，所以进入到 docker 实例内后会发现里面的代码不是最新的代码，这会导致编译时的一些错误，所以这里需要手动更新一下代码，确保当前的代码跟 Lean 大仓库内的代码是同步的。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure></p>
+<h2 id="安装编译工具"><a href="#安装编译工具" class="headerlink" title="安装编译工具"></a>安装编译工具</h2><p>为确保编译工作能够正常进行，也需要把编译所需的工具安装一下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential subversion libncurses5-dev zlib1g-dev gawk gcc-multilib flex git-core gettext libssl-dev unzip</span><br></pre></td></tr></table></figure></p>
+<h2 id="初始化-LEDE-的编译目录"><a href="#初始化-LEDE-的编译目录" class="headerlink" title="初始化 LEDE 的编译目录"></a>初始化 LEDE 的编译目录</h2><p>1、创建一份 feeds.conf<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp feeds.conf.default feeds.conf</span><br></pre></td></tr></table></figure></p>
+<p>2、更新本地的包索引列表<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./scripts/feeds update -a</span><br></pre></td></tr></table></figure></p>
+<p>3、将本地的包更新到最新版本<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./scripts/feeds install -a</span><br></pre></td></tr></table></figure></p>
+<p>PS：如果中途 freeswitch 或者其他包报错，可以删掉重装一下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./scripts/feeds uninstall freeswitch</span><br><span class="line">./scripts/feeds install -a</span><br></pre></td></tr></table></figure></p>
+<h2 id="配置-LEDE-编译目标"><a href="#配置-LEDE-编译目标" class="headerlink" title="配置 LEDE 编译目标"></a>配置 LEDE 编译目标</h2><p>打开配置菜单<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></table></figure></p>
+<p>笔者仅需要用于 WNDR4300，故在此已 WNDR4300 为例进行配置  </p>
+<pre><code>Target System =&gt; Atheros AR7xxx/AR9xxx
+Subtarget =&gt; Generic devices with NAND flash
+Target Profile =&gt; NETGEAR WNDR4300v1
+Target Images =&gt; Root filesystem images =&gt; squashfs
+LuCI =&gt; Applications =&gt; 把自己需要的东西勾上
+LuCI =&gt; Themes =&gt; 可以勾个 material
+LuCI =&gt; Modules =&gt; Translations =&gt; 勾上 Chinese
+</code></pre><p>配好之后保存一下就行了  </p>
+<p>PS：Target Profile 找不到的话可以在 OpenWRT wiki 上把路由器型号输进去，然后 wiki 会有这个提示。  </p>
+<p>附：<a href="https://wiki.openwrt.org/toh/netgear/wndr4300" rel="external nofollow noopener noreferrer" target="_blank">WNDR4300 说明</a>  </p>
+<h2 id="修改-WNDR4300-的-mtd-分布，充分利用路由器的-flash"><a href="#修改-WNDR4300-的-mtd-分布，充分利用路由器的-flash" class="headerlink" title="修改 WNDR4300 的 mtd 分布，充分利用路由器的 flash"></a>修改 WNDR4300 的 mtd 分布，充分利用路由器的 flash</h2><p>由于 OpenWRT 官方给的 WNDR4300 的 mtdlayout 只划分了 32M，WNDR4300 的 flash 实际上有 128M，所以这里最好修改一下编译时的 mtdlayout，这样可以充分利用我们的 flash 空间</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ./target/linux/ar71xx/image/</span><br><span class="line">cp legacy.mk legacy.mk.bak</span><br><span class="line">vi legacy.mk</span><br></pre></td></tr></table></figure>
+<p>找到这一段  </p>
+<blockquote>
+<p>wndr4300_mtdlayout=mtdparts=ar934x-nfc:256k(u-boot)ro,256k(u-boot-env)ro,256k(caldata),512k(pot),2048k(language),512k(config),3072k(traffic_meter),2048k(kernel),<strong>23552k</strong>(ubi),<strong>25600k</strong>@0x6c0000(firmware),256k(caldata_backup),-(reserved)  </p>
+</blockquote>
+<p>改为（将 ubi 和 firmware 增加 96M，完全使用 128M flash）  </p>
+<blockquote>
+<p>wndr4300_mtdlayout=mtdparts=ar934x-nfc:256k(u-boot)ro,256k(u-boot-env)ro,256k(caldata)ro,512k(pot),2048k(language),512k(config),3072k(traffic_meter),2048k(kernel),<strong>121856k</strong>(ubi),<strong>123904k</strong>@0x6c0000(firmware),256k(caldata_backup),-(reserved)  </p>
+</blockquote>
+<p>改完后记得保存退出</p>
+<h2 id="执行编译"><a href="#执行编译" class="headerlink" title="执行编译"></a>执行编译</h2><p>配置好之后可以直接执行编译<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup make V=99 &amp;   <span class="comment"># 编译的日志会输出到 nohup.out</span></span><br></pre></td></tr></table></figure></p>
+<p>也可以在此之前先 <code>make download</code> 一下，把需要的 dl 包先下载下来（有时可能会需要能访问外网的网络环境），接着再 <code>make V=99</code>，听说这样会快一些。  </p>
+<p>这样就可以慢慢地等它编译完，自己先干别的事情去了，第一次编译要几个小时是正常的。  </p>
+<p>PS：docker 可以用 <code>ctrl+p</code> 然后 <code>ctrl+q</code> 操作，直接从容器里面退出来而不中断容器。然后再用 <code>docker attach $id</code> 重新进入实例之后，按下 enter 键，如果 make 编译执行完了会有 <code>Done</code> 的提示。  </p>
+<h1 id="刷入固件"><a href="#刷入固件" class="headerlink" title="刷入固件"></a>刷入固件</h1><p>编译完之后，在本机挂载的 <code>~/lede_output/targets/ar71xx/nand</code> 目录下，看到编译完成的 <code>openwrt-ar71xx-nand-wndr4300-ubi-factory.img</code> 文件，我们只要这个文件就行了，把它拿出来。</p>
+<h2 id="tftp-刷入固件"><a href="#tftp-刷入固件" class="headerlink" title="tftp 刷入固件"></a>tftp 刷入固件</h2><p>由于刷入 img 固件需要 tftp 工具，需要先找个有 tftp 的环境  </p>
+<h3 id="Windows-环境"><a href="#Windows-环境" class="headerlink" title="Windows 环境"></a>Windows 环境</h3><p>1、Windows 下的话 tftp 客户端默认是没有安装的，需要先在 <code>控制面板 &gt; 程序 &gt; 程序和功能 &gt; 打开或关闭 Windows 功能</code> 里面勾选 <code>TFTP 客户端</code>，然后按确定。这样在命令行里面才能调用它。  </p>
+<p>2、用牙签或者粗针或者笔头按住路由器背面红色的 reset 键，重启路由器，直到路由器进入绿灯闪烁状态之后再松开 reset 键  </p>
+<p>3、在 Windows 下手工把网卡的 IP 配成 192.168.1.11，然后在 cmd 下去 <code>ping 192.168.1.1</code>，能够 ping 通才能进行下一步操作</p>
+<p>4、然后在 Windows 下的 cmd 命令行里面输入<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tftp -i <span class="number">192</span>.<span class="number">168</span>.<span class="number">1</span>.<span class="number">1</span> PUT c:\<span class="built_in">path</span>\to\openwrt-ar71xx-nand-wndr4300-ubi-factory.img</span><br></pre></td></tr></table></figure></p>
+<p>把上面的路径改成 img 文件所在的路径即可  </p>
+<p>5、上传完后路由器会自动安装固件并重启，这时把前面手工配的 IP 地址改回 DHCP 分配。当路由器第一次重启完后，若能 ping 通 192.168.1.1 的话，先别急着进入路由器，要先拔掉路由器电源线，再插回去重启一遍，等 5G 的灯亮了再进行后面的操作，不然 5G wifi 可能会打不开。</p>
+<h3 id="macOS-环境"><a href="#macOS-环境" class="headerlink" title="macOS 环境"></a>macOS 环境</h3><p>操作基本跟 Windows 环境相同，只是刷 tftp 的时候，所用的命令会有所不同<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tftp</span><br><span class="line">tftp&gt; connect 192.168.1.1</span><br><span class="line">tftp&gt; mode binary</span><br><span class="line">tftp&gt; put /path/to/openwrt-ar71xx-nand-wndr4300-ubi-factory.img</span><br><span class="line">tftp&gt; quit</span><br></pre></td></tr></table></figure></p>
+<p>同样的，把上面的路径改成 img 的实际路径即可</p>
+<p>安装完成后，登录 LuCI 的面板 <a href="http://192.168.1.1" rel="external nofollow noopener noreferrer" target="_blank">http://192.168.1.1</a>，初始用户名为 <code>root</code>，初始密码为 <code>password</code></p>
+<h1 id="配置多线多拨"><a href="#配置多线多拨" class="headerlink" title="配置多线多拨"></a>配置多线多拨</h1><p>安装好 LEDE 之后，别的 wifi 什么的配置就不多说了，这些都没有什么问题，这里要解决的是多线多拨的问题，一开始我在这里卡了很久，折腾了半天终于给弄出来了。</p>
+<h2 id="给交换机划分-vlan"><a href="#给交换机划分-vlan" class="headerlink" title="给交换机划分 vlan"></a>给交换机划分 vlan</h2><p>在 <code>网络 =&gt; 交换机</code> 中添加一行新的 vlan<br><img src="/images/2018/10/switch_config.png" alt="">  </p>
+<p>把 CPU 列设成 “已标记”，把需要转 WAN 的 LAN 口改成 “未标记”。<br>然后 VLAN 1 上对应的端口也要设为 “关”  </p>
+<p>PS：这里端口状态“未标记”(untagged)，即该端口作为本 VLAN 成员，进行二层交换；若选择“已标记”(tagged)，端口之间通信无二层交换，而是冲突广播（hub 方式）  </p>
+<h2 id="添加接口配置"><a href="#添加接口配置" class="headerlink" title="添加接口配置"></a>添加接口配置</h2><p>在 <code>网络 =&gt; 接口</code> 中添加新的接口配置<br><img src="/images/2018/10/add_interface.png" alt=""></p>
+<p>然后建好接口后把 PPPoE 的用户名和密码自己填上<br>接着给这个接口新增一个防火墙域叫’wanb’ 的<br><img src="/images/2018/10/add_firewall_area.png" alt="">  </p>
+<p>接着要给不同的接口配置不同的跃点数，避免路由失效<br><img src="/images/2018/10/wan_metric.png" alt=""><br><img src="/images/2018/10/wanb_metric.png" alt="">  </p>
+<h2 id="配置防火墙域"><a href="#配置防火墙域" class="headerlink" title="配置防火墙域"></a>配置防火墙域</h2><p>在 <code>网络 =&gt; 防火墙</code> 中把对应的规则也给添加进去<br><img src="/images/2018/10/firewall_config.png" alt="">  </p>
+<h2 id="配置-MWAN-负载均衡"><a href="#配置-MWAN-负载均衡" class="headerlink" title="配置 MWAN 负载均衡"></a>配置 MWAN 负载均衡</h2><p>接着在 <code>网络 =&gt; 负载均衡</code> 给配置一下 MWAN3 的相关配置<br>由于我给接口起的名字是 wanb，MWAN3 默认就有这个配置，所以相关的配置工作量也就减少了<br>启用接口：<br><img src="/images/2018/10/active_mwan_interface.png" alt="">  </p>
+<p>最后，根据自己的需要，在规则这边选择规则，我这里我这里选择了 wan 优先的策略<br><img src="/images/2018/10/mwan_policy.png" alt="">  </p>
+<h2 id="修改-MAC-地址"><a href="#修改-MAC-地址" class="headerlink" title="修改 MAC 地址"></a>修改 MAC 地址</h2><p>由于新增的 eth0.3 没有配置 MAC 地址，所以新增接口会沿用 eth0 的 MAC 地址，导致 MAC 地址冲突，所以这里还要加一个步骤，就是给 eth0.3 配置 MAC 地址  </p>
+<p>PS：可在命令行中输入 <code>ip a show</code> 查看本地的所有 MAC 地址</p>
+<p>ssh 进入路由器<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@192.168.1.1</span><br></pre></td></tr></table></figure></p>
+<p>打开网络配置文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/config/network</span><br></pre></td></tr></table></figure></p>
+<p>在 wanb 的配置前面添加以下配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">config device &apos;wanb_dev&apos;</span><br><span class="line">        option name &apos;eth0.3&apos;</span><br><span class="line">        option macaddr &apos;c0:ff:d4:b3:64:f7&apos;</span><br></pre></td></tr></table></figure></p>
+<p>保存退出，然后重启 eth0.3 接口<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ifdown wanb</span><br><span class="line">ifup wanb</span><br></pre></td></tr></table></figure></p>
+<p>配完之后最好重启一下路由器，再看看 <code>状态 =&gt; 概览</code>，如果有两个 IPv4 的上游就说明配置成功了，这样子就解决了 MAC 地址冲突带来的问题<br><img src="/images/2018/10/mwan_statistic.png" alt="">  </p>
+<p>整个多线多拨到这里就算实现了  </p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux基础/" rel="tag"># Linux基础</a>
+          
+            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
+          
+            <a href="/tags/OpenWRT/" rel="tag"># OpenWRT</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/archives/principle-of-clear-float-in-four-ways.html" rel="next" title="清除浮动的四种方式及其原理理解">
+                <i class="fa fa-chevron-left"></i> 清除浮动的四种方式及其原理理解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/archives/vue-best-ways-to-pass-props-data-in-different-component-relations.html" rel="prev" title="Vue 组件间传参最佳实践">
+                Vue 组件间传参最佳实践 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/icons/icon-128x128.png" alt="BangZ">
+            
+              <p class="site-author-name" itemprop="name">BangZ</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">81</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/istobran" target="_blank" title="GitHub" rel="external nofollow noopener noreferrer"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:i@bangz.me" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#编译"><span class="nav-text">编译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#预备措施"><span class="nav-text">预备措施</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动-Docker-实例"><span class="nav-text">启动 Docker 实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新-git-库"><span class="nav-text">更新 git 库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装编译工具"><span class="nav-text">安装编译工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化-LEDE-的编译目录"><span class="nav-text">初始化 LEDE 的编译目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-LEDE-编译目标"><span class="nav-text">配置 LEDE 编译目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改-WNDR4300-的-mtd-分布，充分利用路由器的-flash"><span class="nav-text">修改 WNDR4300 的 mtd 分布，充分利用路由器的 flash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行编译"><span class="nav-text">执行编译</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#刷入固件"><span class="nav-text">刷入固件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tftp-刷入固件"><span class="nav-text">tftp 刷入固件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-环境"><span class="nav-text">Windows 环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#macOS-环境"><span class="nav-text">macOS 环境</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置多线多拨"><span class="nav-text">配置多线多拨</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#给交换机划分-vlan"><span class="nav-text">给交换机划分 vlan</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加接口配置"><span class="nav-text">添加接口配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置防火墙域"><span class="nav-text">配置防火墙域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-MWAN-负载均衡"><span class="nav-text">配置 MWAN 负载均衡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改-MAC-地址"><span class="nav-text">修改 MAC 地址</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BangZ</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow noopener noreferrer">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next" rel="external nofollow noopener noreferrer">NexT.Muse</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("4MAiIplUcsxIjad83U2IW99g-gzGzoHsz", "nxvNFChEQkVNNMr7yClwBekv");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.get('time'));
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1590725382900')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script></body>
+</html>

@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><link rel="manifest" href="/manifest.json">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="这学期报了华农的甲骨文杯的 Java 比赛，打算在竟考网和其他高校的高手们拼一拼。 咱这学校报名的也就十支队伍左右，三十来个人，就我们团队找了指导老师。 听老师说，这考试以前就叫华农的 Java 比赛，是一个很普通的比赛而已，今天弄得特别高大上，好象是因为拉到了甲骨文公司的合作关系 所以今年的名字叫做甲骨文杯了。我看报名人数三千多人，也挺热闹的。于是就拉了两个同学一起来战 今天是初赛第一次考试，咱">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="说下今天甲骨文杯的考试">
+<meta property="og:url" content="https://hexo.bangz.me/archives/talk-about-the-tournament-of-oracle.html">
+<meta property="og:site_name" content="BangZ&#39;s 梦工厂">
+<meta property="og:description" content="这学期报了华农的甲骨文杯的 Java 比赛，打算在竟考网和其他高校的高手们拼一拼。 咱这学校报名的也就十支队伍左右，三十来个人，就我们团队找了指导老师。 听老师说，这考试以前就叫华农的 Java 比赛，是一个很普通的比赛而已，今天弄得特别高大上，好象是因为拉到了甲骨文公司的合作关系 所以今年的名字叫做甲骨文杯了。我看报名人数三千多人，也挺热闹的。于是就拉了两个同学一起来战 今天是初赛第一次考试，咱">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234327_68653.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234327_88245.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234327_45045.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234327_37731.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234327_63384.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234327_27618.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234328_36398.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234328_25568.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234328_68965.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234328_61373.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234328_28239.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234328_59950.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234328_48213.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234328_25688.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234328_54729.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234328_46019.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234328_23781.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234328_33922.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234412_13045.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234412_81817.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234412_26587.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234413_25230.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234413_98440.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234413_40615.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234413_38142.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234413_56594.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234413_37894.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234413_43552.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234413_88317.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234413_65510.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234413_23735.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234413_65703.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234413_93414.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234413_40910.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234413_15646.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234413_88506.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234508_90170.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234508_89532.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234508_19618.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234508_14707.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234508_28136.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234508_74370.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234508_45899.png">
+<meta property="og:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234509_21470.png">
+<meta property="og:updated_time" content="2018-06-08T08:50:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="说下今天甲骨文杯的考试">
+<meta name="twitter:description" content="这学期报了华农的甲骨文杯的 Java 比赛，打算在竟考网和其他高校的高手们拼一拼。 咱这学校报名的也就十支队伍左右，三十来个人，就我们团队找了指导老师。 听老师说，这考试以前就叫华农的 Java 比赛，是一个很普通的比赛而已，今天弄得特别高大上，好象是因为拉到了甲骨文公司的合作关系 所以今年的名字叫做甲骨文杯了。我看报名人数三千多人，也挺热闹的。于是就拉了两个同学一起来战 今天是初赛第一次考试，咱">
+<meta name="twitter:image" content="https://hexo.bangz.me/images/tp_old/image/20150420/20150420234327_68653.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="BangZ's 梦工厂" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://hexo.bangz.me/archives/talk-about-the-tournament-of-oracle.html">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>说下今天甲骨文杯的考试 | BangZ's 梦工厂</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78277428-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-78277428-2');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BangZ's 梦工厂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">FutureTech Research Center</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives menu-item-active">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-pdf">
+    <a href="/pdfs/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-file"></i> <br>PDF</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hexo.bangz.me/archives/talk-about-the-tournament-of-oracle.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BangZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/icons/icon-128x128.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BangZ's 梦工厂">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">说下今天甲骨文杯的考试
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2015-04-18 14:25:00" itemprop="dateCreated datePublished" datetime="2015-04-18T14:25:00+08:00">2015-04-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-06-08 16:50:38" itemprop="dateModified" datetime="2018-06-08T16:50:38+08:00">2018-06-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术研究/" itemprop="url" rel="index"><span itemprop="name">技术研究</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/archives/talk-about-the-tournament-of-oracle.html" class="leancloud_visitors" data-flag-title="说下今天甲骨文杯的考试">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这学期报了华农的甲骨文杯的 Java 比赛，打算在竟考网和其他高校的高手们拼一拼。</p>
+<p>咱这学校报名的也就十支队伍左右，三十来个人，就我们团队找了指导老师。</p>
+<p>听老师说，这考试以前就叫华农的 Java 比赛，是一个很普通的比赛而已，今天弄得特别高大上，好象是因为拉到了甲骨文公司的合作关系</p>
+<p>所以今年的名字叫做甲骨文杯了。我看报名人数三千多人，也挺热闹的。于是就拉了两个同学一起来战</p>
+<p>今天是初赛第一次考试，咱们三个约好 9 点，大家收拾好东西，就开始向实验室奔去了</p>
+<p>到了实验室，时间还有十分钟，匆忙拿出了笔记本，插好电源开机。</p>
+<p>不得不说，这回咱们三个人的组合还真是有点厉害。</p>
+<p>一个同学拿着 MacBook，用的 Mac OS X，我拿着自己的神船，用的 linuxmint，还有一个同学拿着华硕，用的 windows。</p>
+<p>PC 三大阵营都跑出来了，看着好像很厉害的样子 2333。</p>
+<p>于是咱们按照竟考网约定的时间有打开浏览器准备开始进入答题，约定的时间是九点半到十点登录考试系统</p>
+<p>结果咱们在登录的时候一直卡，咱们实验室用的学校的千兆光纤，却怎么也进不去他们的服务器，还经常弹 502 错误</p>
+<p>估计是他们那边负载爆了，咱们就这样一直 F5，像挤公交车一样去挤网站的感觉。</p>
+<a id="more"></a>
+<p>刷到十点钟的时候，还是进不去，我当时就说，推迟考试的邮件要来了。</p>
+<p>TMD 偏偏这玩意迟迟不来，在竟考网甲骨文杯的考试首页写着这玩意：</p>
+<blockquote>
+<p>本大赛初赛具体时间如下：参赛选手可以在 4 月 18 日 09:30 到 10:00 期间登录竞赛首页并点击考试按钮进入考试，进入考试后将有 90 分钟的做题时间，最迟交卷时间为 11:30。如果 18 号考试发生异常情况，将启用备考系统：考试在第二天（4 月 19 日周日）下午进行，进入考试时间为 4 月 19 日下午 14:30 到 15:00，考试时长 90 分钟，最迟交卷时间为 16:30。若 18 号顺利考试，将不启用备考系统。</p>
+</blockquote>
+<p>原来他们是预着今天会出事的，连备考系统都想到了 = =</p>
+<p>我就说，既然这样，肯定要推迟了，咱们就在实验室随便玩玩然后回去吧。</p>
+<p>有个同学中途不愿意在那玩，跑回宿舍了。</p>
+<p>我和另外一个一直聊天，聊着聊着聊到了 11 点多，这时出于无聊的心态，我又一次点进了考试</p>
+<p>这时，我看到了入口页的这句话：</p>
+<blockquote>
+<p>故障已经修复，18 号 11 点之前都可以进入考试，请大家尽快进入考试。</p>
+</blockquote>
+<p>恶心的事情发生了！！！这时候居然能够正常考试了，他们没有发推迟通知！没错，就是现在，答题吧！</p>
+<p>fxxk!!! 看到这个情况，咱们都无语了，说好的时间呢，说好的信用呢？</p>
+<p>我马上打电话找到那个回了宿舍的同学，叫他马上登录考试</p>
+<p>tm 咱这才没有错过这场考试 = =</p>
+<p>而且我进入考试的时间是 11 点 13 分，考试时间 90 分钟，考完都 TM 一点了。。。午饭不用吃了 qwq</p>
+<p>没有办法，咱们马上开始答题，咱们三个互相交流了一下，看到题目都一样</p>
+<p>这时咱们马上随机应变，做了分工，所以战绩还算不错，最后只差两条编程题没有做出来</p>
+<p>其中一条题目是关于泛型和可变参数的，这个不得不说，咱们太紧张了，当时咱们花了近一个小时都没写出来。</p>
+<p>考完之后，我把原来的程序删了，把整个程序重新写过，写完之后发现才花了十分钟。。。</p>
+<p>另外一条题目是简单 Java 类的，不知怎么回事，怎么写都评判不通过</p>
+<p>好了，抱怨完了，我把今天考到的题目整理一下发上来</p>
+<p>预览图：</p>
+<p><img src="/images/tp_old/image/20150420/20150420234327_68653.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234327_88245.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234327_45045.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234327_37731.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234327_63384.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234327_27618.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234328_36398.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234328_25568.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234328_68965.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234328_61373.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234328_28239.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234328_59950.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234328_48213.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234328_25688.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234328_54729.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234328_46019.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234328_23781.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234328_33922.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234412_13045.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234412_81817.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234412_26587.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234413_25230.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234413_98440.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234413_40615.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234413_38142.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234413_56594.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234413_37894.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234413_43552.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234413_88317.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234413_65510.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234413_23735.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234413_65703.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234413_93414.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234413_40910.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234413_15646.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234413_88506.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234508_90170.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234508_89532.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234508_19618.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234508_14707.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234508_28136.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234508_74370.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234508_45899.png" alt=""><br><img src="/images/tp_old/image/20150420/20150420234509_21470.png" alt=""></p>
+<p>答案：</p>
+<p>答案整合<br>1-10 AEFBC DEABE<br>11-20 BEDFB CDEBA<br>21 ACF<br>22 BD<br>23 ACF<br>24 ABF<br>25 AC<br>26 AE<br>27 i5, i6, i1, i2, i3, i4<br>28 4<br>29<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adder</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a + b;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">add</span><span class="params">(<span class="keyword">double</span> a, <span class="keyword">double</span> b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a + b;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">add</span><span class="params">(String a, String b)</span></span>&#123;</span><br><span class="line">        String c = a + b;</span><br><span class="line">        <span class="keyword">return</span> c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>30<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ToList</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;T&gt; mylist;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ToList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        mylist = <span class="keyword">new</span> ArrayList&lt;T&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ToList <span class="title">add</span><span class="params">(T ... o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (T temp : o) &#123;</span><br><span class="line">            mylist.add(temp);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;T&gt; <span class="title">toList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.mylist;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">ToList <span class="title">create</span><span class="params">(T ... o)</span> </span>&#123;</span><br><span class="line">        ToList&lt;T&gt; tolist1 = <span class="keyword">new</span> ToList&lt;T&gt;();</span><br><span class="line">        tolist1.add(o);</span><br><span class="line">        <span class="keyword">return</span> tolist1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>31<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(<span class="keyword">null</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name,<span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/archives/python-flow-control-statements.html" rel="next" title="python 流程控制——基本控制语句">
+                <i class="fa fa-chevron-left"></i> python 流程控制——基本控制语句
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/archives/python-flow-control-using-range-function.html" rel="prev" title="python 流程控制——range 函数的使用">
+                python 流程控制——range 函数的使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/icons/icon-128x128.png" alt="BangZ">
+            
+              <p class="site-author-name" itemprop="name">BangZ</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">81</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/istobran" target="_blank" title="GitHub" rel="external nofollow noopener noreferrer"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:i@bangz.me" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BangZ</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow noopener noreferrer">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next" rel="external nofollow noopener noreferrer">NexT.Muse</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("4MAiIplUcsxIjad83U2IW99g-gzGzoHsz", "nxvNFChEQkVNNMr7yClwBekv");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.get('time'));
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1590725382900')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script></body>
+</html>

@@ -1,0 +1,1873 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/data-types-designing-of-javascript.html</loc>
+    <lastmod>2020-05-29T04:08:53.148Z</lastmod>
+    <data>
+        <display>
+        <title>细说 javascript 的数据类型</title>
+        <pubTime>2018-06-14T04:00:26.000Z</pubTime>
+        
+        <tag>javascript</tag>
+         
+        <tag>前端</tag>
+         
+        <tag>ECMAScript</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/vue-best-ways-to-pass-props-data-in-different-component-relations.html</loc>
+    <lastmod>2019-12-31T06:20:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>Vue 组件间传参最佳实践</title>
+        <pubTime>2019-06-20T06:00:08.000Z</pubTime>
+        
+        <tag>HTML5</tag>
+         
+        <tag>javascript</tag>
+         
+        <tag>前端</tag>
+         
+        <tag>ECMAScript</tag>
+         
+        <tag>Vue</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/openwrt-compile-and-mwan3-config-in-netgear-wndr4300.html</loc>
+    <lastmod>2018-10-22T01:45:43.000Z</lastmod>
+    <data>
+        <display>
+        <title>在网件 WNDR4300v1 上编译 OpenWRT 并实现多线多拨</title>
+        <pubTime>2018-10-20T04:18:28.000Z</pubTime>
+        
+        <tag>Linux基础</tag>
+         
+        <tag>操作系统</tag>
+         
+        <tag>OpenWRT</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常运维" url="https://hexo.bangz.me/categories/%E6%97%A5%E5%B8%B8%E8%BF%90%E7%BB%B4/"/>
+          
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/principle-of-clear-float-in-four-ways.html</loc>
+    <lastmod>2018-08-15T02:40:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>清除浮动的四种方式及其原理理解</title>
+        <pubTime>2018-08-14T13:37:10.000Z</pubTime>
+        
+        <tag>HTML5</tag>
+         
+        <tag>CSS3</tag>
+         
+        <tag>前端</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/sort-algorithm-implement-in-browser.html</loc>
+    <lastmod>2018-08-11T03:24:39.000Z</lastmod>
+    <data>
+        <display>
+        <title>深入浅出浏览器 js 的数组排序算法</title>
+        <pubTime>2018-08-11T02:42:40.000Z</pubTime>
+        
+        <tag>javascript</tag>
+         
+        <tag>前端</tag>
+         
+        <tag>ECMAScript</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/about-frontend-security.html</loc>
+    <lastmod>2018-08-10T04:06:16.000Z</lastmod>
+    <data>
+        <display>
+        <title>浅谈前端安全</title>
+        <pubTime>2018-08-10T02:32:54.000Z</pubTime>
+        
+        <tag>javascript</tag>
+         
+        <tag>前端</tag>
+         
+        <tag>ECMAScript</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/difference-between-display-none-and-visibility-hidden.html</loc>
+    <lastmod>2018-08-07T09:09:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>display: none 和 visibility: hidden 的区别</title>
+        <pubTime>2018-07-10T06:37:56.000Z</pubTime>
+        
+        <tag>CSS3</tag>
+         
+        <tag>javascript</tag>
+         
+        <tag>前端</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/mobile-web-capabiltiy-faq.html</loc>
+    <lastmod>2018-08-07T08:36:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>移动端常见兼容性问题及解决方案</title>
+        <pubTime>2018-08-07T08:26:09.000Z</pubTime>
+        
+        <tag>HTML5</tag>
+         
+        <tag>CSS3</tag>
+         
+        <tag>前端</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/law-of-yahoo-web-development.html</loc>
+    <lastmod>2018-07-31T07:02:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>雅虎开发的 14 条军规</title>
+        <pubTime>2018-07-30T08:44:17.000Z</pubTime>
+        
+        <tag>前端</tag>
+         
+        <tag>HTTP</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/css-inherited-properties-and-non-inherited-properties.html</loc>
+    <lastmod>2018-07-13T12:26:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>CSS 中的继承属性与非继承属性</title>
+        <pubTime>2018-07-13T10:16:03.000Z</pubTime>
+        
+        <tag>HTML5</tag>
+         
+        <tag>CSS3</tag>
+         
+        <tag>前端</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/http-cache-tutorial.html</loc>
+    <lastmod>2018-07-13T12:25:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>HTTP 缓存机制（强缓存与协商缓存）</title>
+        <pubTime>2018-07-13T11:38:32.000Z</pubTime>
+        
+        <tag>前端</tag>
+         
+        <tag>HTTP</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/principle-of-wechat-miniprogram.html</loc>
+    <lastmod>2018-07-13T11:41:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>小程序实现原理链接集合</title>
+        <pubTime>2018-07-13T07:18:04.000Z</pubTime>
+        
+        <tag>HTML5</tag>
+         
+        <tag>javascript</tag>
+         
+        <tag>前端</tag>
+         
+        <tag>ECMAScript</tag>
+         
+        <tag>小程序</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/http-quick-guide.html</loc>
+    <lastmod>2018-07-13T11:41:17.000Z</lastmod>
+    <data>
+        <display>
+        <title>HTTP 面试指南</title>
+        <pubTime>2018-07-03T02:34:52.000Z</pubTime>
+        
+        <tag>javascript</tag>
+         
+        <tag>前端</tag>
+         
+        <tag>HTTP</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/event-loop-tutorial-links.html</loc>
+    <lastmod>2018-07-13T07:07:47.000Z</lastmod>
+    <data>
+        <display>
+        <title>JS 事件循环资料集合</title>
+        <pubTime>2018-07-10T08:08:36.000Z</pubTime>
+        
+        <tag>javascript</tag>
+         
+        <tag>前端</tag>
+         
+        <tag>ECMAScript</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/difference-between-domcontentloaded-and-load.html</loc>
+    <lastmod>2018-07-12T08:08:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>事件 DOMContentLoaded 和 load 的区别</title>
+        <pubTime>2018-07-10T09:17:54.000Z</pubTime>
+        
+        <tag>javascript</tag>
+         
+        <tag>前端</tag>
+         
+        <tag>ECMAScript</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/vue-data-driving-tutorial-links.html</loc>
+    <lastmod>2018-07-10T08:00:42.000Z</lastmod>
+    <data>
+        <display>
+        <title>Vue 数据驱动原理教程链接集合</title>
+        <pubTime>2018-07-10T04:34:05.000Z</pubTime>
+        
+        <tag>javascript</tag>
+         
+        <tag>前端</tag>
+         
+        <tag>Vue</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/linux-ss-client.html</loc>
+    <lastmod>2018-06-08T10:26:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>linux 下的 shadowsocks 客户端</title>
+        <pubTime>2015-01-31T06:24:00.000Z</pubTime>
+        
+        <tag>随笔</tag>
+         
+        <tag>Linux基础</tag>
+         
+        <tag>操作系统</tag>
+         
+        <tag>Shadowsocks</tag>
+         
+         
+           
+             
+              <breadCrumb title="实用工具" url="https://hexo.bangz.me/categories/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/mysql-data-restore-after-reinstall-system.html</loc>
+    <lastmod>2018-06-08T10:26:51.000Z</lastmod>
+    <data>
+        <display>
+        <title>换了操作系统之后 MySQL 数据的恢复</title>
+        <pubTime>2015-02-03T06:18:00.000Z</pubTime>
+        
+        <tag>随笔</tag>
+         
+        <tag>Shell</tag>
+         
+        <tag>Linux基础</tag>
+         
+        <tag>操作系统</tag>
+         
+        <tag>MySQL</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常运维" url="https://hexo.bangz.me/categories/%E6%97%A5%E5%B8%B8%E8%BF%90%E7%BB%B4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/getting-size-and-position-attributes-with-javascript.html</loc>
+    <lastmod>2018-06-08T10:26:51.000Z</lastmod>
+    <data>
+        <display>
+        <title>原生 js 中的各种宽高以及位置的获取</title>
+        <pubTime>2016-11-06T22:44:00.000Z</pubTime>
+        
+        <tag>javascript</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/linuxmint-install-sogou-input-method.html</loc>
+    <lastmod>2018-06-08T10:26:51.000Z</lastmod>
+    <data>
+        <display>
+        <title>linux mint 17.1 MATE 下的搜狗输入法安装</title>
+        <pubTime>2015-02-01T20:52:00.000Z</pubTime>
+        
+        <tag>随笔</tag>
+         
+        <tag>Linux基础</tag>
+         
+        <tag>操作系统</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常运维" url="https://hexo.bangz.me/categories/%E6%97%A5%E5%B8%B8%E8%BF%90%E7%BB%B4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/fast-learning-pyqt-4.html</loc>
+    <lastmod>2018-06-08T10:26:51.000Z</lastmod>
+    <data>
+        <display>
+        <title>PyQt4 快速入门</title>
+        <pubTime>2015-08-16T01:04:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/ten-useful-searching-skills-when-using-google.html</loc>
+    <lastmod>2018-06-08T09:56:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>十大高明的 Google 搜索技巧</title>
+        <pubTime>2015-06-11T04:14:00.000Z</pubTime>
+        
+        <tag>搜索引擎</tag>
+         
+         
+           
+             
+              <breadCrumb title="其他" url="https://hexo.bangz.me/categories/%E5%85%B6%E4%BB%96/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/make-container-contains-floating-items.html</loc>
+    <lastmod>2018-06-08T09:54:56.000Z</lastmod>
+    <data>
+        <display>
+        <title>解决浮动脱档问题（clearfix）的常用方法</title>
+        <pubTime>2016-07-16T19:18:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/find-javascript-improvements-from-remove-duplicates.html</loc>
+    <lastmod>2018-06-08T09:50:32.000Z</lastmod>
+    <data>
+        <display>
+        <title>从数组去重来看 javascript 的进化</title>
+        <pubTime>2017-04-07T01:44:00.000Z</pubTime>
+        
+        <tag>javascript</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/migrating-config-to-webpack-2.html</loc>
+    <lastmod>2018-06-08T09:49:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>从 webpack 1 到 webpack 2 的迁移记</title>
+        <pubTime>2017-02-14T00:42:00.000Z</pubTime>
+        
+        <tag>javascript</tag>
+         
+        <tag>前端</tag>
+         
+        <tag>webpack</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/customize-icon-font-for-your-own-website.html</loc>
+    <lastmod>2018-06-08T09:48:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>使用阿里巴巴矢量图标库自定义图标集</title>
+        <pubTime>2016-10-25T01:44:00.000Z</pubTime>
+        
+        <tag>iconfont</tag>
+         
+        <tag>前端</tag>
+         
+        <tag>字体图标</tag>
+         
+         
+           
+             
+              <breadCrumb title="实用工具" url="https://hexo.bangz.me/categories/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/elementary-os-disable-login-window.html</loc>
+    <lastmod>2018-06-08T09:48:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>禁用 Elementary OS 下的开机弹框</title>
+        <pubTime>2016-10-22T23:07:00.000Z</pubTime>
+        
+        <tag>Linux基础</tag>
+         
+        <tag>Elementary OS</tag>
+         
+        <tag>eOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常运维" url="https://hexo.bangz.me/categories/%E6%97%A5%E5%B8%B8%E8%BF%90%E7%BB%B4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/first-experience-improve-render-efficiency.html</loc>
+    <lastmod>2018-06-08T09:47:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>js 实时动画性能优化初体验</title>
+        <pubTime>2016-09-22T18:04:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/set-gmail-as-default-email-handler-in-chrome.html</loc>
+    <lastmod>2018-06-08T09:46:02.000Z</lastmod>
+    <data>
+        <display>
+        <title>设置 Chrome 使用 Gmail 来处理邮件连接</title>
+        <pubTime>2016-07-18T18:44:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="实用工具" url="https://hexo.bangz.me/categories/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/using-javascript-closure.html</loc>
+    <lastmod>2018-06-08T09:44:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>javascript 中闭包的概念与用法</title>
+        <pubTime>2016-07-17T20:51:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/deal-with-the-varible-which-contains-minus-in-php.html</loc>
+    <lastmod>2018-06-08T09:41:35.000Z</lastmod>
+    <data>
+        <display>
+        <title>关于 PHP 中带减号的变量的处理方法</title>
+        <pubTime>2016-02-14T00:28:00.000Z</pubTime>
+        
+        <tag>PHP</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/some-feeling-after-first-writed-discuz-plugin.html</loc>
+    <lastmod>2018-06-08T09:40:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>初次写 discuz X 插件的一些感受</title>
+        <pubTime>2016-02-03T20:57:00.000Z</pubTime>
+        
+        <tag>PHP</tag>
+         
+        <tag>Discuz</tag>
+         
+         
+           
+             
+              <breadCrumb title="项目开发" url="https://hexo.bangz.me/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/using-ajax-to-make-calendar-plugin.html</loc>
+    <lastmod>2018-06-08T09:40:03.000Z</lastmod>
+    <data>
+        <display>
+        <title>利用 ajax 制作简单的边栏日历插件</title>
+        <pubTime>2016-01-12T05:18:00.000Z</pubTime>
+        
+        <tag>javascript</tag>
+         
+        <tag>PHP</tag>
+         
+        <tag>ajax</tag>
+         
+         
+           
+             
+              <breadCrumb title="项目开发" url="https://hexo.bangz.me/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/scripting-automatic-teacher-evaluation-by-javascript.html</loc>
+    <lastmod>2018-06-08T09:38:25.000Z</lastmod>
+    <data>
+        <display>
+        <title>javascript 编写正方系统评教脚本</title>
+        <pubTime>2016-01-02T08:19:00.000Z</pubTime>
+        
+        <tag>HTML5</tag>
+         
+        <tag>CSS3</tag>
+         
+        <tag>javascript</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/pyqt4-build-a-slider-bar-with-tooltip.html</loc>
+    <lastmod>2018-06-08T09:37:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>PyQt4——自制带提示的滑动槽</title>
+        <pubTime>2015-12-12T23:35:00.000Z</pubTime>
+        
+        <tag>PYTHON</tag>
+         
+         
+           
+             
+              <breadCrumb title="项目开发" url="https://hexo.bangz.me/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/pyqt4-implement-window-drag.html</loc>
+    <lastmod>2018-06-08T09:37:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>PyQt4——实现窗口拖动</title>
+        <pubTime>2015-12-12T23:26:00.000Z</pubTime>
+        
+        <tag>PYTHON</tag>
+         
+         
+           
+             
+              <breadCrumb title="项目开发" url="https://hexo.bangz.me/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/pyqt4-load-photo-image-resources-with-qrc.html</loc>
+    <lastmod>2018-06-08T09:32:03.000Z</lastmod>
+    <data>
+        <display>
+        <title>PyQt4——使用 qrc 载入图片资源</title>
+        <pubTime>2015-12-07T19:01:00.000Z</pubTime>
+        
+        <tag>PYTHON</tag>
+         
+         
+           
+             
+              <breadCrumb title="项目开发" url="https://hexo.bangz.me/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/pyqt4-using-qt-designer-to-draw-gui.html</loc>
+    <lastmod>2018-06-08T09:31:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>PyQt4——使用 Qt Designer 快速绘制 GUI 界面</title>
+        <pubTime>2015-12-05T23:09:00.000Z</pubTime>
+        
+        <tag>PYTHON</tag>
+         
+         
+           
+             
+              <breadCrumb title="项目开发" url="https://hexo.bangz.me/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/writing-readme-with-markdown-syntax.html</loc>
+    <lastmod>2018-06-08T09:25:32.000Z</lastmod>
+    <data>
+        <display>
+        <title>GitHub 上 Readme.md 的编写方法（Markdown 语法）</title>
+        <pubTime>2015-10-09T23:30:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="项目开发" url="https://hexo.bangz.me/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/recording-of-kubuntu-installation.html</loc>
+    <lastmod>2018-06-08T09:19:28.000Z</lastmod>
+    <data>
+        <display>
+        <title>kubuntu 安装折腾记</title>
+        <pubTime>2015-10-06T03:40:00.000Z</pubTime>
+        
+        <tag>Linux基础</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常运维" url="https://hexo.bangz.me/categories/%E6%97%A5%E5%B8%B8%E8%BF%90%E7%BB%B4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/centos-7-firewalld-tutorial.html</loc>
+    <lastmod>2018-06-08T09:18:15.000Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS7 下 firewalld 的基本使用方法</title>
+        <pubTime>2015-09-17T02:04:00.000Z</pubTime>
+        
+        <tag>Linux基础</tag>
+         
+        <tag>操作系统</tag>
+         
+        <tag>CentOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常运维" url="https://hexo.bangz.me/categories/%E6%97%A5%E5%B8%B8%E8%BF%90%E7%BB%B4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/setup-python-scrapy-framework-on-centos-7.html</loc>
+    <lastmod>2018-06-08T09:11:17.000Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS 7 上安装 python 爬虫框架 Scrapy</title>
+        <pubTime>2015-06-28T22:18:00.000Z</pubTime>
+        
+        <tag>PYTHON</tag>
+         
+        <tag>云计算</tag>
+         
+         
+           
+             
+              <breadCrumb title="项目开发" url="https://hexo.bangz.me/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/my-notes-when-fast-learning-python.html</loc>
+    <lastmod>2018-06-08T09:09:16.000Z</lastmod>
+    <data>
+        <display>
+        <title>Python —— 快速入门笔记</title>
+        <pubTime>2015-06-27T22:54:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/setup-mysql-noinstall-edition-on-windows.html</loc>
+    <lastmod>2018-06-08T09:04:41.000Z</lastmod>
+    <data>
+        <display>
+        <title>Windows 下安装 Mysql5.6 的 Noinstall 版</title>
+        <pubTime>2015-05-30T02:28:00.000Z</pubTime>
+        
+        <tag>MySQL</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常运维" url="https://hexo.bangz.me/categories/%E6%97%A5%E5%B8%B8%E8%BF%90%E7%BB%B4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/display-chinese-in-linuxmint-terminal.html</loc>
+    <lastmod>2018-06-08T09:00:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>Mint（Ubuntu）Linux 终端中文显示的处理</title>
+        <pubTime>2015-05-09T00:35:00.000Z</pubTime>
+        
+        <tag>Shell</tag>
+         
+        <tag>Linux基础</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常运维" url="https://hexo.bangz.me/categories/%E6%97%A5%E5%B8%B8%E8%BF%90%E7%BB%B4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/python-define-a-function.html</loc>
+    <lastmod>2018-06-08T08:54:24.000Z</lastmod>
+    <data>
+        <display>
+        <title>python 函数定义——简单定义</title>
+        <pubTime>2015-04-23T08:10:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/python-flow-control-loop-statement-break-and-continue.html</loc>
+    <lastmod>2018-06-08T08:53:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>python 流程控制——循环控制语句 break 与 continue</title>
+        <pubTime>2015-04-21T09:04:00.000Z</pubTime>
+        
+        <tag>PYTHON</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/python-flow-control-using-range-function.html</loc>
+    <lastmod>2018-06-08T08:51:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>python 流程控制——range 函数的使用</title>
+        <pubTime>2015-04-20T08:55:00.000Z</pubTime>
+        
+        <tag>PYTHON</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/talk-about-the-tournament-of-oracle.html</loc>
+    <lastmod>2018-06-08T08:50:38.000Z</lastmod>
+    <data>
+        <display>
+        <title>说下今天甲骨文杯的考试</title>
+        <pubTime>2015-04-18T06:25:00.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/python-flow-control-statements.html</loc>
+    <lastmod>2018-06-08T08:38:56.000Z</lastmod>
+    <data>
+        <display>
+        <title>python 流程控制——基本控制语句</title>
+        <pubTime>2015-04-16T08:47:00.000Z</pubTime>
+        
+        <tag>PYTHON</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/python-flow-control-fibonacci-demo.html</loc>
+    <lastmod>2018-06-08T08:34:32.000Z</lastmod>
+    <data>
+        <display>
+        <title>python 流程控制——菲波那契序列</title>
+        <pubTime>2015-04-16T08:19:00.000Z</pubTime>
+        
+        <tag>PYTHON</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/python-basic-of-list.html</loc>
+    <lastmod>2018-06-08T08:33:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>python 基础——列表</title>
+        <pubTime>2015-04-15T20:40:00.000Z</pubTime>
+        
+        <tag>PYTHON</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/python-basic-of-string.html</loc>
+    <lastmod>2018-06-08T08:32:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>python 基础——字符串</title>
+        <pubTime>2015-04-15T20:19:00.000Z</pubTime>
+        
+        <tag>PYTHON</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/using-python-as-a-calculator.html</loc>
+    <lastmod>2018-06-08T08:27:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>python 基础——计算器</title>
+        <pubTime>2015-04-15T08:52:00.000Z</pubTime>
+        
+        <tag>PYTHON</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/sublime-text-3-useful-plugins.html</loc>
+    <lastmod>2018-06-08T08:26:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>Sublime Text 3 常用插件以及安装方法</title>
+        <pubTime>2015-04-12T03:30:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/make-gedit-support-chinese-encoding-on-linuxmint.html</loc>
+    <lastmod>2018-06-08T08:14:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>【手记】让 linuxmint 17.1 下的 gedit 支持中文编码</title>
+        <pubTime>2015-04-12T03:01:00.000Z</pubTime>
+        
+        <tag>Shell</tag>
+         
+        <tag>Linux基础</tag>
+         
+        <tag>操作系统</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常运维" url="https://hexo.bangz.me/categories/%E6%97%A5%E5%B8%B8%E8%BF%90%E7%BB%B4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/calculate-disk-capacity-on-windows.html</loc>
+    <lastmod>2018-06-08T08:08:24.000Z</lastmod>
+    <data>
+        <display>
+        <title>Windows 下的整数分区计算</title>
+        <pubTime>2015-04-12T02:59:00.000Z</pubTime>
+        
+        <tag>操作系统</tag>
+         
+         
+           
+             
+              <breadCrumb title="实用工具" url="https://hexo.bangz.me/categories/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/hooks-in-python-interpreter.html</loc>
+    <lastmod>2018-06-08T08:06:14.000Z</lastmod>
+    <data>
+        <display>
+        <title>python 学习笔记：python 解释器所使用的两个 hook</title>
+        <pubTime>2015-04-09T19:06:00.000Z</pubTime>
+        
+        <tag>PYTHON</tag>
+         
+        <tag>Shell</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/configure-enviroment-varible-on-linux.html</loc>
+    <lastmod>2018-06-08T08:02:56.000Z</lastmod>
+    <data>
+        <display>
+        <title>在 Linux 里设置环境变量的方法（export PATH）</title>
+        <pubTime>2015-04-09T18:37:00.000Z</pubTime>
+        
+        <tag>Shell</tag>
+         
+        <tag>Linux基础</tag>
+         
+        <tag>操作系统</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常运维" url="https://hexo.bangz.me/categories/%E6%97%A5%E5%B8%B8%E8%BF%90%E7%BB%B4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/configure-python-startup.html</loc>
+    <lastmod>2018-06-08T07:52:56.000Z</lastmod>
+    <data>
+        <display>
+        <title>python 学习笔记：配置 PYTHONSTARTUP</title>
+        <pubTime>2015-04-09T08:45:00.000Z</pubTime>
+        
+        <tag>PYTHON</tag>
+         
+        <tag>Shell</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/tutorial-of-centos-yum.html</loc>
+    <lastmod>2018-06-08T07:48:26.000Z</lastmod>
+    <data>
+        <display>
+        <title>yum 工具的使用</title>
+        <pubTime>2015-03-31T00:01:00.000Z</pubTime>
+        
+        <tag>Linux基础</tag>
+         
+        <tag>云计算</tag>
+         
+        <tag>CentOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常运维" url="https://hexo.bangz.me/categories/%E6%97%A5%E5%B8%B8%E8%BF%90%E7%BB%B4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/learning-apache-server-on-linux.html</loc>
+    <lastmod>2018-06-08T07:41:24.000Z</lastmod>
+    <data>
+        <display>
+        <title>关于 apache 服务器的使用学习</title>
+        <pubTime>2015-03-24T18:52:00.000Z</pubTime>
+        
+        <tag>Linux基础</tag>
+         
+        <tag>操作系统</tag>
+         
+        <tag>Apache</tag>
+         
+        <tag>LAMP</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常运维" url="https://hexo.bangz.me/categories/%E6%97%A5%E5%B8%B8%E8%BF%90%E7%BB%B4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/compile-opwnwrt-on-linuxmint.html</loc>
+    <lastmod>2018-06-08T07:37:05.000Z</lastmod>
+    <data>
+        <display>
+        <title>在 linuxmint 上编译自己的 OpenWRT，并安装到 DIR-615 D4 上</title>
+        <pubTime>2015-03-24T04:56:00.000Z</pubTime>
+        
+        <tag>随笔</tag>
+         
+        <tag>Shell</tag>
+         
+        <tag>Linux基础</tag>
+         
+        <tag>OpenWRT</tag>
+         
+         
+           
+             
+              <breadCrumb title="项目开发" url="https://hexo.bangz.me/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/configure-remote-desktop-multi-session-on-windows-10.html</loc>
+    <lastmod>2018-06-08T07:24:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>Windows 10 上的远程桌面多用户多开会话工具</title>
+        <pubTime>2015-11-19T23:56:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="实用工具" url="https://hexo.bangz.me/categories/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/pyqt4-design-beautiful-ui-with-qss-stylesheet.html</loc>
+    <lastmod>2018-06-08T07:24:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>PyQt4——qss 样式表的使用，设计一个漂亮的界面</title>
+        <pubTime>2015-12-08T00:39:00.000Z</pubTime>
+        
+        <tag>PYTHON</tag>
+         
+         
+           
+             
+              <breadCrumb title="项目开发" url="https://hexo.bangz.me/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/pyqt4-bind-ui-event-by-signal-and-slot.html</loc>
+    <lastmod>2018-06-08T07:24:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>PyQt4——处理用户界面事件，信号槽机制</title>
+        <pubTime>2015-12-08T03:01:00.000Z</pubTime>
+        
+        <tag>PYTHON</tag>
+         
+         
+           
+             
+              <breadCrumb title="项目开发" url="https://hexo.bangz.me/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/centos-7-setup-lamp-server.html</loc>
+    <lastmod>2018-06-08T07:24:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>【手记】CentOS 7 搭建 LAMP 环境</title>
+        <pubTime>2015-04-12T03:00:00.000Z</pubTime>
+        
+        <tag>Linux基础</tag>
+         
+        <tag>MySQL</tag>
+         
+        <tag>PHP</tag>
+         
+        <tag>云计算</tag>
+         
+        <tag>Apache</tag>
+         
+        <tag>LAMP</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常运维" url="https://hexo.bangz.me/categories/%E6%97%A5%E5%B8%B8%E8%BF%90%E7%BB%B4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/flushing-openwrt-to-cisco-ven401.html</loc>
+    <lastmod>2018-06-08T07:24:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>【手记】Cisco VEN401 刷 OpenWRT 成功</title>
+        <pubTime>2015-04-12T03:07:00.000Z</pubTime>
+        
+        <tag>Shell</tag>
+         
+        <tag>操作系统</tag>
+         
+        <tag>OpenWRT</tag>
+         
+         
+           
+             
+              <breadCrumb title="项目开发" url="https://hexo.bangz.me/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/learning-network-security.html</loc>
+    <lastmod>2018-06-08T07:24:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>网络攻防学习体验</title>
+        <pubTime>2015-05-23T06:47:00.000Z</pubTime>
+        
+        <tag>操作系统</tag>
+         
+        <tag>网络安全</tag>
+         
+         
+           
+             
+              <breadCrumb title="其他" url="https://hexo.bangz.me/categories/%E5%85%B6%E4%BB%96/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/migrate-sourcecode-to-oschina-using-git.html</loc>
+    <lastmod>2018-06-08T07:24:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>git 转移源代码到 oschina</title>
+        <pubTime>2015-06-03T21:23:00.000Z</pubTime>
+        
+        <tag>操作系统</tag>
+         
+        <tag>git</tag>
+         
+         
+           
+             
+              <breadCrumb title="项目开发" url="https://hexo.bangz.me/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/pyqt4-hide-program-titlebar.html</loc>
+    <lastmod>2018-06-08T07:07:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>PyQt4——隐藏程序标题栏</title>
+        <pubTime>2015-12-12T22:44:00.000Z</pubTime>
+        
+        <tag>PYTHON</tag>
+         
+         
+           
+             
+              <breadCrumb title="项目开发" url="https://hexo.bangz.me/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/configure-yaourt-proxy-in-manjaro.html</loc>
+    <lastmod>2018-06-08T07:07:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>Manjaro 下设置 yaourt 走 ss 代理</title>
+        <pubTime>2016-01-25T02:24:00.000Z</pubTime>
+        
+        <tag>Linux基础</tag>
+         
+        <tag>Shadowsocks</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/jdbc-out-garbled-on-linux.html</loc>
+    <lastmod>2018-06-08T07:07:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>使用 java 在 linux 环境下连接 mysql 乱码问题</title>
+        <pubTime>2015-02-12T21:51:00.000Z</pubTime>
+        
+        <tag>Shell</tag>
+         
+        <tag>Linux基础</tag>
+         
+        <tag>操作系统</tag>
+         
+        <tag>MySQL</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常运维" url="https://hexo.bangz.me/categories/%E6%97%A5%E5%B8%B8%E8%BF%90%E7%BB%B4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/centos-7-multi-network-card-configuation.html</loc>
+    <lastmod>2018-06-08T07:07:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>基于 CentOS 7 的多网卡配置</title>
+        <pubTime>2015-03-16T05:48:00.000Z</pubTime>
+        
+        <tag>Shell</tag>
+         
+        <tag>Linux基础</tag>
+         
+        <tag>操作系统</tag>
+         
+        <tag>云计算</tag>
+         
+        <tag>CentOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常运维" url="https://hexo.bangz.me/categories/%E6%97%A5%E5%B8%B8%E8%BF%90%E7%BB%B4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/openwrt-get-device-infomation.html</loc>
+    <lastmod>2018-06-08T07:07:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>OpenWRT 系统研究，查看基础设备信息</title>
+        <pubTime>2015-03-24T07:53:00.000Z</pubTime>
+        
+        <tag>随笔</tag>
+         
+        <tag>Linux基础</tag>
+         
+        <tag>操作系统</tag>
+         
+        <tag>OpenWRT</tag>
+         
+         
+           
+             
+              <breadCrumb title="项目开发" url="https://hexo.bangz.me/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/using-linux-vi-editor.html</loc>
+    <lastmod>2018-06-08T07:07:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>vi 编辑器的使用</title>
+        <pubTime>2015-03-24T16:53:00.000Z</pubTime>
+        
+        <tag>Linux基础</tag>
+         
+        <tag>操作系统</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常运维" url="https://hexo.bangz.me/categories/%E6%97%A5%E5%B8%B8%E8%BF%90%E7%BB%B4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/using-sftp-tool.html</loc>
+    <lastmod>2018-06-08T07:07:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>sftp 工具的使用</title>
+        <pubTime>2015-03-24T22:21:00.000Z</pubTime>
+        
+        <tag>Shell</tag>
+         
+        <tag>Linux基础</tag>
+         
+        <tag>操作系统</tag>
+         
+        <tag>云计算</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常运维" url="https://hexo.bangz.me/categories/%E6%97%A5%E5%B8%B8%E8%BF%90%E7%BB%B4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/using-vim-to-improve-efficiency.html</loc>
+    <lastmod>2018-06-08T07:07:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>「转自 IBM」技巧：快速提高 Vi/Vim 使用效率的原则与途径</title>
+        <pubTime>2015-03-29T06:16:00.000Z</pubTime>
+        
+        <tag>Linux基础</tag>
+         
+        <tag>操作系统</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/create-a-mac-bootable-sierra-image-usb-stick-from-windows.html</loc>
+    <lastmod>2018-06-08T07:07:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>在 windows 下制作 macOS Sierra（10.12）正式版的安装 U 盘</title>
+        <pubTime>2016-11-01T01:07:00.000Z</pubTime>
+        
+        <tag>Mac</tag>
+         
+        <tag>Sierra</tag>
+         
+        <tag>系统安装</tag>
+         
+        <tag>U盘镜像</tag>
+         
+        <tag>windows</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常运维" url="https://hexo.bangz.me/categories/%E6%97%A5%E5%B8%B8%E8%BF%90%E7%BB%B4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/fast-learning-plugin-emmet.html</loc>
+    <lastmod>2018-06-08T07:07:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>Emmet 插件快速入门</title>
+        <pubTime>2015-08-16T00:12:00.000Z</pubTime>
+        
+        <tag>HTML5</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术研究" url="https://hexo.bangz.me/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hexo.bangz.me/archives/setup-dhcp-server-on-ubuntu.html</loc>
+    <lastmod>2018-06-08T07:07:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>关于 Ubuntu 下的 DHCP 服务器的配置</title>
+        <pubTime>2015-10-14T21:41:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="日常运维" url="https://hexo.bangz.me/categories/%E6%97%A5%E5%B8%B8%E8%BF%90%E7%BB%B4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</urlset>

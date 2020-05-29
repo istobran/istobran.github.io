@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><link rel="manifest" href="/manifest.json">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="现在出来写前端有一段时间了，现在来回头看看，当初大学刚学搞前端的时候，为了快速适应新的语言，直接看后面的内容去了，跳过了基本数据类型的介绍，想当然的觉得 javascript 的数据类型应该也跟其他弱类型语言差不了太多，从而忽略了基本数据类型上的细节。最近随着对 js 语言了解和应用的加深，发现 js 的基本数据类型里面真的大有文章，甚至有不少的语言设计缺陷在里面。所以我打算专门写一篇关于基本数据">
+<meta name="keywords" content="javascript,前端,ECMAScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="细说 javascript 的数据类型">
+<meta property="og:url" content="https://hexo.bangz.me/archives/data-types-designing-of-javascript.html">
+<meta property="og:site_name" content="BangZ&#39;s 梦工厂">
+<meta property="og:description" content="现在出来写前端有一段时间了，现在来回头看看，当初大学刚学搞前端的时候，为了快速适应新的语言，直接看后面的内容去了，跳过了基本数据类型的介绍，想当然的觉得 javascript 的数据类型应该也跟其他弱类型语言差不了太多，从而忽略了基本数据类型上的细节。最近随着对 js 语言了解和应用的加深，发现 js 的基本数据类型里面真的大有文章，甚至有不少的语言设计缺陷在里面。所以我打算专门写一篇关于基本数据">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hexo.bangz.me/images/2018/06/data-transformation-of-abstract-equality-omparison.jpeg">
+<meta property="og:updated_time" content="2020-05-29T04:08:53.148Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="细说 javascript 的数据类型">
+<meta name="twitter:description" content="现在出来写前端有一段时间了，现在来回头看看，当初大学刚学搞前端的时候，为了快速适应新的语言，直接看后面的内容去了，跳过了基本数据类型的介绍，想当然的觉得 javascript 的数据类型应该也跟其他弱类型语言差不了太多，从而忽略了基本数据类型上的细节。最近随着对 js 语言了解和应用的加深，发现 js 的基本数据类型里面真的大有文章，甚至有不少的语言设计缺陷在里面。所以我打算专门写一篇关于基本数据">
+<meta name="twitter:image" content="https://hexo.bangz.me/images/2018/06/data-transformation-of-abstract-equality-omparison.jpeg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="BangZ's 梦工厂" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://hexo.bangz.me/archives/data-types-designing-of-javascript.html">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>细说 javascript 的数据类型 | BangZ's 梦工厂</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78277428-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-78277428-2');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BangZ's 梦工厂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">FutureTech Research Center</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives menu-item-active">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-pdf">
+    <a href="/pdfs/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-file"></i> <br>PDF</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hexo.bangz.me/archives/data-types-designing-of-javascript.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BangZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/icons/icon-128x128.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BangZ's 梦工厂">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">细说 javascript 的数据类型
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-14 12:00:26" itemprop="dateCreated datePublished" datetime="2018-06-14T12:00:26+08:00">2018-06-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-05-29 12:08:53" itemprop="dateModified" datetime="2020-05-29T12:08:53+08:00">2020-05-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术研究/" itemprop="url" rel="index"><span itemprop="name">技术研究</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/archives/data-types-designing-of-javascript.html" class="leancloud_visitors" data-flag-title="细说 javascript 的数据类型">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>现在出来写前端有一段时间了，现在来回头看看，当初大学刚学搞前端的时候，为了快速适应新的语言，直接看后面的内容去了，跳过了基本数据类型的介绍，想当然的觉得 javascript 的数据类型应该也跟其他弱类型语言差不了太多，从而忽略了基本数据类型上的细节。最近随着对 js 语言了解和应用的加深，发现 js 的基本数据类型里面真的大有文章，甚至有不少的语言设计缺陷在里面。所以我打算专门写一篇关于基本数据类型的文章，专门来谈谈 js 在基本数据类型上的这些设计和缺陷。<br><a id="more"></a></p>
+<h1 id="1-javascript-的诞生背景"><a href="#1-javascript-的诞生背景" class="headerlink" title="1. javascript 的诞生背景"></a>1. javascript 的诞生背景</h1><p>要说 javascript 的设计缺陷，我觉得不得不先谈下 js 诞生的背景，据说 javascript 的作者 <a href="https://zh.wikipedia.org/wiki/%E5%B8%83%E8%98%AD%E7%99%BB%C2%B7%E8%89%BE%E5%85%8B" rel="external nofollow noopener noreferrer" target="_blank">Brendan Eich</a> 在设计和实现它的时候，总共加起来居然只花了十天的时间。。。</p>
+<p>想一想，咱一个项目周期一般都是一个月左右，而这位大佬只花了十天就是设计出了一门语言！也许这就是真大佬的实力吧。。。</p>
+<p>有兴趣的可以看下 <a href="http://www.ruanyifeng.com/blog/2011/06/birth_of_javascript.html" rel="external nofollow noopener noreferrer" target="_blank">阮一峰的这篇文章</a> 了解一下。但也就是在这种高压，并要求苛刻的背景下，就算是大佬也无法避免地在语言设计上出现了一些缺陷错误，有些随着时间的推移，想改都已经改不掉了，因为一改就会所有网站的 js 代码都得跟着改，由于当今 web 网站体量极为庞大，这么做会得罪很多人，所以这些缺陷错误都慢慢地成为了历史遗留问题。</p>
+<p>作为一个 js 程序员，必须时时刻刻都要清楚牢记这些缺陷，在写代码的时候要尽可能地随时避开这些坑，这样子我们才能写出更加健壮，稳定，不坑自己的代码。</p>
+<h1 id="2-基础数据类型表"><a href="#2-基础数据类型表" class="headerlink" title="2. 基础数据类型表"></a>2. 基础数据类型表</h1><p>首先必须要明确的一点是 javascript 这门语言根据 <a href="https://www.ecma-international.org/ecma-262/6.0/#sec-ecmascript-data-types-and-values" rel="external nofollow noopener noreferrer" target="_blank">ECMAScript 2015</a> 标准的定义，只有 7 种数据类型，它们分别是：</p>
+<ol>
+<li>Number</li>
+<li>Boolean</li>
+<li>String</li>
+<li>Symbol（ES2015 中加入）</li>
+<li>Null</li>
+<li>Undefined</li>
+<li>Object</li>
+</ol>
+<p>其中原始 (Primitive) 数据类型为 <strong>Number</strong>, <strong>Boolean</strong>, <strong>String</strong>, <strong>Symbol</strong>, <strong>Null</strong>, <strong>Undefined</strong></p>
+<p>而引用 (Reference) 数据类型为 <strong>Object</strong></p>
+<p>其他什么 Array, Function, RegExp 等的都是 Object 的子类。</p>
+<h1 id="3-typeof-操作符上的问题"><a href="#3-typeof-操作符上的问题" class="headerlink" title="3. typeof 操作符上的问题"></a>3. typeof 操作符上的问题</h1><p>我们先来看一个 <a href="https://www.ecma-international.org/ecma-262/6.0/#sec-typeof-operator" rel="external nofollow noopener noreferrer" target="_blank">ECMAScript 2015</a> 中规范的表格：</p>
+<p><strong>Table 35 — typeof Operator Results</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type of val</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Undefined</td>
+<td>“undefined”</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>“object”</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>“boolean”</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>“number”</td>
+</tr>
+<tr>
+<td>String</td>
+<td>“string”</td>
+</tr>
+<tr>
+<td>Symbol</td>
+<td>“symbol”</td>
+</tr>
+<tr>
+<td>Object (ordinary and does not implement [[Call]])</td>
+<td>“object”</td>
+</tr>
+<tr>
+<td>Object (standard exotic and does not implement [[Call]])</td>
+<td>“object”</td>
+</tr>
+<tr>
+<td>Object (implements [[Call]])</td>
+<td>“function”</td>
+</tr>
+<tr>
+<td>Object (non-standard exotic and does not implement [[Call]])</td>
+<td>Implementation-defined. Must not be “undefined”, “boolean”, “function”, “number”, “symbol”, or “string”.</td>
+</tr>
+</tbody>
+</table>
+<p>这个表格第一眼看过去会发现规范中存在着至少两个问题：</p>
+<h2 id="3-1-typeof-null-的值为-“object”"><a href="#3-1-typeof-null-的值为-“object”" class="headerlink" title="3.1. typeof null 的值为 “object”"></a>3.1. typeof null 的值为 “object”</h2><p>前面说好的 null 是单独的一种数据类型，为什么 typeof null 又返回了 “object” 呢？？？</p>
+<p>这实在是太奇怪了，网上搜查了一番，看到了<a href="https://www.zhihu.com/question/21691758" rel="external nofollow noopener noreferrer" target="_blank">这个</a>。原来 typeof null 就是一个设计缺陷，把 null 设计成了 0x00 ，而用 typeof 去判断类型的时候，如果低三位都是 0 就返回 “object”；</p>
+<blockquote>
+<p>000: object. The data is a reference to an object.</p>
+</blockquote>
+<p>这个问题就是前面所说的无法修改的设计缺陷，返回错误也拿它没办法，用户体量实在太庞大了，曾经有提案 typeof null === ‘null’. 但提案被拒绝<br><a href="http://wiki.ecmascript.org/doku.php?id=harmony%3atypeof_null" rel="external nofollow noopener noreferrer" target="_blank">harmony:typeof_null [ES Wiki]</a></p>
+<h2 id="3-2-为什么要多出个-“function”-类型出来"><a href="#3-2-为什么要多出个-“function”-类型出来" class="headerlink" title="3.2. 为什么要多出个 “function” 类型出来"></a>3.2. 为什么要多出个 “function” 类型出来</h2><p>难道函数也要单独算一种类型？这跟前面基本数据类型的定义又对不上了。</p>
+<p>带着这个问题我又去搜了一圈，找到了这篇东西</p>
+<p><a href="https://www.zhihu.com/question/24804474/answer/29040916" rel="external nofollow noopener noreferrer" target="_blank">JavaScript 里 Function 也算一种基本类型？</a></p>
+<blockquote>
+<p>如果抛开 typeof null 的谜题，那么剩下唯一不对应的地方，就是 function 被单列出来。我个人的看法，这是因为 function 确实很特殊，特殊到从实际应用场景考虑确实应该将其单独列出来。spec 没有将其单列，是因为它同样有所有其他 object 的特性——而按照我的看法（爱民应该也是这样的看法），这仅仅是因为当初 JS 是如此设计和实现的。如果当初 function 不是作为一种特殊 object 来实现的（这完全是可能的，而且其实这样做更清晰），spec 自然应该将其单列为类型之一。</p>
+</blockquote>
+<p>如果按照这个说法这么一看，function 就是因为它的特殊性被开了特例，所以 typeof 这个函数也并不是完全按照前面基本数据类型来的，另外规范里面还有一种区分普通对象的 exotic 对象，这种对象可以根据浏览器实现来控制 typeof 的返回值，所以 typeof 现在的返回值也不仅仅只有基本数据类型和 function 了。</p>
+<p>作为 typeof 的使用者，对于 typeof 这个操作符还是应该记住这个规律：</p>
+<ul>
+<li>对于基本类型，除 null 以外，均可以返回正确的结果。</li>
+<li>对于引用类型，除 function 以外，一律返回 object 类型。</li>
+<li>对于 null ，返回 object 类型。</li>
+<li>对于 function 返回  function 类型。</li>
+</ul>
+<h2 id="3-3-“number”-类型中的特殊值"><a href="#3-3-“number”-类型中的特殊值" class="headerlink" title="3.3. “number” 类型中的特殊值"></a>3.3. “number” 类型中的特殊值</h2><p>对于 NaN 和 Infinity 这两个特殊值，typeof 遇到他们都会返回 number</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="literal">Infinity</span>   <span class="comment">// "number"</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">NaN</span>        <span class="comment">// "number"</span></span><br></pre></td></tr></table></figure>
+<p>Infinity 其实还好，但是 NaN(Not a Number)把它设计成 number 类型之后，使得有些时候用 typeof 在判断数字的时候不会达到我们想要的效果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> response = &#123;&#125;</span><br><span class="line"><span class="keyword">var</span> num = <span class="built_in">parseInt</span>(response.a)</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> num === <span class="string">'number'</span>) &#123;</span><br><span class="line">    num = num + <span class="number">10</span> <span class="comment">// 执行后 num 仍然是 NaN</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>服务器下发的数据中，缺少了 response.a 的数值字段，如果没有提前对这个字段是否为空做判断，就会发生上面的情况，它一旦出现，有时候会非常难找原因，因为在编译的时候它也不会报错，开发者不容易发现这个问题。</p>
+<p>在这里也顺带说下，其实判断一个值是否为数字的最好的办法是借助 isFinite 函数来进行判断，因为 isFinite 函数本身会把传入值转换为 number，所以还得提前再加一层判断：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isNumber</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">typeof</span> val === <span class="string">"number"</span> &amp;&amp; <span class="built_in">isFinite</span>(val)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="4-instanceof-操作符上的问题"><a href="#4-instanceof-操作符上的问题" class="headerlink" title="4. instanceof 操作符上的问题"></a>4. instanceof 操作符上的问题</h1><p>关于 instanceof 这个操作符，可以在 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/instanceof" rel="external nofollow noopener noreferrer" target="_blank">MDN</a> 上看到它的定义：</p>
+<blockquote>
+<p>instanceof 运算符用来测试一个对象在其原型链中是否存在一个构造函数的 prototype 属性。</p>
+</blockquote>
+<p>从这个定义上可以看出，instanceof 操作符相当于在原型链上查找一个 constructor，如果这个 constructor 存在的话，该运算符返回 true， 否则返回 false。</p>
+<p>举个例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">Dog.prototype = <span class="keyword">new</span> Animal();</span><br><span class="line">Dog.prototype.constructor = Dog;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> adog = <span class="keyword">new</span> Dog();</span><br><span class="line"><span class="built_in">console</span>.log(adog <span class="keyword">instanceof</span> Dog);    <span class="comment">// 返回 true</span></span><br><span class="line"><span class="built_in">console</span>.log(adog <span class="keyword">instanceof</span> Animal);   <span class="comment">// 返回 true</span></span><br></pre></td></tr></table></figure></p>
+<p>平时这样子正常使用它是感觉不出来有问题的，然而，当遇到下面这些情况的时候，就需要注意了。</p>
+<h2 id="4-1-当页面中存在一个或多个-frame-的时候"><a href="#4-1-当页面中存在一个或多个-frame-的时候" class="headerlink" title="4.1. 当页面中存在一个或多个 frame 的时候"></a>4.1. 当页面中存在一个或多个 frame 的时候</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[] <span class="keyword">instanceof</span> <span class="built_in">window</span>.frames[<span class="number">0</span>].Array</span><br></pre></td></tr></table></figure>
+<p>这个跨环境的判断会返回 false，因为 <code>Array.prototype !== window.frames[0].Array.prototype</code></p>
+<p>这在跨 frame 传递数据对象的时候，需要注意的一个问题。</p>
+<h2 id="4-2-一些相对特殊的判断"><a href="#4-2-一些相对特殊的判断" class="headerlink" title="4.2. 一些相对特殊的判断"></a>4.2. 一些相对特殊的判断</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span>    <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Function</span> <span class="keyword">instanceof</span> <span class="built_in">Function</span>      <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Function</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span>    <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">Dog <span class="keyword">instanceof</span> <span class="built_in">Object</span>     <span class="comment">// true</span></span><br><span class="line">Dog <span class="keyword">instanceof</span> <span class="built_in">Function</span>   <span class="comment">// true</span></span><br><span class="line">Dog <span class="keyword">instanceof</span> Dog    <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Number</span> <span class="keyword">instanceof</span> <span class="built_in">Number</span>    <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Boolean</span> <span class="keyword">instanceof</span> <span class="built_in">Boolean</span>    <span class="comment">// false</span></span><br><span class="line"><span class="built_in">String</span> <span class="keyword">instanceof</span> <span class="built_in">String</span>    <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Symbol</span> <span class="keyword">instanceof</span> <span class="built_in">Symbol</span>    <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>虽然前面的规范表格里面有提到过，js 里的 Function 是一个实现了 [[call]] 方法的 Object，它具有 Object 对象的全部特性，也就是说，Function 是继承了 Object 对象的，所以 <code>Function instanceof Object</code> 不难理解。</p>
+<p>但是 <code>Function instanceof Function</code> 和 <code>Object instanceof Object</code>，实在是比较容易懵，一开始我也没想明白为什么会这样，后来看到了 <a href="https://www.ibm.com/developerworks/cn/web/1306_jiangjj_jsinstanceof/index.html" rel="external nofollow noopener noreferrer" target="_blank">IBM 上的一篇文章</a>，里面对这个 instanceof 的执行过程做了一个模拟还原：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">instance_of</span>(<span class="params">L, R</span>) </span>&#123;<span class="comment">//L 表示左表达式，R 表示右表达式</span></span><br><span class="line"> <span class="keyword">var</span> O = R.prototype;<span class="comment">// 取 R 的显示原型</span></span><br><span class="line"> L = L.__proto__;<span class="comment">// 取 L 的隐式原型</span></span><br><span class="line"> <span class="keyword">while</span> (<span class="literal">true</span>) &#123; </span><br><span class="line">   <span class="keyword">if</span> (L === <span class="literal">null</span>) </span><br><span class="line">     <span class="keyword">return</span> <span class="literal">false</span>; </span><br><span class="line">   <span class="keyword">if</span> (O === L)<span class="comment">// 这里重点：当 O 严格等于 L 时，返回 true </span></span><br><span class="line">     <span class="keyword">return</span> <span class="literal">true</span>; </span><br><span class="line">   L = L.__proto__; </span><br><span class="line"> &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出，instanceof 操作符会在左边的表达式中递归地向上查找 __proto__ 属性值，这个 __proto__ 对应着规范上的 [[Prototype]] 属性，再来对应到我们现在的问题上，最关键的是这一段：</p>
+<pre><code>清单 7. Object instanceof Object
+... 
+L = ObjectL.__proto__ = Function.prototype
+</code></pre><p>等下，ObjectL.__proto__ 竟然是 Function.prototype ？？？</p>
+<p>看到这里我才突然想起来，原来 Object 和 Function 他们本身都是作为函数来提供给用户调用的，所以他们必须是 Function，按照这个思路，<code>Object instanceof Object</code> 和 <code>Function instanceof Function</code> 返回 true 也就合情合理了。</p>
+<p>而对于 <code>Dog instanceof Dog</code> 为什么返回 false，也是因为</p>
+<pre><code>L = FooL.__proto__ = Function.prototype
+</code></pre><p>左侧表达式一开始就为 Function.prototype 了，这样子的话左侧表达式的原型链在向上查找的过程中就找不到 Dog.prototype 了，结果自然返回的是 false。</p>
+<h2 id="4-3-关于原始类型的包装类"><a href="#4-3-关于原始类型的包装类" class="headerlink" title="4.3. 关于原始类型的包装类"></a>4.3. 关于原始类型的包装类</h2><p>对于四个原始类型的包装类，Number, Boolean, String, Symbol 返回 false 的原因会有所不同，我们来看下面一个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"dog"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str <span class="keyword">instanceof</span> <span class="built_in">String</span>);   <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(str.__proto__ === <span class="built_in">String</span>.prototype);    <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>按照这个结果，那前面的说法就不合逻辑了，str.__proto__ 都是 String.prototype，把这个逻辑套到前面的函数里去</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">instance_of(str, <span class="built_in">String</span>);   <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>返回的就是 true，但是偏偏实际 instanceof 操作符返回的就是 false，这是为什么呢？</p>
+<p>在翻阅了一轮资料之后，在 StackOverflow 上看到了这么一个<a href="https://stackoverflow.com/questions/15705232/confusion-about-prototype-chain-primitives-and-objects" rel="external nofollow noopener noreferrer" target="_blank">答案</a>。</p>
+<p>原来，在我们对原始类型变量使用成员访问符 <code>.</code> 的时候，js 会自动调起装箱机制（auto-boxes），临时把原始数据类型通过语言内置的包装类给转换成对应的对象类型，在这个例子中相当于自动做了 <code>new String(str)</code> 这一步，所以我们才能在原始类型的变量上访问到 __proto__ 属性。</p>
+<p>换句话说，原始数据类型本身是根本没有 __proto__ 这个对象属性的，在直接使用 instanceof 操作符的时候，js 运行环境并不会自动调起装箱过程，原始数据类型也并没有 [[Prototype]] 属性，所以它的返回的是 false，这也导致了 instanceof 操作符有无法用于判断原始数据类型的弊端。</p>
+<h1 id="5-关于-null-和-undefined"><a href="#5-关于-null-和-undefined" class="headerlink" title="5. 关于 null 和 undefined"></a>5. 关于 null 和 undefined</h1><p>javascript 有个非常独特的设计，就是 null 和 undefined 同时存在于这个语言中，这使得这门语言可以有两种表示空值的方法，这两个空值在使用过程中极其相似，比如<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!<span class="literal">undefined</span>) </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'undefined is false'</span>);</span><br><span class="line"><span class="comment">// undefined is false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="literal">null</span>) </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'null is false'</span>);</span><br><span class="line"><span class="comment">// null is false</span></span><br><span class="line"></span><br><span class="line"><span class="literal">undefined</span> == <span class="literal">null</span></span><br><span class="line"><span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
+<p>上面相等运算符甚至直接返回 true，很多开发者在实际开发中到底选择哪种也是随心所欲，根本没有去在乎过里面的区别，不过热衷于探索的我还是认为需要深究一下，它们之间究竟有什么区别呢？咱还是来看看定义吧。</p>
+<h2 id="5-1-这两者在定义上的区别"><a href="#5-1-这两者在定义上的区别" class="headerlink" title="5.1. 这两者在定义上的区别"></a>5.1. 这两者在定义上的区别</h2><ul>
+<li><code>null</code>，表示一个 “无” 的对象</li>
+<li><code>undefined</code>，表示一个 “无” 的原始值</li>
+</ul>
+<p>typeof 返回值的区别<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="literal">null</span>         <span class="comment">//object</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">undefined</span>    <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure></p>
+<p>Number 转换上的区别<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="literal">null</span>)        <span class="comment">// 0</span></span><br><span class="line">+<span class="literal">null</span>               <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="literal">undefined</span>)   <span class="comment">// NaN</span></span><br><span class="line">+<span class="literal">undefined</span>          <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure></p>
+<p>出现时机上的区别<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name;</span><br><span class="line"><span class="built_in">console</span>.log(name); <span class="comment">//undefined</span></span><br><span class="line">name = <span class="string">'night'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(name); <span class="comment">//night</span></span><br><span class="line">name = <span class="literal">null</span>;</span><br><span class="line"><span class="built_in">console</span>.log(name); <span class="comment">//null</span></span><br></pre></td></tr></table></figure></p>
+<p>看完这三个例子，可以得出一些规律：</p>
+<p><strong> 对于 null：</strong></p>
+<ol>
+<li>变量不主动赋值 null 的话是不会出现 null 的</li>
+<li>null 在转换为数字的时候会被转换为 0</li>
+<li>typeof null 的值返回的是 “object”</li>
+</ol>
+<p><strong> 对于 undefined：</strong></p>
+<ol>
+<li>变量在声明的时候会被默认初始化为 undefined</li>
+<li>undefined 在转换为数字的时候会被转换为 NaN</li>
+<li>typeof undefined 会返回的是 “undefined”</li>
+</ol>
+<h2 id="5-2-同时存在的历史原因"><a href="#5-2-同时存在的历史原因" class="headerlink" title="5.2. 同时存在的历史原因"></a>5.2. 同时存在的历史原因</h2><p>虽然我们得到了前面的规律，也可以看出来确实存在一些区别，可是这些区别直观的看过去它们实际上都是些无关痛痒的区别。按理说，这门语言其实只要一个空值就行了，两个空值在很多时候都作用重叠了，它为什么要这样子设计呢？</p>
+<p>翻了一圈，看到了阮老师写的一篇 <a href="http://www.ruanyifeng.com/blog/2014/03/undefined-vs-null.html" rel="external nofollow noopener noreferrer" target="_blank">undefined 与 null 的区别</a>，里面提到了</p>
+<blockquote>
+<p>1995 年 JavaScript 诞生时，最初像 Java 一样，只设置了 null 作为表示 “无” 的值。</p>
+<p>但是，JavaScript 的设计者 Brendan Eich，觉得这样做还不够，有两个原因。</p>
+<p>首先，null 像在 Java 里一样，被当成一个对象。但是，JavaScript 的数据类型分成原始类型（primitive）和合成类型（complex）两大类，Brendan Eich 觉得表示 “无” 的值最好不是对象。</p>
+<p>其次，JavaScript 的最初版本没有包括错误处理机制，发生数据类型不匹配时，往往是自动转换类型或者默默地失败。Brendan Eich 觉得，如果 null 自动转为 0，很不容易发现错误。</p>
+<p>因此，Brendan Eich 又设计了一个 undefined。</p>
+</blockquote>
+<p>可见，undefined 是在 null 之后设计的，设计它的本意是希望能够补全 null 的不足，然而当真正这么实践的时候，却发现两个空值的作用和含义基本一致，当初只需要改进 null 值就好了，根本不需要多设计一个空值出来。</p>
+<h2 id="5-3-二者的缺陷"><a href="#5-3-二者的缺陷" class="headerlink" title="5.3. 二者的缺陷"></a>5.3. 二者的缺陷</h2><p>即使 js 发展到了今天，其实不论是 null 还是 undefined，它们二者仍然存在着各自本身的缺陷。</p>
+<p>先说下 null 值。前面也提到了，它作为原始数据类型，typeof null 的值返回 “object” 本身就是个巨大的设计缺陷，所以检测 null 值，用 typeof 是检测不出来的，一般建议下面这种方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isNull</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> val === <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而检测对象的值，用 typeof 也没办法区分出 null 和真正的对象，所以要区分出真正的对象，还得用这种方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isEntityObject</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> val &amp;&amp; <span class="keyword">typeof</span> val === <span class="string">"object"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再来看看 undefined 值的问题，undefined 按理说也应该是一个原始类型的值，然而如果你接触 js 不深的话，你一定做梦也想不到 undefined 竟然是一个全局变量！<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.hasOwnProperty(<span class="string">"undefined"</span>)    <span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
+<p>因为它既不是 js 里的关键字也不是保留字，可以在 <a href="https://www.ecma-international.org/ecma-262/6.0/#sec-names-and-keywords" rel="external nofollow noopener noreferrer" target="_blank">规范</a> 里面看到，undefined 即不存在于关键字列表中，也不存在于保留字列表中，所以它理论上就是一个变量，是可以被任意修改覆盖的。比如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="literal">undefined</span> = <span class="string">"oops"</span>;</span><br><span class="line">alert(<span class="literal">undefined</span>);</span><br></pre></td></tr></table></figure>
+<p>据说这段代码在 IE9 以下真的会弹出 <code>oops</code>，有兴趣的可以试一下，不过现在的浏览器已经锁定了全局 undefined 的值，上面的操作已经不能够修改 undefined 的值了，但是这段代码这么执行也并不会报错，相比 null，给它赋值就会报错。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="literal">null</span> = <span class="number">1</span>;</span><br><span class="line">VM122:<span class="number">1</span> Uncaught <span class="built_in">SyntaxError</span>: Unexpected token <span class="literal">null</span></span><br></pre></td></tr></table></figure>
+<p>然而，它也仅仅只是锁定了全局 undefined 的值，如果在局部声明一个 undefined 变量，它还是可以进行修改</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">!<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> <span class="literal">undefined</span> = <span class="string">"changed value"</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="literal">undefined</span>);</span><br><span class="line">&#125;();</span><br><span class="line"><span class="comment">// changed value</span></span><br></pre></td></tr></table></figure>
+<p>所以，要想获得唯一准确的 undefined 值，而不是想借用 undefined 变量的话，得走一条弯路：去构造一个 undefined 值，这时候，js 的一个老古董 <code>void</code> 关键字就派上用场了。</p>
+<h2 id="5-4-巧用-void-关键字"><a href="#5-4-巧用-void-关键字" class="headerlink" title="5.4. 巧用 void 关键字"></a>5.4. 巧用 void 关键字</h2><p>对于这个关键字，其实我们并不陌生，我们以前经常会见到 <code>javascript:void(0);</code> 这种用法，它与 <code>&lt;a href=&quot;#&quot;&gt;link&lt;/a&gt;</code> 的区别是后者在点击了之后会跳到页面的最顶部去，改成用 <code>&lt;a href=&quot;javascript:void(0);&quot;&gt;link&lt;/a&gt;</code> 就可以避免这个问题。</p>
+<p>说到底其实 void 这个关键字，它本身的作用只有一个，就是返回一个 undefined 值，它是一个一元操作符，无论后面传入什么参数进去，他都会返回 undefined，比如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">void</span> <span class="string">"you are useless?"</span>;</span><br><span class="line"><span class="keyword">void</span> <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">void</span> [];</span><br><span class="line"><span class="keyword">void</span> /(useless)/ig;</span><br><span class="line"><span class="keyword">void</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="built_in">console</span>.log(<span class="string">"you are so useless?"</span>); &#125;</span><br><span class="line"><span class="comment">//... always return undefined</span></span><br></pre></td></tr></table></figure>
+<p>所以当我们需要使用真正的 undefined 值，而不是全局的 undefined 变量的时候，可以通过 void 关键字去生成一个出来，比如<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scheduleFlush = <span class="keyword">void</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure></p>
+<h1 id="6-利用-Class-精确判断数据类型"><a href="#6-利用-Class-精确判断数据类型" class="headerlink" title="6. 利用 [[Class]] 精确判断数据类型"></a>6. 利用 [[Class]] 精确判断数据类型</h1><p>看过了前面 typeof 让人失望的表现之后，再来看看我们到底应该如何稳妥的判断数据类型，目前来说，要检测基本数据类型和内置对象，最好的方法是使用 <code>toString</code> 函数来进行判断。</p>
+<p>toString 函数是 Object.prototype 上的方法，所以所有对象都拥有 toString 方法，它可以返回对象内部属性 <strong>[[Class]]</strong> 的值。但 Array, Date 等对象会重写从 Object.prototype 继承来的 toString 方法，从而返回不同的对象值，下面是一些例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">toString.call(&#123;&#125;);          <span class="comment">// "[object Object]"</span></span><br><span class="line">toString.call(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;);     <span class="comment">// "[object Function]"</span></span><br><span class="line"></span><br><span class="line">toString.call([]);          <span class="comment">// "[object Array]"</span></span><br><span class="line">toString.call(<span class="regexp">/a/</span>);         <span class="comment">// "[object RegExp]"</span></span><br><span class="line">toString.call(<span class="built_in">JSON</span>);        <span class="comment">// "[object JSON]"</span></span><br><span class="line">toString.call(<span class="keyword">new</span> <span class="built_in">Date</span>());  <span class="comment">// "[object Date]"</span></span><br><span class="line"></span><br><span class="line">toString.call(<span class="number">0</span>);           <span class="comment">// "[object Number]"</span></span><br><span class="line">toString.call(<span class="literal">false</span>);       <span class="comment">// "[object Boolean]"</span></span><br><span class="line">toString.call(<span class="string">'foo'</span>);       <span class="comment">// "[object String]"</span></span><br><span class="line">toString.call(<span class="built_in">Symbol</span>());    <span class="comment">// "[object Symbol]"</span></span><br><span class="line"></span><br><span class="line">toString.call(<span class="literal">NaN</span>);         <span class="comment">// "[object Number]"</span></span><br><span class="line">toString.call(<span class="literal">Infinity</span>);    <span class="comment">// "[object Number]"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Since ECMAScript 5 （JavaScript 1.8.5）</span></span><br><span class="line">toString.call(<span class="literal">null</span>);        <span class="comment">// "[object Null]"</span></span><br><span class="line">toString.call(<span class="literal">undefined</span>);   <span class="comment">// "[object Undefined]"</span></span><br></pre></td></tr></table></figure>
+<p>可见 toString 函数几乎所有的内置类型都可以返回预期的正确结果，而且由于返回值是字符串，也可以用于解决前面所提到的跨 frame 判断数据类型的问题，这几乎是最理想的判断数据类型的方法了。</p>
+<p>不过这里值得一提的是，基本数据类型 number, boolean, string, symbol 在调用 toString 这个函数的时候，也是用了包装类来进行隐式自动装箱的，所以它们返回的是首字母大写的 Number, Boolean, String, Symbol。</p>
+<p>而对于 null 和 undefined，却不存在 Null 和 Undefined 这两个包装类，根据 ES2015 规范中对于 <a href="https://www.ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring" rel="external nofollow noopener noreferrer" target="_blank">toString 函数的定义</a></p>
+<pre><code>1. If the this value is undefined, return &quot;[object Undefined]&quot;.
+2. If the this value is null, return &quot;[object Null]&quot;.
+...
+</code></pre><p>可知，它们是在函数判断的时候直接返回的。也就是说，null 和 undefined 这两个值在 toString 函数处理的时候不需要经过装箱处理，内部代码在直接判断的过程中就进行了返回。</p>
+<p><code>toString</code> 也不是完美的，它无法检测用户自定义类型。 因为 Object.prototype 是不知道用户会创造什么类型的， 它只能检测 ECMA 标准中的那些内置类型。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">toString.call(<span class="keyword">new</span> Dog())   <span class="comment">// [object Object]</span></span><br></pre></td></tr></table></figure>
+<p>所以如果你要判断的是基本数据类型或 JavaScript 内置对象，推荐使用 <code>toString</code>，如果要判断的时自定义对象类型，还是得使用 <code>instanceof</code> 操作符。</p>
+<h1 id="7-弱相等运算符在判断时的类型转换"><a href="#7-弱相等运算符在判断时的类型转换" class="headerlink" title="7. 弱相等运算符在判断时的类型转换"></a>7. 弱相等运算符在判断时的类型转换</h1><p>说到这个，不得不提一个经典的例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[]==![]   <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>这个例子按照常识，右边的 [] 是 Object 类型，在 <code>!</code> 运算符取反后应该等于 false，而左边的 [] 是 Object，所有的 Object 应该都会被转成 true，所以 true == false 返回的应该是 false 才对，但是怎么就偏偏返回了个 true 呢？</p>
+<p>说到底，还是对这个运算符的了解不够深造成的，对 == 运算符运算过程的理解太想当然了，其实这个运算符真正的内部执行过程是这样的：</p>
+<pre><code>[] == ![]
+==&gt; [] == false
+==&gt; [] == ToNumber(false)
+==&gt; [] == 0
+==&gt; ToPrimitive([]) == 0
+==&gt; &quot;&quot; == 0
+==&gt; ToNumber(&quot;&quot;) == 0
+==&gt; 0 == 0
+==&gt; true
+</code></pre><p>至于到底为什么会这样子算，可以详细看看<a href="https://github.com/jawil/blog/issues/1" rel="external nofollow noopener noreferrer" target="_blank">这篇文章</a>，简单来说就是根据 ECMA 规范的定义，这个运算符会在内部不断的做类型转换。它的转换规则是这样的：</p>
+<p><img src="/images/2018/06/data-transformation-of-abstract-equality-omparison.jpeg" alt="运算规则图"></p>
+<ul>
+<li>null == undefined 为 true，且它俩与所有其他值比较的结果都是 false。</li>
+<li>Object 类型在与 Boolean/String/Number 进行运算时，会先调用 ToPrimitive 函数转换为原始类型（内部会尝试调用 <code>valueOf()</code> 方法，如果得到的结果不是基本数据类型，那再调用 <code>toString()</code> 方法）</li>
+<li>String 类型与 Boolean 类型进行运算时，两边都会先调用 ToNumber 函数转换为 Number 类型</li>
+<li>Number 与 String/Boolean 类型进行运算时，String/Boolean 类型的一方会先调用 ToNumber 函数转换为 Number 类型</li>
+<li>数值 NaN 与任何值都不相等，包括 NaN 本身也不相等（<a href="https://en.wikipedia.org/wiki/IEEE_754" rel="external nofollow noopener noreferrer" target="_blank">IEEE-754 浮点数标准</a>定义的）</li>
+</ul>
+<p>通过这个转换规则就可以很容易解释前面为什么 <code>[] == ![]</code> 的结果为 true 了</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+            <a href="/tags/ECMAScript/" rel="tag"># ECMAScript</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/archives/find-javascript-improvements-from-remove-duplicates.html" rel="next" title="从数组去重来看 javascript 的进化">
+                <i class="fa fa-chevron-left"></i> 从数组去重来看 javascript 的进化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/archives/http-quick-guide.html" rel="prev" title="HTTP 面试指南">
+                HTTP 面试指南 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/icons/icon-128x128.png" alt="BangZ">
+            
+              <p class="site-author-name" itemprop="name">BangZ</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">81</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/istobran" target="_blank" title="GitHub" rel="external nofollow noopener noreferrer"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:i@bangz.me" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-javascript-的诞生背景"><span class="nav-text">1. javascript 的诞生背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-基础数据类型表"><span class="nav-text">2. 基础数据类型表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-typeof-操作符上的问题"><span class="nav-text">3. typeof 操作符上的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-typeof-null-的值为-“object”"><span class="nav-text">3.1. typeof null 的值为 “object”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-为什么要多出个-“function”-类型出来"><span class="nav-text">3.2. 为什么要多出个 “function” 类型出来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-“number”-类型中的特殊值"><span class="nav-text">3.3. “number” 类型中的特殊值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-instanceof-操作符上的问题"><span class="nav-text">4. instanceof 操作符上的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-当页面中存在一个或多个-frame-的时候"><span class="nav-text">4.1. 当页面中存在一个或多个 frame 的时候</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-一些相对特殊的判断"><span class="nav-text">4.2. 一些相对特殊的判断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-关于原始类型的包装类"><span class="nav-text">4.3. 关于原始类型的包装类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-关于-null-和-undefined"><span class="nav-text">5. 关于 null 和 undefined</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-这两者在定义上的区别"><span class="nav-text">5.1. 这两者在定义上的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-同时存在的历史原因"><span class="nav-text">5.2. 同时存在的历史原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-二者的缺陷"><span class="nav-text">5.3. 二者的缺陷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-巧用-void-关键字"><span class="nav-text">5.4. 巧用 void 关键字</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-利用-Class-精确判断数据类型"><span class="nav-text">6. 利用 [[Class]] 精确判断数据类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-弱相等运算符在判断时的类型转换"><span class="nav-text">7. 弱相等运算符在判断时的类型转换</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BangZ</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow noopener noreferrer">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next" rel="external nofollow noopener noreferrer">NexT.Muse</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("4MAiIplUcsxIjad83U2IW99g-gzGzoHsz", "nxvNFChEQkVNNMr7yClwBekv");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.get('time'));
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1590725382900')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script></body>
+</html>

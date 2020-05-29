@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><link rel="manifest" href="/manifest.json">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="在说这个之前，我要先说下我对 yum 工具的认识，在我的认识中，yum 工具其实只是一个软件管理器，相当与 Windows 下的各种软件管家或者 Android 下的应用商店一样的东西而已，不过这个工具却不仅仅只是安装卸载应用软件这么简单，他还提供维持 linux 系统稳定的必须系统软件，包括内核也在它的管理范围之内。所以在 linux 下，这样的软件管理工具已经成为各发行版必备的东西。在 deb">
+<meta name="keywords" content="Linux基础,云计算,CentOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="yum 工具的使用">
+<meta property="og:url" content="https://hexo.bangz.me/archives/tutorial-of-centos-yum.html">
+<meta property="og:site_name" content="BangZ&#39;s 梦工厂">
+<meta property="og:description" content="在说这个之前，我要先说下我对 yum 工具的认识，在我的认识中，yum 工具其实只是一个软件管理器，相当与 Windows 下的各种软件管家或者 Android 下的应用商店一样的东西而已，不过这个工具却不仅仅只是安装卸载应用软件这么简单，他还提供维持 linux 系统稳定的必须系统软件，包括内核也在它的管理范围之内。所以在 linux 下，这样的软件管理工具已经成为各发行版必备的东西。在 deb">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-06-08T07:48:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="yum 工具的使用">
+<meta name="twitter:description" content="在说这个之前，我要先说下我对 yum 工具的认识，在我的认识中，yum 工具其实只是一个软件管理器，相当与 Windows 下的各种软件管家或者 Android 下的应用商店一样的东西而已，不过这个工具却不仅仅只是安装卸载应用软件这么简单，他还提供维持 linux 系统稳定的必须系统软件，包括内核也在它的管理范围之内。所以在 linux 下，这样的软件管理工具已经成为各发行版必备的东西。在 deb">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="BangZ's 梦工厂" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://hexo.bangz.me/archives/tutorial-of-centos-yum.html">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>yum 工具的使用 | BangZ's 梦工厂</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78277428-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-78277428-2');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BangZ's 梦工厂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">FutureTech Research Center</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives menu-item-active">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-pdf">
+    <a href="/pdfs/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-file"></i> <br>PDF</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hexo.bangz.me/archives/tutorial-of-centos-yum.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BangZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/icons/icon-128x128.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BangZ's 梦工厂">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">yum 工具的使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2015-03-31 08:01:00" itemprop="dateCreated datePublished" datetime="2015-03-31T08:01:00+08:00">2015-03-31</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-06-08 15:48:26" itemprop="dateModified" datetime="2018-06-08T15:48:26+08:00">2018-06-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/日常运维/" itemprop="url" rel="index"><span itemprop="name">日常运维</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/archives/tutorial-of-centos-yum.html" class="leancloud_visitors" data-flag-title="yum 工具的使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在说这个之前，我要先说下我对 yum 工具的认识，在我的认识中，yum 工具其实只是一个软件管理器，相当与 Windows 下的各种软件管家或者 Android 下的应用商店一样的东西而已，不过这个工具却不仅仅只是安装卸载应用软件这么简单，他还提供维持 linux 系统稳定的必须系统软件，包括内核也在它的管理范围之内。所以在 linux 下，这样的软件管理工具已经成为各发行版必备的东西。在 debian 阵营中他的名字叫 dpkg，在 ubuntu 中它的名字叫 apt，在 OpenSUSE 中，他的名字叫 zypper，在 Red Hat 中，它的名字叫 rpm，在 CentOS 中，它的名字就叫做 yum。</p>
+<p>由于 CentOS 是属于 RedHat 阵营的，俗称盗版 Red Hat Enterprise（误），所以它具有 Red Hat 阵营的基本特性，也就是包括 rpm 在内的系统架构方式。因此会 CentOS 的同学，用其他 Red Hat 阵营的 linux 发行版都很容易适应。</p>
+<p>其实 CentOS 6 到 CentOS 7 这两个版本之间产生了很多的变化，比如原来的 iptables 已不再使用，主打防火墙是 firewalld，在实际使用中还会体验到更多的明显变化。所以我们在学习 yum 之前，应该要先了解 CentOS。</p>
+<p>查看 linux 内核的办法<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># uname -a</span></span><br><span class="line">Linux myServer 3.10.0-123.13.1.el7.x86_64 <span class="comment">#1 SMP Tue Dec 9 23:06:09 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux</span></span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>这里边的 el7 其实就已经说明了现在使用的 rhel7 的内核了，也就是 CentOS 7，x86_64 说明是 64 位架构的系统。</p>
+<p>如果不确定，其实还有更准确的办法。直接查看 release 文档<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat /etc/redhat-release </span></span><br><span class="line">CentOS Linux release 7.0.1406 (Core)</span><br></pre></td></tr></table></figure></p>
+<p>或者 cat 别的都可以，不过他们本质上都是 centos-release 的映射<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ls -al /etc/*-release</span></span><br><span class="line"> -rw-r--r--. 1 root root  38 Feb 20 14:38 /etc/centos-release</span><br><span class="line"> -rw-r--r--. 1 root root 254 Feb 20 14:38 /etc/os-release</span><br><span class="line"> lrwxrwxrwx. 1 root root  14 Mar  2 05:41 /etc/redhat-release -&amp;gt; centos-release</span><br><span class="line"> lrwxrwxrwx. 1 root root  14 Mar  2 05:41 /etc/system-release -&amp;gt; centos-release</span><br></pre></td></tr></table></figure></p>
+<p>了解了系统的 CentOS 的版本之后，我们才保证正确的使用 yum 工具。在不知道 yum 工具怎么用的情况下，我们先看下 yum 工具的自带帮助<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum --help</span></span><br><span class="line">Loaded plugins: fastestmirror</span><br><span class="line">Usage: yum [options] COMMAND</span><br><span class="line">List of Commands:</span><br><span class="line">check          Check <span class="keyword">for</span> problems <span class="keyword">in</span> the rpmdb</span><br><span class="line">check-update   Check <span class="keyword">for</span> available package updates</span><br><span class="line">clean          Remove cached data</span><br><span class="line">deplist        List a package<span class="string">'s dependencies</span></span><br><span class="line"><span class="string">distribution-synchronization Synchronize installed packages to the latest available versions</span></span><br><span class="line"><span class="string">downgrade      downgrade a package</span></span><br><span class="line"><span class="string">erase          Remove a package or packages from your system</span></span><br><span class="line"><span class="string">fs             Creates filesystem snapshots, or lists/deletes current snapshots.</span></span><br><span class="line"><span class="string">fssnapshot     Creates filesystem snapshots, or lists/deletes current snapshots.</span></span><br><span class="line"><span class="string">groups         Display, or use, the groups information</span></span><br><span class="line"><span class="string">help           Display a helpful usage message</span></span><br><span class="line"><span class="string">history        Display, or use, the transaction history</span></span><br><span class="line"><span class="string">info           Display details about a package or group of packages</span></span><br><span class="line"><span class="string">install        Install a package or packages on your system</span></span><br><span class="line"><span class="string">list           List a package or groups of packages</span></span><br><span class="line"><span class="string">load-transaction load a saved transaction from filename</span></span><br><span class="line"><span class="string">makecache      Generate the metadata cache</span></span><br><span class="line"><span class="string">provides       Find what package provides the given value</span></span><br><span class="line"><span class="string">reinstall      reinstall a package</span></span><br><span class="line"><span class="string">repo-pkgs      Treat a repo. as a group of packages, so we can install/remove all of them</span></span><br><span class="line"><span class="string">repolist       Display the configured software repositories</span></span><br><span class="line"><span class="string">search         Search package details for the given string</span></span><br><span class="line"><span class="string">shell          Run an interactive yum shell</span></span><br><span class="line"><span class="string">swap           Simple way to swap packages, instead of using shell</span></span><br><span class="line"><span class="string">update         Update a package or packages on your system</span></span><br><span class="line"><span class="string">update-minimal Works like upgrade, but goes to the'</span>newest<span class="string">'package match which fixes a problem that affects your system</span></span><br><span class="line"><span class="string">updateinfo     Acts on repository update information</span></span><br><span class="line"><span class="string">upgrade        Update packages taking obsoletes into account</span></span><br><span class="line"><span class="string">version        Display a version for the machine and/or available repos.</span></span><br><span class="line"><span class="string">Options:</span></span><br><span class="line"><span class="string">  -h, --help            show this help message and exit</span></span><br><span class="line"><span class="string">  -t, --tolerant        be tolerant of errors</span></span><br><span class="line"><span class="string">  -C, --cacheonly       run entirely from system cache, don'</span>t update cache</span><br><span class="line">  -c [config file], --config=[config file]</span><br><span class="line">                        config file location</span><br><span class="line">  -R [minutes], --randomwait=[minutes]</span><br><span class="line">                        maximum <span class="built_in">command</span> <span class="built_in">wait</span> time</span><br><span class="line">  -d [debug level], --debuglevel=[debug level]</span><br><span class="line">                        debugging output level</span><br><span class="line">  --showduplicates      show duplicates, <span class="keyword">in</span> repos, <span class="keyword">in</span> list/search commands</span><br><span class="line">  -e [error level], --errorlevel=[error level]</span><br><span class="line">                        error output level</span><br><span class="line">  --rpmverbosity=[debug level name]</span><br><span class="line">                        debugging output level <span class="keyword">for</span> rpm</span><br><span class="line">  -q, --quiet           quiet operation</span><br><span class="line">  -v, --verbose         verbose operation</span><br><span class="line">  -y, --assumeyes       answer yes <span class="keyword">for</span> all questions</span><br><span class="line">  --assumeno            answer no <span class="keyword">for</span> all questions</span><br><span class="line">  --version             show Yum version and <span class="built_in">exit</span></span><br><span class="line">  --installroot=[path]  <span class="built_in">set</span> install root</span><br><span class="line">  --enablerepo=[repo]   <span class="built_in">enable</span> one or more repositories (wildcards allowed)</span><br><span class="line">  --disablerepo=[repo]  <span class="built_in">disable</span> one or more repositories (wildcards allowed)</span><br><span class="line">  -x [package], --exclude=[package]</span><br><span class="line">                        exclude package(s) by name or glob</span><br><span class="line">  --disableexcludes=[repo]</span><br><span class="line">                        <span class="built_in">disable</span> exclude from main, <span class="keyword">for</span> a repo or <span class="keyword">for</span></span><br><span class="line">                        everything</span><br><span class="line">  --disableincludes=[repo]</span><br><span class="line">                        <span class="built_in">disable</span> includepkgs <span class="keyword">for</span> a repo or <span class="keyword">for</span> everything</span><br><span class="line">  --obsoletes           <span class="built_in">enable</span> obsoletes processing during updates</span><br><span class="line">  --noplugins           <span class="built_in">disable</span> Yum plugins</span><br><span class="line">  --nogpgcheck          <span class="built_in">disable</span> gpg signature checking</span><br><span class="line">  --disableplugin=[plugin]</span><br><span class="line">                        <span class="built_in">disable</span> plugins by name</span><br><span class="line">  --enableplugin=[plugin]</span><br><span class="line">                        <span class="built_in">enable</span> plugins by name</span><br><span class="line">  --skip-broken         skip packages with depsolving problems</span><br><span class="line">  --color=COLOR         control whether color is used</span><br><span class="line">  --releasever=RELEASEVER</span><br><span class="line">                        <span class="built_in">set</span> value of <span class="variable">$releasever</span> <span class="keyword">in</span> yum config and repo files</span><br><span class="line">  --downloadonly        don<span class="string">'t update, just download</span></span><br><span class="line"><span class="string">  --downloaddir=DLDIR   specifies an alternate directory to store packages</span></span><br><span class="line"><span class="string">  --setopt=SETOPTS      set arbitrary config and repo options</span></span><br><span class="line"><span class="string">  --bugfix              Include bugfix relevant packages, in updates</span></span><br><span class="line"><span class="string">  --security            Include security relevant packages, in updates</span></span><br><span class="line"><span class="string">  --advisory=ADVS, --advisories=ADVS</span></span><br><span class="line"><span class="string">                        Include packages needed to fix the given advisory, in</span></span><br><span class="line"><span class="string">                        updates</span></span><br><span class="line"><span class="string">  --bzs=BZS             Include packages needed to fix the given BZ, in</span></span><br><span class="line"><span class="string">                        updates</span></span><br><span class="line"><span class="string">  --cves=CVES           Include packages needed to fix the given CVE, in</span></span><br><span class="line"><span class="string">                        updates</span></span><br><span class="line"><span class="string">  --sec-severity=SEVS, --secseverity=SEVS</span></span><br><span class="line"><span class="string">                        Include security relevant packages matching the</span></span><br><span class="line"><span class="string">                        severity, in updates</span></span><br><span class="line"><span class="string">  Plugin Options:</span></span><br></pre></td></tr></table></figure></p>
+<p>看的眼花缭乱的，不过这个只是一个前奏，下面来说下实际的应用吧，比如我要安装 apache2，那么可以直接<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install apache2</span><br></pre></td></tr></table></figure></p>
+<p>这个时候会弹出是否确认要安装的提示，如果你要安装的软件包很多的时候，所有的包都要一个一个按 y 来确认，这样会显的很麻烦，这个时候可以加个 - y 的参数，这样就可以默认情况下忽略提示直接安装了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install apache2 libpcap libgcc python2 .....</span><br></pre></td></tr></table></figure></p>
+<p>也许有的时候我们会遇到这样一个情况，当我们需要一个工具的时候，直接打 yum install … 要弄好半天，有的时候提示找不到这个软件。这个时候会很烦，若是我想知道我要用的软件到底叫什么名字，或者想查看类似的软件列表，这个时候就要用到搜索功能了，没错就是软件搜索！<br>比如我要搜索 python<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum search python</span><br></pre></td></tr></table></figure></p>
+<p>这个时候你就会很清晰的看到可以安装的软件的列表，接下来就可以根据你的需要来安装软件了！<br>其实，你也可以用 yum list | grep 想要的软件名，这样的形式来获取软件列表，比如<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list | grep python</span><br></pre></td></tr></table></figure></p>
+<p>效果都一样。<br>有的时候，要装一个软件，需要很多很多的包，比如桌面环境，这个时候一个一个包去敲会有点麻烦，yum 工具很人性化的提供了组安装的功能<br>也就是一次性的安装一组软件，你可以用这个命令查看当前可以装的软件组<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum grouplist</span><br></pre></td></tr></table></figure></p>
+<p>这个时候你可以看到很多 yum 源里面准备好的软件组，比如我要装 GNOME 桌面环境的话，我只需要在类表里面找到 GNOME 这个组的名字。<br>我这的 GNOME 桌面环境组的名字直接就叫做 GNOME Desktop，于是我输入以下命令就可以直接安装这个组<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum groupinstall GNOME Desktop</span><br></pre></td></tr></table></figure></p>
+<p>这样就完成了一次性安装整个软件组的操作了。<br>有的时候，可能会因为网络问题，导致有些软件安装失败，如果需要重新安装的话，建议先 clean 一次<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum clean all</span><br></pre></td></tr></table></figure></p>
+<p>有的时候，我们想安装一些自定义的软件，由第三方提供了软件源。这个时候我们就需要修改 yum 的软件源。<br>yum 源的列表在 CentOS 7 中默认在这个位置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cd /etc/yum.repos.d/</span></span><br></pre></td></tr></table></figure></p>
+<p>这个目录下的文件都是名为. repo 的文件，这些文件就是源的地址列表<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ls -al</span></span><br><span class="line">total 40</span><br><span class="line">drwxr-xr-x.  2 root root 4096 Mar 31 08:39 .</span><br><span class="line">drwxr-xr-x. 83 root root 4096 Mar 11 10:43 ..</span><br><span class="line">-rw-r--r--.  1 root root 1528 Dec 16 21:27 CentOS-Base.repo</span><br></pre></td></tr></table></figure></p>
+<p>可以 vi 进去看看<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi CentOS-Base.repo</span><br></pre></td></tr></table></figure></p>
+<p>一个标准的 repo 标签就是这样的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[base]</span><br><span class="line">name=...</span><br><span class="line">baseurl=...</span><br><span class="line">gpgcheck=...</span><br><span class="line">gpgkey=...</span><br></pre></td></tr></table></figure></p>
+<p>当需要修改的时候，就是改这里的文件了，改完之后需要 yum update 一下，才会把新的源的软件列表添加到本地软件列表里</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux基础/" rel="tag"># Linux基础</a>
+          
+            <a href="/tags/云计算/" rel="tag"># 云计算</a>
+          
+            <a href="/tags/CentOS/" rel="tag"># CentOS</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/archives/using-vim-to-improve-efficiency.html" rel="next" title="「转自 IBM」技巧：快速提高 Vi/Vim 使用效率的原则与途径">
+                <i class="fa fa-chevron-left"></i> 「转自 IBM」技巧：快速提高 Vi/Vim 使用效率的原则与途径
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/archives/configure-python-startup.html" rel="prev" title="python 学习笔记：配置 PYTHONSTARTUP">
+                python 学习笔记：配置 PYTHONSTARTUP <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/icons/icon-128x128.png" alt="BangZ">
+            
+              <p class="site-author-name" itemprop="name">BangZ</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">81</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/istobran" target="_blank" title="GitHub" rel="external nofollow noopener noreferrer"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:i@bangz.me" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BangZ</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow noopener noreferrer">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next" rel="external nofollow noopener noreferrer">NexT.Muse</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("4MAiIplUcsxIjad83U2IW99g-gzGzoHsz", "nxvNFChEQkVNNMr7yClwBekv");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.get('time'));
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1590725382900')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script></body>
+</html>

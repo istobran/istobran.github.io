@@ -1,0 +1,2272 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><link rel="manifest" href="/manifest.json">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="HTTP 状态码HTTP 状态码由三个十进制数字组成，第一个十进制数字定义了状态码的类型，后两个数字没有分类的作用。HTTP 状态码共分为 5 种类型：  1xx    信息，服务器收到请求，需要请求者继续执行操作 2xx    成功，操作被成功接收并处理 3xx    重定向，需要进一步的操作以完成请求 4xx    客户端错误，请求包含语法错误或无法完成请求 5xx    服务器错误，服务器在">
+<meta name="keywords" content="javascript,前端,HTTP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP 面试指南">
+<meta property="og:url" content="https://hexo.bangz.me/archives/http-quick-guide.html">
+<meta property="og:site_name" content="BangZ&#39;s 梦工厂">
+<meta property="og:description" content="HTTP 状态码HTTP 状态码由三个十进制数字组成，第一个十进制数字定义了状态码的类型，后两个数字没有分类的作用。HTTP 状态码共分为 5 种类型：  1xx    信息，服务器收到请求，需要请求者继续执行操作 2xx    成功，操作被成功接收并处理 3xx    重定向，需要进一步的操作以完成请求 4xx    客户端错误，请求包含语法错误或无法完成请求 5xx    服务器错误，服务器在">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/zqjflash/http2-protocol/master/binary-frame-layout.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zqjflash/http2-protocol/master/binary-frame-layout.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zqjflash/http2-protocol/master/http2-connect-stream.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zqjflash/http2-protocol/master/http2-request-more.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zqjflash/http2-protocol/master/http2-server-push.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/zqjflash/http2-protocol/master/http2-header-diff.png">
+<meta property="og:updated_time" content="2018-07-13T11:41:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP 面试指南">
+<meta name="twitter:description" content="HTTP 状态码HTTP 状态码由三个十进制数字组成，第一个十进制数字定义了状态码的类型，后两个数字没有分类的作用。HTTP 状态码共分为 5 种类型：  1xx    信息，服务器收到请求，需要请求者继续执行操作 2xx    成功，操作被成功接收并处理 3xx    重定向，需要进一步的操作以完成请求 4xx    客户端错误，请求包含语法错误或无法完成请求 5xx    服务器错误，服务器在">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/zqjflash/http2-protocol/master/binary-frame-layout.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="BangZ's 梦工厂" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://hexo.bangz.me/archives/http-quick-guide.html">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>HTTP 面试指南 | BangZ's 梦工厂</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78277428-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-78277428-2');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BangZ's 梦工厂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">FutureTech Research Center</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives menu-item-active">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-pdf">
+    <a href="/pdfs/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-file"></i> <br>PDF</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hexo.bangz.me/archives/http-quick-guide.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BangZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/icons/icon-128x128.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BangZ's 梦工厂">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HTTP 面试指南
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-03 10:34:52" itemprop="dateCreated datePublished" datetime="2018-07-03T10:34:52+08:00">2018-07-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-13 19:41:17" itemprop="dateModified" datetime="2018-07-13T19:41:17+08:00">2018-07-13</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术研究/" itemprop="url" rel="index"><span itemprop="name">技术研究</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/archives/http-quick-guide.html" class="leancloud_visitors" data-flag-title="HTTP 面试指南">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="HTTP-状态码"><a href="#HTTP-状态码" class="headerlink" title="HTTP 状态码"></a>HTTP 状态码</h1><p>HTTP 状态码由三个十进制数字组成，第一个十进制数字定义了状态码的类型，后两个数字没有分类的作用。HTTP 状态码共分为 5 种类型：</p>
+<ul>
+<li>1xx    信息，服务器收到请求，需要请求者继续执行操作</li>
+<li>2xx    成功，操作被成功接收并处理</li>
+<li>3xx    重定向，需要进一步的操作以完成请求</li>
+<li>4xx    客户端错误，请求包含语法错误或无法完成请求</li>
+<li>5xx    服务器错误，服务器在处理请求的过程中发生了错误</li>
+</ul>
+<a id="more"></a>
+<h2 id="完整的-HTTP-状态码表"><a href="#完整的-HTTP-状态码表" class="headerlink" title="完整的 HTTP 状态码表"></a>完整的 HTTP 状态码表</h2><h3 id="1xx-————-信息状态码"><a href="#1xx-————-信息状态码" class="headerlink" title="1xx ———— 信息状态码"></a>1xx ———— 信息状态码</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态名</th>
+<th>状态描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100</td>
+<td>Continue</td>
+<td>服务器已经接收到请求头，并且客户端应继续发送请求主体（在需要发送身体的请求的情况下：例如，POST 请求），或者如果请求已经完成，忽略这个响应。服务器必须在请求完成后向客户端发送一个最终响应。要使服务器检查请求的头部，客户端必须在其初始请求中发送 Expect: 100-continue 作为头部，并在发送正文之前接收 100 Continue 状态代码。响应代码 417 期望失败表示请求不应继续。</td>
+</tr>
+<tr>
+<td>101</td>
+<td>Switching Protocols</td>
+<td>服务器已经理解了客户端的请求，并将通过 Upgrade 消息头通知客户端采用不同的协议来完成这个请求。在发送完这个响应最后的空行后，服务器将会切换到在 Upgrade 消息头中定义的那些协议。<br> 只有在切换新的协议更有好处的时候才应该采取类似措施。例如，切换到新的 HTTP 版本（如 HTTP/2）比旧版本更有优势，或者切换到一个实时且同步的协议（如 WebSocket）以传送利用此类特性的资源。</td>
+</tr>
+<tr>
+<td>102</td>
+<td>Processing</td>
+<td>WebDAV 请求可能包含许多涉及文件操作的子请求，需要很长时间才能完成请求。该代码表示​​服务器已经收到并正在处理请求，但无响应可用。这样可以防止客户端超时，并假设请求丢失。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2xx-————-成功状态码"><a href="#2xx-————-成功状态码" class="headerlink" title="2xx ———— 成功状态码"></a>2xx ———— 成功状态码</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态名</th>
+<th>状态描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>OK</td>
+<td>请求已成功，请求所希望的响应头或数据体将随此响应返回。实际的响应将取决于所使用的请求方法。在 GET 请求中，响应将包含与请求的资源相对应的实体。在 POST 请求中，响应将包含描述或操作结果的实体。</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Created</td>
+<td>请求已经被实现，而且有一个新的资源已经依据请求的需要而创建，且其 URI 已经随 Location 头信息返回。假如需要的资源无法及时创建的话，应当返回’202 Accepted’。</td>
+</tr>
+<tr>
+<td>202</td>
+<td>Accepted</td>
+<td>服务器已接受请求，但尚未处理。最终该请求可能会也可能不会被执行，并且可能在处理发生时被禁止。</td>
+</tr>
+<tr>
+<td>203</td>
+<td>Non-Authoritative Information</td>
+<td>服务器是一个转换代理服务器（transforming proxy，例如网络加速器），以 200 OK 状态码为起源，但回应了原始响应的修改版本。</td>
+</tr>
+<tr>
+<td>204</td>
+<td>No Content</td>
+<td>服务器成功处理了请求，没有返回任何内容。</td>
+</tr>
+<tr>
+<td>205</td>
+<td>Reset Content</td>
+<td>服务器成功处理了请求，但没有返回任何内容。与 204 响应不同，此响应要求请求者重置文档视图。</td>
+</tr>
+<tr>
+<td>206</td>
+<td>Partial Content</td>
+<td>服务器已经成功处理了部分 GET 请求。类似于 FlashGet 或者迅雷这类的 HTTP 下载工具都是使用此类响应实现断点续传或者将一个大文档分解为多个下载段同时下载。</td>
+</tr>
+<tr>
+<td>207</td>
+<td>Multi-Status</td>
+<td>代表之后的消息体将是一个 XML 消息，并且可能依照之前子请求数量的不同，包含一系列独立的响应代码。</td>
+</tr>
+<tr>
+<td>208</td>
+<td>Already Reported</td>
+<td>DAV 绑定的成员已经在（多状态）响应之前的部分被列举，且未被再次包含。</td>
+</tr>
+<tr>
+<td>226</td>
+<td>IM Used</td>
+<td>服务器已经满足了对资源的请求，对实体请求的一个或多个实体操作的结果表示。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3xx-————-重定向状态码"><a href="#3xx-————-重定向状态码" class="headerlink" title="3xx ———— 重定向状态码"></a>3xx ———— 重定向状态码</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态名</th>
+<th>状态描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>300</td>
+<td>Multiple Choices</td>
+<td>被请求的资源有一系列可供选择的回馈信息，每个都有自己特定的地址和浏览器驱动的商议信息。用户或浏览器能够自行选择一个首选的地址进行重定向。<br> 除非这是一个 HEAD 请求，否则该响应应当包括一个资源特性及地址的列表的实体，以便用户或浏览器从中选择最合适的重定向地址。这个实体的格式由 Content-Type 定义的格式所决定。浏览器可能根据响应的格式以及浏览器自身能力，自动作出最合适的选择。当然，RFC 2616 规范并没有规定这样的自动选择该如何进行。<br> 如果服务器本身已经有了首选的回馈选择，那么在 Location 中应当指明这个回馈的 URI；浏览器可能会将这个 Location 值作为自动重定向的地址。此外，除非额外指定，否则这个响应也是可缓存的。</td>
+</tr>
+<tr>
+<td>301</td>
+<td>Moved Permanently</td>
+<td>被请求的资源已永久移动到新位置，并且将来任何对此资源的引用都应该使用本响应返回的若干个 URI 之一。如果可能，拥有链接编辑功能的客户端应当自动把请求的地址修改为从服务器反馈回来的地址。除非额外指定，否则这个响应也是可缓存的。<br> 新的永久性的 URI 应当在响应的 Location 域中返回。除非这是一个 HEAD 请求，否则响应的实体中应当包含指向新的 URI 的超链接及简短说明。<br> 如果这不是一个 GET 或者 HEAD 请求，因此浏览器禁止自动进行重定向，除非得到用户的确认，因为请求的条件可能因此发生变化。<br> 注意：对于某些使用 HTTP/1.0 协议的浏览器，当它们发送的 POST 请求得到了一个 301 响应的话，接下来的重定向请求将会变成 GET 方式。</td>
+</tr>
+<tr>
+<td>302</td>
+<td>Found</td>
+<td>要求客户端执行临时重定向（原始描述短语为“Moved Temporarily”）。由于这样的重定向是临时的，客户端应当继续向原有地址发送以后的请求。只有在 Cache-Control 或 Expires 中进行了指定的情况下，这个响应才是可缓存的。<br> 新的临时性的 URI 应当在响应的 Location 域中返回。除非这是一个 HEAD 请求，否则响应的实体中应当包含指向新的 URI 的超链接及简短说明。<br> 如果这不是一个 GET 或者 HEAD 请求，那么浏览器禁止自动进行重定向，除非得到用户的确认，因为请求的条件可能因此发生变化。<br> 注意：虽然 RFC 1945 和 RFC 2068 规范不允许客户端在重定向时改变请求的方法，但是很多现存的浏览器将 302 响应视作为 303 响应，并且使用 GET 方式访问在 Location 中规定的 URI，而无视原先请求的方法。因此状态码 303 和 307 被添加了进来，用以明确服务器期待客户端进行何种反应。</td>
+</tr>
+<tr>
+<td>303</td>
+<td>See Other</td>
+<td>对应当前请求的响应可以在另一个 URI 上被找到，当响应于 POST（或 PUT / DELETE）接收到响应时，客户端应该假定服务器已经收到数据，并且应该使用单独的 GET 消息发出重定向。这个方法的存在主要是为了允许由脚本激活的 POST 请求输出重定向到一个新的资源。这个新的 URI 不是原始资源的替代引用。同时，303 响应禁止被缓存。当然，第二个请求（重定向）可能被缓存。<br> 新的 URI 应当在响应的 Location 域中返回。除非这是一个 HEAD 请求，否则响应的实体中应当包含指向新的 URI 的超链接及简短说明。<br> 注意：许多 HTTP/1.1 版以前的浏览器不能正确理解 303 状态。如果需要考虑与这些浏览器之间的互动，302 状态码应该可以胜任，因为大多数的浏览器处理 302 响应时的方式恰恰就是上述规范要求客户端处理 303 响应时应当做的。</td>
+</tr>
+<tr>
+<td>304</td>
+<td>Not Modified</td>
+<td>表示资源未被修改，因为请求头指定的版本 If-Modified-Since 或 If-None-Match。在这种情况下，由于客户端仍然具有以前下载的副本，因此不需要重新传输资源。</td>
+</tr>
+<tr>
+<td>305</td>
+<td>Use Proxy</td>
+<td>被请求的资源必须通过指定的代理才能被访问。Location 域中将给出指定的代理所在的 URI 信息，接收者需要重复发送一个单独的请求，通过这个代理才能访问相应资源。只有原始服务器才能创建 305 响应。许多 HTTP 客户端（像是 Mozilla 和 Internet Explorer）都没有正确处理这种状态代码的响应，主要是出于安全考虑。<br> 注意：RFC 2068 中没有明确 305 响应是为了重定向一个单独的请求，而且只能被原始服务器建立。忽视这些限制可能导致严重的安全后果。</td>
+</tr>
+<tr>
+<td>306</td>
+<td>Switch Proxy</td>
+<td>在最新版的规范中，306 状态码已经不再被使用。最初是指“后续请求应使用指定的代理”。</td>
+</tr>
+<tr>
+<td>307</td>
+<td>Temporary Redirect</td>
+<td>在这种情况下，请求应该与另一个 URI 重复，但后续的请求应仍使用原始的 URI。 与 302 相反，当重新发出原始请求时，不允许更改请求方法。 例如，应该使用另一个 POST 请求来重复 POST 请求。</td>
+</tr>
+<tr>
+<td>308</td>
+<td>Permanent Redirect</td>
+<td>请求和所有将来的请求应该使用另一个 URI 重复。 307 和 308 重复 302 和 301 的行为，但不允许 HTTP 方法更改。 例如，将表单提交给永久重定向的资源可能会顺利进行。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4xx-————-客户端错误状态码"><a href="#4xx-————-客户端错误状态码" class="headerlink" title="4xx ———— 客户端错误状态码"></a>4xx ———— 客户端错误状态码</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态名</th>
+<th>状态描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>由于明显的客户端错误（例如，格式错误的请求语法，太大的大小，无效的请求消息或欺骗性路由请求），服务器不能或不会处理该请求。</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized</td>
+<td>类似于 403 Forbidden，401 语义即“未认证”，即用户没有必要的凭据。该状态码表示当前请求需要用户验证。该响应必须包含一个适用于被请求资源的 WWW-Authenticate 信息头用以询问用户信息。客户端可以重复提交一个包含恰当的 Authorization 头信息的请求。如果当前请求已经包含了 Authorization 证书，那么 401 响应代表着服务器验证已经拒绝了那些证书。如果 401 响应包含了与前一个响应相同的身份验证询问，且浏览器已经至少尝试了一次验证，那么浏览器应当向用户展示响应中包含的实体信息，因为这个实体信息中可能包含了相关诊断信息。 <br> 注意：当网站（通常是网站域名）禁止 IP 地址时，有些网站状态码显示的 401，表示该特定地址被拒绝访问网站。</td>
+</tr>
+<tr>
+<td>402</td>
+<td>Payment Required</td>
+<td>该状态码是为了将来可能的需求而预留的。该状态码最初的意图可能被用作某种形式的数字现金或在线支付方案的一部分，但几乎没有哪家服务商使用，而且这个状态码通常不被使用。如果特定开发人员已超过请求的每日限制，Google Developers API 会使用此状态码。</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden</td>
+<td>服务器已经理解请求，但是拒绝执行它。与 401 响应不同的是，身份验证并不能提供任何帮助，而且这个请求也不应该被重复提交。如果这不是一个 HEAD 请求，而且服务器希望能够讲清楚为何请求不能被执行，那么就应该在实体内描述拒绝的原因。当然服务器也可以返回一个 404 响应，假如它不希望让客户端获得任何信息。</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found</td>
+<td>请求失败，请求所希望得到的资源未被在服务器上发现，但允许用户的后续请求。没有信息能够告诉用户这个状况到底是暂时的还是永久的。假如服务器知道情况的话，应当使用 410 状态码来告知旧资源因为某些内部的配置机制问题，已经永久的不可用，而且没有任何可以跳转的地址。404 这个状态码被广泛应用于当服务器不想揭示到底为何请求被拒绝或者没有其他适合的响应可用的情况下。</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed</td>
+<td>请求行中指定的请求方法不能被用于请求相应的资源。该响应必须返回一个 Allow 头信息用以表示出当前资源能够接受的请求方法的列表。例如，需要通过 POST 呈现数据的表单上的 GET 请求，或只读资源上的 PUT 请求。<br> 鉴于 PUT，DELETE 方法会对服务器上的资源进行写操作，因而绝大部分的网页服务器都不支持或者在默认配置下不允许上述请求方法，对于此类请求均会返回 405 错误。</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable</td>
+<td>请求的资源的内容特性无法满足请求头中的条件，因而无法生成响应实体，该请求不可接受。<br> 除非这是一个 HEAD 请求，否则该响应就应当返回一个包含可以让用户或者浏览器从中选择最合适的实体特性以及地址列表的实体。实体的格式由 Content-Type 头中定义的媒体类型决定。浏览器可以根据格式及自身能力自行作出最佳选择。但是，规范中并没有定义任何作出此类自动选择的标准。</td>
+</tr>
+<tr>
+<td>407</td>
+<td>Proxy Authentication Required</td>
+<td>与 401 响应类似，只不过客户端必须在代理服务器上进行身份验证。代理服务器必须返回一个 Proxy-Authenticate 用以进行身份询问。客户端可以返回一个 Proxy-Authorization 信息头用以验证。</td>
+</tr>
+<tr>
+<td>408</td>
+<td>Request Timeout</td>
+<td>请求超时。根据 HTTP 规范，客户端没有在服务器预备等待的时间内完成一个请求的发送，客户端可以随时再次提交这一请求而无需进行任何更改。</td>
+</tr>
+<tr>
+<td>409</td>
+<td>Conflict</td>
+<td>表示因为请求存在冲突无法处理该请求，例如多个同步更新之间的编辑冲突。</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone</td>
+<td>表示所请求的资源不再可用，将不再可用。当资源被有意地删除并且资源应被清除时，应该使用这个。在收到 410 状态码后，用户应停止再次请求资源。但大多数服务端不会使用此状态码，而是直接使用 404 状态码。</td>
+</tr>
+<tr>
+<td>411</td>
+<td>Length Required</td>
+<td>服务器拒绝在没有定义 Content-Length 头的情况下接受请求。在添加了表明请求消息体长度的有效 Content-Length 头之后，客户端可以再次提交该请求。</td>
+</tr>
+<tr>
+<td>412</td>
+<td>Precondition Failed</td>
+<td>服务器在验证在请求的头字段中给出先决条件时，没能满足其中的一个或多个。这个状态码允许客户端在获取资源时在请求的元信息（请求头字段数据）中设置先决条件，以此避免该请求方法被应用到其希望的内容以外的资源上。</td>
+</tr>
+<tr>
+<td>413</td>
+<td>Request Entity Too Large</td>
+<td>前称“Request Entity Too Large”，表示服务器拒绝处理当前请求，因为该请求提交的实体数据大小超过了服务器愿意或者能够处理的范围。此种情况下，服务器可以关闭连接以免客户端继续发送此请求。<br> 如果这个状况是临时的，服务器应当返回一个 Retry-After 的响应头，以告知客户端可以在多少时间以后重新尝试。</td>
+</tr>
+<tr>
+<td>414</td>
+<td>Request-URI Too Long</td>
+<td>前称“Request-URI Too Long”，表示请求的 URI 长度超过了服务器能够解释的长度，因此服务器拒绝对该请求提供服务。通常将太多数据的结果编码为 GET 请求的查询字符串，在这种情况下，应将其转换为 POST 请求。这比较少见，通常的情况包括：<br> 本应使用 POST 方法的表单提交变成了 GET 方法，导致查询字符串过长。<br> 重定向 URI“黑洞”，例如每次重定向把旧的 URI 作为新的 URI 的一部分，导致在若干次重定向后 URI 超长。<br> 客户端正在尝试利用某些服务器中存在的安全漏洞攻击服务器。这类服务器使用固定长度的缓冲读取或操作请求的 URI，当 GET 后的参数超过某个数值后，可能会产生缓冲区溢出，导致任意代码被执行。没有此类漏洞的服务器，应当返回 414 状态码。</td>
+</tr>
+<tr>
+<td>415</td>
+<td>Unsupported Media Type</td>
+<td>对于当前请求的方法和所请求的资源，请求中提交的互联网媒体类型并不是服务器中所支持的格式，因此请求被拒绝。例如，客户端将图像上传格式为 svg，但服务器要求图像使用上传格式为 jpg。</td>
+</tr>
+<tr>
+<td>416</td>
+<td>Requested Range Not Satisfiable</td>
+<td>前称“Requested Range Not Satisfiable”。客户端已经要求文件的一部分（Byte serving），但服务器不能提供该部分。例如，如果客户端要求文件的一部分超出文件尾端。</td>
+</tr>
+<tr>
+<td>417</td>
+<td>Expectation Failed</td>
+<td>在请求头 Expect 中指定的预期内容无法被服务器满足，或者这个服务器是一个代理服显的证据证明在当前路由的下一个节点上，Expect 的内容无法被满足。</td>
+</tr>
+<tr>
+<td>418</td>
+<td>I’m a teapot</td>
+<td>本操作码是在 1998 年作为 IETF 的传统愚人节笑话, 在 RFC 2324 超文本咖啡壶控制协议’中定义的，并不需要在真实的 HTTP 服务器中定义。当一个控制茶壶的 HTCPCP 收到 BREW 或 POST 指令要求其煮咖啡时应当回传此错误。这个 HTTP 状态码在某些网站（包括 Google.com）与项目（如 Node.js、ASP.NET 和 Go 语言）中用作彩蛋。</td>
+</tr>
+<tr>
+<td>420</td>
+<td>Enhance Your Caim</td>
+<td>Twitter Search 与 Trends API 在客户端被限速的情况下返回。</td>
+</tr>
+<tr>
+<td>421</td>
+<td>Misdirected Request</td>
+<td>该请求针对的是无法产生响应的服务器（例如因为连接重用）。</td>
+</tr>
+<tr>
+<td>422</td>
+<td>Unprocessable Entity</td>
+<td>请求格式正确，但是由于含有语义错误，无法响应。</td>
+</tr>
+<tr>
+<td>423</td>
+<td>Locked</td>
+<td>当前资源被锁定。</td>
+</tr>
+<tr>
+<td>424</td>
+<td>Failed Dependency</td>
+<td>由于之前的某个请求发生的错误，导致当前请求失败，例如 PROPPATCH。</td>
+</tr>
+<tr>
+<td>425</td>
+<td>Unordered Collection</td>
+<td>在 WebDAV Advanced Collections Protocol 中定义，但 Web Distributed Authoring and Versioning (WebDAV) Ordered Collections Protocol 中并不存在。</td>
+</tr>
+<tr>
+<td>426</td>
+<td>Upgrade Required</td>
+<td>客户端应当切换到 TLS/1.0，并在 HTTP/1.1 Upgrade header 中给出。</td>
+</tr>
+<tr>
+<td>428</td>
+<td>Precondition Required</td>
+<td>原服务器要求该请求满足一定条件。这是为了防止“‘未更新’问题，即客户端读取（GET）一个资源的状态，更改它，并将它写（PUT）回服务器，但这期间第三方已经在服务器上更改了该资源的状态，因此导致了冲突。”</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests</td>
+<td>用户在给定的时间内发送了太多的请求。旨在用于网络限速。</td>
+</tr>
+<tr>
+<td>431</td>
+<td>Request Header Fields Too Large</td>
+<td>服务器不愿处理请求，因为一个或多个头字段过大。</td>
+</tr>
+<tr>
+<td>444</td>
+<td>No Response</td>
+<td>Nginx 上 HTTP 服务器扩展。服务器不向客户端返回任何信息，并关闭连接（有助于阻止恶意软件）。</td>
+</tr>
+<tr>
+<td>450</td>
+<td>Blocked by Windows Parental Controls</td>
+<td>这是一个由 Windows 家庭控制（Microsoft）HTTP 阻止的 450 状态代码的示例，用于信息和测试。</td>
+</tr>
+<tr>
+<td>451</td>
+<td>Unavailable For Legal Reasons</td>
+<td>该访问因法律的要求而被拒绝，由 IETF 在 2015 核准后新增加。</td>
+</tr>
+<tr>
+<td>494</td>
+<td>Request Header Too Large</td>
+<td>在错误代码 431 提出之前 Nginx 上使用的扩展 HTTP 代码。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5xx-————-服务器错误状态码"><a href="#5xx-————-服务器错误状态码" class="headerlink" title="5xx ———— 服务器错误状态码"></a>5xx ———— 服务器错误状态码</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态名</th>
+<th>状态描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>500</td>
+<td>Internal Server Error</td>
+<td>通用错误消息，服务器遇到了一个未曾预料的状况，导致了它无法完成对请求的处理。没有给出具体错误信息。</td>
+</tr>
+<tr>
+<td>501</td>
+<td>Not Implemented</td>
+<td>服务器不支持当前请求所需要的某个功能。当服务器无法识别请求的方法，并且无法支持其对任何资源的请求。（例如，网络服务 API 的新功能）</td>
+</tr>
+<tr>
+<td>502</td>
+<td>Bad Gateway</td>
+<td>作为网关或者代理工作的服务器尝试执行请求时，从上游服务器接收到无效的响应。</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable</td>
+<td>由于临时的服务器维护或者过载，服务器当前无法处理请求。这个状况是暂时的，并且将在一段时间以后恢复。如果能够预计延迟时间，那么响应中可以包含一个 Retry-After 头用以标明这个延迟时间。如果没有给出这个 Retry-After 信息，那么客户端应当以处理 500 响应的方式处理它。</td>
+</tr>
+<tr>
+<td>504</td>
+<td>Gateway Timeout</td>
+<td>作为网关或者代理工作的服务器尝试执行请求时，未能及时从上游服务器（URI 标识出的服务器，例如 HTTP、FTP、LDAP）或者辅助服务器（例如 DNS）收到响应。<br> 注意：某些代理服务器在 DNS 查询超时时会返回 400 或者 500 错误。</td>
+</tr>
+<tr>
+<td>505</td>
+<td>HTTP Version Not Supported</td>
+<td>服务器不支持，或者拒绝支持在请求中使用的 HTTP 版本。这暗示着服务器不能或不愿使用与客户端相同的版本。响应中应当包含一个描述了为何版本不被支持以及服务器支持哪些协议的实体。</td>
+</tr>
+<tr>
+<td>506</td>
+<td>Variant Also Negotiates</td>
+<td>由《透明内容协商协议》（RFC 2295）扩展，代表服务器存在内部配置错误，被请求的协商变元资源被配置为在透明内容协商中使用自己，因此在一个协商处理中不是一个合适的重点。</td>
+</tr>
+<tr>
+<td>507</td>
+<td>Insufficient Storage</td>
+<td>服务器无法存储完成请求所必须的内容。这个状况被认为是临时的。</td>
+</tr>
+<tr>
+<td>508</td>
+<td>Loop Detected</td>
+<td>服务器在处理请求时陷入死循环。（可代替 208 状态码）</td>
+</tr>
+<tr>
+<td>510</td>
+<td>Not Extended</td>
+<td>获取资源所需要的策略并没有被满足。</td>
+</tr>
+<tr>
+<td>511</td>
+<td>Network Authentication Required</td>
+<td>客户端需要进行身份验证才能获得网络访问权限，旨在限制用户群访问特定网络。（例如连接 WiFi 热点时的强制网络门户）</td>
+</tr>
+</tbody>
+</table>
+<h1 id="HTTP-头部字段"><a href="#HTTP-头部字段" class="headerlink" title="HTTP 头部字段"></a>HTTP 头部字段</h1><p>HTTP 头字段根据实际用途被分为以下 4 种类型：</p>
+<ul>
+<li>通用头字段(英语：General Header Fields)</li>
+<li>请求头字段(英语：Request Header Fields)</li>
+<li>响应头字段(英语：Response Header Fields)</li>
+<li>实体头字段(英语：Entity Header Fields)</li>
+</ul>
+<h2 id="HTTP-通用头字段"><a href="#HTTP-通用头字段" class="headerlink" title="HTTP 通用头字段"></a>HTTP 通用头字段</h2><h3 id="一、Cache-Control"><a href="#一、Cache-Control" class="headerlink" title="一、Cache-Control"></a>一、Cache-Control</h3><p>通过这个首部字段可以操作缓存的工作机制。它的参数是可选的，多个指令之间通过 “,” 分隔，例如：<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cache-Control</span>: private, max-age=0, no-cache</span><br></pre></td></tr></table></figure></p>
+<p>缓存请求指令：</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>no-cache</td>
+<td>无</td>
+<td>强制向源服务器再次验证</td>
+</tr>
+<tr>
+<td>no-store</td>
+<td>无</td>
+<td>不缓存请求或响应的任何内容</td>
+</tr>
+<tr>
+<td>max-age=[秒]</td>
+<td>必需</td>
+<td>响应的最大 Age 值</td>
+</tr>
+<tr>
+<td>max-stale=[秒]</td>
+<td>可省略</td>
+<td>接收已过期的响应</td>
+</tr>
+<tr>
+<td>min-fresh=[秒]</td>
+<td>必需</td>
+<td>期望在指定时间内的响应仍有效</td>
+</tr>
+<tr>
+<td>no-transform</td>
+<td>无</td>
+<td>代理不可更改媒体类型</td>
+</tr>
+<tr>
+<td>only-if-cached</td>
+<td>无</td>
+<td>从缓存获取资源</td>
+</tr>
+<tr>
+<td>cache-extension</td>
+<td>-</td>
+<td>新指令标记</td>
+</tr>
+</tbody>
+</table>
+<p>缓存响应指令：</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>public</td>
+<td>无</td>
+<td>可向任意方提供响应的缓存</td>
+</tr>
+<tr>
+<td>private</td>
+<td>可省略</td>
+<td>仅向特定用户返回响应</td>
+</tr>
+<tr>
+<td>no-cache</td>
+<td>可省略</td>
+<td>缓存前必须确认其有效性</td>
+</tr>
+<tr>
+<td>no-store</td>
+<td>无</td>
+<td>不缓存请求或响应的任何内容</td>
+</tr>
+<tr>
+<td>no-transform</td>
+<td>无</td>
+<td>代理不可更改媒体类型</td>
+</tr>
+<tr>
+<td>must-revalidate</td>
+<td>无</td>
+<td>可缓存但必须向源服务器进行确认</td>
+</tr>
+<tr>
+<td>proxy-revalidate</td>
+<td>无</td>
+<td>要求中间缓存服务器对缓存的响应有效性再进行确认</td>
+</tr>
+<tr>
+<td>max-age=[秒]</td>
+<td>必需</td>
+<td>响应的最大 Age 值</td>
+</tr>
+<tr>
+<td>s-macage=[秒]</td>
+<td>必需</td>
+<td>公共缓存服务器响应的最大 Age 值</td>
+</tr>
+<tr>
+<td>cache-extension</td>
+<td>-</td>
+<td>新指令标记</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>public 指令<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cache-Control</span>: public</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>此指令表示其它用户也可利用缓存。</p>
+<ul>
+<li>private 指令<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cache-Control</span>: private</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>此指令表示响应只以特定的用户作为对象，与 public 的行为正好相反。</p>
+<ul>
+<li>no-cache 指令<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cache-Control</span>: no-cache</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>此指令的目的是为了防止从缓存中返回 <strong> 过期 </strong> 的资源。</p>
+<ul>
+<li>no-store 指令<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cache-Control</span>: no-store</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>此指令规定不能在本地存储请求或者响应的任何一部分。</p>
+<blockquote>
+<p>从字面意思上很容易把 no-cache 误解成为不缓存，实际它代表的是不缓存过期的资源，缓存会向源服务器进行有效期确认后处理资源，也许称为 do-not-serve-from-cache-without-revalidation 更合适。no-store 才是真正地不进行缓存，请注意它们的区别。</p>
+</blockquote>
+<ul>
+<li>max-age 指令<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cache-Control</span>: maxage=604800（单位：秒）</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>当客户端发送的请求中包含 max-age 指令时，如果判定缓存资源的缓存时间数值比指定时间的数值更小，那么客户端就接收缓存的资源。当 max-age 值为 0，缓存服务器需要将请求转发给源服务器。</p>
+<p>当服务器返回的响应中包含 max-age 指令时，缓存服务器将不对资源的有效性再作确认，它的数值代表了缓存的最长时间。如果同时存在 Expires 字段，会优选处理 max-age 指令，而忽略掉 Expires 字段。</p>
+<ul>
+<li>s-maxage 指令<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cache-Control</span>: s-maxage=604800（单位：秒）</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>它的作用和 max-age 指令相同，不同点有两个：</p>
+<ol>
+<li>此指令只适用于供多位用户使用的公共缓存服务器，对于向同一用户重复返回响应的服务器来说，这个指令是没有用的。</li>
+<li>当使用此指令后，会直接忽略对 Expires、max-age 指令的处理。</li>
+</ol>
+<ul>
+<li>min-fresh 指令<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cache-Control</span>: min-fresh=60（单位：秒）</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>此指令要求缓存服务器返回还未过指定时间的缓存资源。</p>
+<ul>
+<li>max-stale 指令<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cache-Control</span>: max-stale=3600（单位：秒）</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>此指令表示即使缓存资源过期也照常接收。如果未指定参数值，那么无论经过多久，客户端都会接收响应。如果指定了具体值，那么即使过期，只要没有超过 max-stale 指定的时间内，客户端依然会接收。</p>
+<ul>
+<li>only-if-cached 指令<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cache-Control</span>: only-if-cached</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>此指令表示客户端仅在缓存服务器本直缓存了目标资源的情况下，才会要求其返回。该指令不要求缓存服务器重新加载响应，也不会再次确认资源有效性。若缓存服务器无响应，则返回 504 Gateway Timeout。</p>
+<ul>
+<li>must-revalidate 指令<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cache-Control</span>: must-revalidate</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>此指令表示代理服务器会向源服务器再次验证即将返回的响应缓存目前是否仍然有效。若代理服务器无法从源服务器获取有效资源的话，应该给客户端返回 504 Gateway Timeout。使用此指令之后，max-stale 指令会被忽略。</p>
+<ul>
+<li>proxy-revalidate 指令<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cache-Control</span>: proxy-revalidate</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>此指令表示所有的缓存服务器在返回响应之前必须再次验证缓存的有效性。</p>
+<ul>
+<li>no-transform 指令<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cache-Control</span>: no-transform</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>此指令表示无论是在请求或者响应中，缓存都不能改变实体主体的缓存类型。</p>
+<ul>
+<li>Cache-Control 扩展</li>
+</ul>
+<p>cache-extension token<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cache-Control</span>: private, community="UCI"</span><br></pre></td></tr></table></figure></p>
+<p>通过此标记，可以扩展 Cache-Control 的字段指令。如上例，就扩展了 community 这个指令。如果目标服务器不理解这个指令，就会直接忽略。</p>
+<h3 id="二、connection"><a href="#二、connection" class="headerlink" title="二、connection"></a>二、connection</h3><p>connection 首部字段有两个作用：</p>
+<ol>
+<li><p>控制不再转发给代理的首部字段</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">connection</span>: 不再转发的首部字段名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>管理持久连接</p>
+</li>
+</ol>
+<p>HTTP/1.1 默认都是持久连接的，客户端可以在持久连接上连续发送请求。当服务器明确想断开连接时，则指定首部字段值为 close：<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Connection</span>: close</span><br></pre></td></tr></table></figure></p>
+<p>HTTP/1.1 之前的版本如果想维持持久连接，则需要明确指定字段值为 Keep-Alive：<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Connection</span>: Keep-Alive</span><br></pre></td></tr></table></figure></p>
+<h3 id="三、Date"><a href="#三、Date" class="headerlink" title="三、Date"></a>三、Date</h3><p>首部字段 Date 表明创建 HTTP 报文的日期和时间。</p>
+<h3 id="四、Pragma"><a href="#四、Pragma" class="headerlink" title="四、Pragma"></a>四、Pragma</h3><p>首部字段 Pragma 是 HTTP/1.1 之前版本的遗留字段，只用在客户端请求中。作用是要求所有的中间服务器不返回缓存资源。因此为了兼容 HTTP/1.1 之前的版本，在发送请求时会包含两个首部字段：<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cache-Control</span>: no-cache</span><br><span class="line"><span class="attribute">Pragma</span>: no-cache</span><br></pre></td></tr></table></figure></p>
+<h3 id="五、Trailer"><a href="#五、Trailer" class="headerlink" title="五、Trailer"></a>五、Trailer</h3><p>首部字段 Traliler 事先说明了报文主体后记录了哪些首部和字段，主要是应用在分块传输编码时。</p>
+<h3 id="六、Transfer-Encoding"><a href="#六、Transfer-Encoding" class="headerlink" title="六、Transfer-Encoding"></a>六、Transfer-Encoding</h3><p>首部字段 Transfer-Encoding 规定了传输报文主体时采用的编码方式，仅对分块传输编码有效。</p>
+<h3 id="七、Upgrade"><a href="#七、Upgrade" class="headerlink" title="七、Upgrade"></a>七、Upgrade</h3><p>首部字段 Upgrade 用于检测 HTTP 协议及其它协议是否可用更高的版本进行通信，其参数可以用来指定一个完全不同的通信协议。</p>
+<h3 id="八、Via"><a href="#八、Via" class="headerlink" title="八、Via"></a>八、Via</h3><p>首部字段 Via 是为了追踪客户端与服务器之间的请求和响应报文的传输路径。报文经过代理或者网关时，会先在首部 Via 中附加服务器的信息，然后再进行转发。</p>
+<h3 id="九、Warning"><a href="#九、Warning" class="headerlink" title="九、Warning"></a>九、Warning</h3><p>首部字段 Warning 通常会告知用户一些与缓存相关的问题警告。</p>
+<h2 id="HTTP-请求头字段"><a href="#HTTP-请求头字段" class="headerlink" title="HTTP 请求头字段"></a>HTTP 请求头字段</h2><p>请求首部字段是从客户端往服务器发送请求报文中所使用的字段，用于补充请求的附加信息、客户端信息、对响应内容相关的优先级等内容。</p>
+<h3 id="一、Accept"><a href="#一、Accept" class="headerlink" title="一、Accept"></a>一、Accept</h3><p>首部字段 Accept 通知服务器，用户代理能够处理的媒体类型及媒体类型的相对优先级。可使用 type/subtype 这种形式，一次指定多种媒体类型。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Accept</span>: text/plain; q=0.3, text/html</span><br></pre></td></tr></table></figure>
+<p>使用 <code>q=</code> 来表示媒体类型的优先级，用分号进行分隔。权重 <code>q</code> 值的范围是 <code>0~1</code>（可精确到小数点后 3 位）。不指 <code>q</code> 值时，默认权重为 <code>q=1.0</code>。所以，浏览器会优先返回权重值最高的媒体类型。</p>
+<h3 id="二、Accept-Charset"><a href="#二、Accept-Charset" class="headerlink" title="二、Accept-Charset"></a>二、Accept-Charset</h3><p>首部字段 Accept-Charset 用来告知服务器用户代理支持的字符集及字符集的优先顺序。可一次性指定多种字符集，使用权重 <code>q</code> 来表示相对优先级顺序。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Accept-Charset</span>: iso-8859-5, unicode-1-1; q=0.8</span><br></pre></td></tr></table></figure>
+<h3 id="三、Accept-Encoding"><a href="#三、Accept-Encoding" class="headerlink" title="三、Accept-Encoding"></a>三、Accept-Encoding</h3><p>首部字段 Accept-Encoding 用来告知服务器用户代理支持的内容编码。可一次性指定多种，使用权重 <code>q</code> 表示相对优先级顺序。也可使用星号（*）作为通配符，指定任意的编码格式。常用的几种编码：gzip、compress、deflate、identity。</p>
+<h3 id="四、Accept-Language"><a href="#四、Accept-Language" class="headerlink" title="四、Accept-Language"></a>四、Accept-Language</h3><p>首部字段 Accept-Language 用来告知服务器用户代理能够处理的自然语言集（指中文或英文等）。可指定多个自然语言集，使用权重 <code>q</code> 来表示相对优先级顺序。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Accept-Language</span>: zh-cn,zh; q=0.7, en-us,en; q=0.3</span><br></pre></td></tr></table></figure>
+<h3 id="五、Authorization"><a href="#五、Authorization" class="headerlink" title="五、Authorization"></a>五、Authorization</h3><p>首部字段 Authorization 用来告知服务器用户代理的认证信息（证书值）。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Authorization</span>: Basic dWVub3NlbjpwYXNzd29yZA==</span><br></pre></td></tr></table></figure>
+<h3 id="六、Expect"><a href="#六、Expect" class="headerlink" title="六、Expect"></a>六、Expect</h3><p>首部字段 Expect 用来告知服务器期望出现的某种特定行为。如果服务器无法理解发生错误时，应该返回状态码 417 Expectation Failed.</p>
+<h3 id="七、From"><a href="#七、From" class="headerlink" title="七、From"></a>七、From</h3><p>首部字段 From 用来告知服务器使用用户代理的用户的电子邮件地址。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">From</span>: info@jd.com</span><br></pre></td></tr></table></figure></p>
+<h3 id="八、Host"><a href="#八、Host" class="headerlink" title="八、Host"></a>八、Host</h3><p>首部字段 Host 告知服务器请求的资源所处的互联网主机名和端口号。它是 HTTP/1.1 规范内唯一一个必须被包含在请求内的首部字段。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Host</span>: www.jd.com</span><br></pre></td></tr></table></figure></p>
+<h3 id="九、If-Match"><a href="#九、If-Match" class="headerlink" title="九、If-Match"></a>九、If-Match</h3><p>形如 If-Match 的请求首部字段，都可称为条件请求。只有当 If-Match 的字段值跟 Etag 值匹配一致时，服务器才会执行请求。如果指定星号（*）值，则服务器会忽略 Etag 值，只要资源存在就会处理请求。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">If-Match</span>: "123456"</span><br></pre></td></tr></table></figure></p>
+<h3 id="十、If-Modified-Since"><a href="#十、If-Modified-Since" class="headerlink" title="十、If-Modified-Since"></a>十、If-Modified-Since</h3><p>它会告知服务器若 If-Modified-Since 的字段值早于资源的更新时间，则希望能处理此请求。否则，服务器应该返回状态码 304 Not Modified。一般用于确认代理或者客户端本地缓存资源的有效性。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">If-Modified-Since</span>: Thu, 15 Apr 2004 00:00:00 GMT</span><br></pre></td></tr></table></figure></p>
+<h3 id="十一、If-None-Match"><a href="#十一、If-None-Match" class="headerlink" title="十一、If-None-Match"></a>十一、If-None-Match</h3><p>此首部字段用于告知服务器，当它的字段值与 Etag 不一致时，希望服务器处理该请求。</p>
+<h3 id="十二、If-Range"><a href="#十二、If-Range" class="headerlink" title="十二、If-Range"></a>十二、If-Range</h3><p>此首部字段用于告知服务器，当它的字段值与请求资源的 Etag 值或时间相一致时，则作为范围请求处理。反之，则返回全体资源。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">If-Range</span>: "123456"</span><br></pre></td></tr></table></figure></p>
+<h3 id="十三、If-Unmodified-Since"><a href="#十三、If-Unmodified-Since" class="headerlink" title="十三、If-Unmodified-Since"></a>十三、If-Unmodified-Since</h3><p>此首部字段用于告知服务器，指定的请求资源只有在字段值指定的日期之后，未发生更新的情况下，才能处理请求。否则，服务器应该返回状态码 412 Precondition Failed。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">If-Unmodified-Since</span>: Thu, 03 Jul 2012 00:00:00 GMT</span><br></pre></td></tr></table></figure></p>
+<h3 id="十四、Max-Forwards"><a href="#十四、Max-Forwards" class="headerlink" title="十四、Max-Forwards"></a>十四、Max-Forwards</h3><p>通过 TRACE 方法或者 OPTIONS 方法，发送包含此首部字段的请求时，字段值以十进制整数形式指定可经过的服务器最大数目。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Max-Forwards</span>: 10</span><br></pre></td></tr></table></figure></p>
+<h3 id="十五、Proxy-Authorization"><a href="#十五、Proxy-Authorization" class="headerlink" title="十五、Proxy-Authorization"></a>十五、Proxy-Authorization</h3><p>此首部字段用于告知代理服务器所需要的认证信息。这个认证只发生于客户端与代理服务器之间。客户端与服务器之间的认证需要使用首部字段 Authorization。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Proxy-Authorization</span>: Basic dGlwOjkpNLAGfFY5</span><br></pre></td></tr></table></figure></p>
+<h3 id="十六、Range"><a href="#十六、Range" class="headerlink" title="十六、Range"></a>十六、Range</h3><p>此首部字段用于告知服务器获取部分资源的范围请求，例如以下示例就是获取从第 5001 字节至第 10000 字节的资源。服务器处理请求之后返回的状态码应该为 206 Partial Content。无法处理该请求时，应该返回状态码 200 OK 以及全部资源。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Range</span>: 5001-10000</span><br></pre></td></tr></table></figure></p>
+<h3 id="十七、Referer"><a href="#十七、Referer" class="headerlink" title="十七、Referer"></a>十七、Referer</h3><p>此首部字段会告知服务器请求的原始资源 URI。但是，直接在浏览器地址栏输入 URI 或者出于安全考虑时，也可以不发送该首部字段。另外，Referer 的正确拼写应该是 Referrer，不知为何，这个错误一直延续至今。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Referer</span>: http://www.jd.com</span><br></pre></td></tr></table></figure></p>
+<h3 id="十八、TE"><a href="#十八、TE" class="headerlink" title="十八、TE"></a>十八、TE</h3><p>此首部字段用于告知服务器客户端能够处理响应的传输编码方式及相对优先级。它和首部字段 Accept-Encoding 的功能很相似，但是用于传输编码。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">TE</span>: gzip, deflate;q=0.5</span><br></pre></td></tr></table></figure></p>
+<h3 id="十九、User-Agent"><a href="#十九、User-Agent" class="headerlink" title="十九、User-Agent"></a>十九、User-Agent</h3><p>此首部字段会将创建请求的浏览器和用户代理名称等信息传达给服务器。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">User-Agent</span>: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:13.0) Gecko/⇒20100101 Firefox/13.0.1</span><br></pre></td></tr></table></figure></p>
+<h2 id="HTTP-响应头字段"><a href="#HTTP-响应头字段" class="headerlink" title="HTTP 响应头字段"></a>HTTP 响应头字段</h2><p>响应首部字段是由服务器端向客户端返回响应报文中所使用的字段，用过补充响应的附加信息、服务器信息，以及对客户端的附加要求等信息。</p>
+<h3 id="一、Accept-Ranges"><a href="#一、Accept-Ranges" class="headerlink" title="一、Accept-Ranges"></a>一、Accept-Ranges</h3><p>此首部字段用于告知客户端服务器是否能处理范围请求。如果能处理返回的值为 bytes，否则返回的值为 none。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Accept-Ranges</span>: bytes</span><br></pre></td></tr></table></figure></p>
+<h3 id="二、Age"><a href="#二、Age" class="headerlink" title="二、Age"></a>二、Age</h3><p>此首部字段用于告知客户端，服务器在多久前创建了响应，单位为秒。若是缓存服务器，则是指缓存后的响应再次发起认证到认证完成的时间值。代理创建响应时必须带上此首部字段。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Age</span>: 600</span><br></pre></td></tr></table></figure></p>
+<h3 id="三、ETag"><a href="#三、ETag" class="headerlink" title="三、ETag"></a>三、ETag</h3><p>它是一种可将资源以字符串形式做唯一标识的方式。服务器会为每份资源分配对应的 ETag 值。资源更新时，ETag 值也会更新。生成 ETag 值的算法由服务器决定。ETag 值分为两种：</p>
+<ul>
+<li>强 ETag 值</li>
+</ul>
+<p>不认实体发生多么细微的变化都会改变其值。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ETag</span>: "usagi-1234"</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>弱 ETag 值</li>
+</ul>
+<p>只用于提示资源是否相同，只有资源发生了根本改变，产生差异时才会改变 ETag 值，而且在字符值最开始处附加 W/。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ETag</span>: W/"usagi-1234"</span><br></pre></td></tr></table></figure></p>
+<h3 id="四、Location"><a href="#四、Location" class="headerlink" title="四、Location"></a>四、Location</h3><p>几乎所有的浏览器在接收到包含首部字段 Location 的响应后，都会强制性地尝试进行资源重定向。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Location</span>: http://www.jd.com</span><br></pre></td></tr></table></figure></p>
+<h3 id="五、Proxy-Authenticate"><a href="#五、Proxy-Authenticate" class="headerlink" title="五、Proxy-Authenticate"></a>五、Proxy-Authenticate</h3><p>把由代理服务器所要求的认证信息发送给客户端。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Proxy-Authenticate</span>: Basic realm="Usagidesign Auth"</span><br></pre></td></tr></table></figure></p>
+<h3 id="六、Retry-After"><a href="#六、Retry-After" class="headerlink" title="六、Retry-After"></a>六、Retry-After</h3><p>此首部字段告知客户端应该在多久之后再次发送请求。主要是配合状态码 503 Service Unavailable 或者 3xx Redirect。可以指定具体的时间值，也可以是创建响应后的秒数。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Retry-After</span>: 120</span><br></pre></td></tr></table></figure></p>
+<h3 id="七、Server"><a href="#七、Server" class="headerlink" title="七、Server"></a>七、Server</h3><p>此首部字段告知客户端当前服务器上安装的 HTTP 服务器应用程序的信息。不仅仅有应用程序的名称，还有可能包括版本号和安装时启用的可选项。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Server</span>: Apache/2.2.17 (Unix)</span><br><span class="line"><span class="attribute">Server</span>: Apache/2.2.6 (Unix) PHP/5.2.5</span><br></pre></td></tr></table></figure></p>
+<h3 id="八、Vary"><a href="#八、Vary" class="headerlink" title="八、Vary"></a>八、Vary</h3><p>此首部字段可对缓存进行控制。从代理服务器收到源服务器返回包含 Vary 的响应之后，若要再进行缓存，仅对请求中含有相同 Vary 字段值的请求返回缓存。即使请求相同的资源，但是 Vary 指定的首部字段值不相同，也要必须从源服务器重新获取资源。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Vary</span>: Accept-Language</span><br></pre></td></tr></table></figure></p>
+<h3 id="九、WWW-Authenticate"><a href="#九、WWW-Authenticate" class="headerlink" title="九、WWW-Authenticate"></a>九、WWW-Authenticate</h3><p>此首部字段用于 HTTP 访问认证。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">WWW-Authenticate</span>: Basic realm="Usagidesign Auth"</span><br></pre></td></tr></table></figure></p>
+<h2 id="HTTP-实体头字段"><a href="#HTTP-实体头字段" class="headerlink" title="HTTP 实体头字段"></a>HTTP 实体头字段</h2><p>实体首部字体是包含在请求报文和响应报文中的实体部分所使用的首部，用于补充内容的更新时间等与实体相关的信息。</p>
+<h3 id="一、Allow"><a href="#一、Allow" class="headerlink" title="一、Allow"></a>一、Allow</h3><p>此首部字段用于告知客户端能够支持 Request-URI 指定资源的 HTTP 方法。当服务器收到不支持的 HTTP 方法时，会返回状态码 405 Method Not Allowed，并且还会把所有支持的 HTTP 方法写入首部字段 Allow 后返回。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Allow</span>: GET, HEAD</span><br></pre></td></tr></table></figure></p>
+<h3 id="二、Content-Encoding"><a href="#二、Content-Encoding" class="headerlink" title="二、Content-Encoding"></a>二、Content-Encoding</h3><p>此首部字段用于告知客户端服务器对实体的主体部分选用的内容编码方式。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Encoding</span>: gzip</span><br></pre></td></tr></table></figure></p>
+<h3 id="三、Content-Language"><a href="#三、Content-Language" class="headerlink" title="三、Content-Language"></a>三、Content-Language</h3><p>此首部字体用于告知客户端，实体主体使用的自然语言（指中文或者英文等）。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Language</span>: zh-CN</span><br></pre></td></tr></table></figure></p>
+<h3 id="四、Content-Length"><a href="#四、Content-Length" class="headerlink" title="四、Content-Length"></a>四、Content-Length</h3><p>此首部字段表明了实体主体部分的大小（单位是字节）。对实体主体进行内容编码传输时，不能再使用 Content-Length 首部字段。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Length</span>: 15000</span><br></pre></td></tr></table></figure></p>
+<h3 id="五、Content-Location"><a href="#五、Content-Location" class="headerlink" title="五、Content-Location"></a>五、Content-Location</h3><p>此首部字段表示的是报文主体返回资源对应的 URI。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Location</span>: http://www.jd.com/index.html</span><br></pre></td></tr></table></figure></p>
+<h3 id="六、Content-MD5"><a href="#六、Content-MD5" class="headerlink" title="六、Content-MD5"></a>六、Content-MD5</h3><p>此首部字段是一串由 MD5 算法生成的值，其目的在于检查报文主体在传输过程中是否保持完整。客户端会对接收的报文主体执行相同的 MD5 算法，然后与此首部字段值进行比较。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-MD5</span>: OGFkZDUwNGVhNGY3N2MxMDIwZmQ4NTBmY2IyTY==</span><br></pre></td></tr></table></figure></p>
+<h3 id="七、Content-Range"><a href="#七、Content-Range" class="headerlink" title="七、Content-Range"></a>七、Content-Range</h3><p>作为返回响应时使用此首部字段，能告知客户端返回的实体的哪个部分符合范围请求。字段值以字节为单位。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Range</span>: bytes 5001-10000/10000</span><br></pre></td></tr></table></figure></p>
+<h3 id="八、Content-Type"><a href="#八、Content-Type" class="headerlink" title="八、Content-Type"></a>八、Content-Type</h3><p>此首部字段说明了实体主体内对象的媒体类型。字段值用 type/subtype 形式赋值。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Type</span>: text/html; charset=UTF-8</span><br></pre></td></tr></table></figure></p>
+<h3 id="九、Expires"><a href="#九、Expires" class="headerlink" title="九、Expires"></a>九、Expires</h3><p>此首部字段用于告知客户端缓存资源失效的日期。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Expires</span>: Wed, 04 Jul 2012 08:26:05 GMT</span><br></pre></td></tr></table></figure></p>
+<h3 id="十、Last-Modified"><a href="#十、Last-Modified" class="headerlink" title="十、Last-Modified"></a>十、Last-Modified</h3><p>此首部字段用来指明资源的最后修改时间。<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Last-Modified</span>: Wed, 23 May 2012 09:59:55 GMT</span><br></pre></td></tr></table></figure></p>
+<h1 id="HTTP-请求过程"><a href="#HTTP-请求过程" class="headerlink" title="HTTP 请求过程"></a>HTTP 请求过程</h1><ol>
+<li>域名解析</li>
+<li>与目标 IP 建立起基于 TCP 的 HTTP 连接</li>
+<li>传输请求数据</li>
+<li>服务器收到请求数据</li>
+<li>服务器执行对应的 CGI 程序进行处理</li>
+<li>服务器把处理结果通过之前建立起来的 HTTP 连接响应给客户端</li>
+<li>客户端将响应结果处理后渲染给用户，同时服务器关闭与客户端建立的连接</li>
+</ol>
+<h1 id="HTTP-2-0-的特性"><a href="#HTTP-2-0-的特性" class="headerlink" title="HTTP 2.0 的特性"></a>HTTP 2.0 的特性</h1><h2 id="一、HTTP-2-0：改进传输性能"><a href="#一、HTTP-2-0：改进传输性能" class="headerlink" title="一、HTTP 2.0：改进传输性能"></a>一、HTTP 2.0：改进传输性能</h2><blockquote>
+<p>HTTP 2.0 的主要目标是改进传输性能，实现低延迟和高吞吐量。从另一方面看，HTTP 的高层协议语义并不会因为这次版本升级而受影响。所有 HTTP 首部、值，以及它们的使用场景都不会变。</p>
+</blockquote>
+<p><strong> 现有的任何网站和应用，无需做任何修改都可以在 HTTP 2.0 上跑起来。不用为了利用 HTTP 2.0 的好处而修改标记。HTTP 服务器必须运行 HTTP 2.0 协议，但大部分用户都不会因此而受到影响。</strong></p>
+<h2 id="二、HTTP2-0-历史及其与-SPDY-的渊源"><a href="#二、HTTP2-0-历史及其与-SPDY-的渊源" class="headerlink" title="二、HTTP2.0 历史及其与 SPDY 的渊源"></a>二、HTTP2.0 历史及其与 SPDY 的渊源</h2><blockquote>
+<p>SPDY 是谷歌开发的一个实验性协议，于 2009 年年中发布，主要目标是通过解决 HTTP 1.1 中广为人知的一些性能限制，来减少网页的加载延迟</p>
+</blockquote>
+<h3 id="SPDY-协议设定的目标"><a href="#SPDY-协议设定的目标" class="headerlink" title="SPDY 协议设定的目标"></a>SPDY 协议设定的目标</h3><ul>
+<li>页面加载时间（PLT，Page • Load Time）降低 50%；</li>
+<li>无需网站作者修改任何内容；</li>
+<li>把部署复杂性降至最低，无需变更网络基础设施；</li>
+<li>与开源社区合作开发这个新协议；</li>
+<li><p>收集真实性能数据，验证这个实验性协议是否有效。</p>
+<p><img src="https://raw.githubusercontent.com/zqjflash/http2-protocol/master/binary-frame-layout.png" alt="Alt text"></p>
+</li>
+</ul>
+<h3 id="注：为了达到降低-50-页面加载时间的目标，SPDY-引入了一个新的二进制分帧数据层，以实现多向请求和响应、优先次序、最小化及消除不必要的网络延迟，目的是更有效地利用底层-TCP-连接；"><a href="#注：为了达到降低-50-页面加载时间的目标，SPDY-引入了一个新的二进制分帧数据层，以实现多向请求和响应、优先次序、最小化及消除不必要的网络延迟，目的是更有效地利用底层-TCP-连接；" class="headerlink" title="注：为了达到降低 50% 页面加载时间的目标，SPDY 引入了一个新的二进制分帧数据层，以实现多向请求和响应、优先次序、最小化及消除不必要的网络延迟，目的是更有效地利用底层 TCP 连接；"></a>注：为了达到降低 50% 页面加载时间的目标，SPDY 引入了一个新的二进制分帧数据层，以实现多向请求和响应、优先次序、最小化及消除不必要的网络延迟，目的是更有效地利用底层 TCP 连接；</h3><h3 id="HTTP-WG（HTTP-Working-Group）在-2012-年初把-HTTP-2-0-提到了议事日程，吸取-SPDY-的经验教训，并在此基础上制定官方标准"><a href="#HTTP-WG（HTTP-Working-Group）在-2012-年初把-HTTP-2-0-提到了议事日程，吸取-SPDY-的经验教训，并在此基础上制定官方标准" class="headerlink" title="HTTP-WG（HTTP Working Group）在 2012 年初把 HTTP 2.0 提到了议事日程，吸取 SPDY 的经验教训，并在此基础上制定官方标准"></a>HTTP-WG（HTTP Working Group）在 2012 年初把 HTTP 2.0 提到了议事日程，吸取 SPDY 的经验教训，并在此基础上制定官方标准</h3><h2 id="三、HTTP2-0-深入探究"><a href="#三、HTTP2-0-深入探究" class="headerlink" title="三、HTTP2.0 深入探究"></a>三、HTTP2.0 深入探究</h2><blockquote>
+<p>HTTP/2.0 应该满足如下条件：</p>
+</blockquote>
+<ul>
+<li>相对于使用 TCP 的 HTTP 1.1，• 用户在大多数情况下的感知延迟要有实质上、可度量的改进；</li>
+<li>解决 HTTP 中的 “队首阻塞” 问题；</li>
+<li>并行操作无需与服务器建立多个连接，从而改进 TCP 的利用率，特别是拥塞控制方面；</li>
+<li>保持 HTTP 1.1 的语义，利用现有文档，包括（但不限于）HTTP 方法、状态码、URI，以及首部字段；</li>
+<li>明确规定 HTTP 2.0 如何与 HTTP 1.x 互操作，特别是在中间介质上；</li>
+<li>明确指出所有新的可扩展机制以及适当的扩展策略。</li>
+</ul>
+<h3 id="HTTP-2-0-致力于突破上一代标准众所周知的性能限制，但它也是对之前-1-x-标准的扩展，而非替代。之所以要递增一个大版本到-2-0，主要是因为它改变了客户端与服务器之间交换数据的方式，HTTP-2-0-增加了新的二进制分帧数据层"><a href="#HTTP-2-0-致力于突破上一代标准众所周知的性能限制，但它也是对之前-1-x-标准的扩展，而非替代。之所以要递增一个大版本到-2-0，主要是因为它改变了客户端与服务器之间交换数据的方式，HTTP-2-0-增加了新的二进制分帧数据层" class="headerlink" title="HTTP 2.0 致力于突破上一代标准众所周知的性能限制，但它也是对之前 1.x 标准的扩展，而非替代。之所以要递增一个大版本到 2.0，主要是因为它改变了客户端与服务器之间交换数据的方式，HTTP 2.0 增加了新的二进制分帧数据层"></a>HTTP 2.0 致力于突破上一代标准众所周知的性能限制，但它也是对之前 1.x 标准的扩展，而非替代。之所以要递增一个大版本到 2.0，主要是因为它改变了客户端与服务器之间交换数据的方式，HTTP 2.0 增加了新的二进制分帧数据层</h3><h2 id="四、HTTP2-0-设计和技术目标"><a href="#四、HTTP2-0-设计和技术目标" class="headerlink" title="四、HTTP2.0 设计和技术目标"></a>四、HTTP2.0 设计和技术目标</h2><blockquote>
+<p>HTTP/2.0 通过支持首部字段压缩和在同一连接上发送多个并发消息，让应用更有效地利用网络资源，减少感知的延迟时间。而且，它还支持服务器到客户端的主动推送机制。</p>
+</blockquote>
+<ul>
+<li><p>二进制分帧层</p>
+<ul>
+<li>HTTP 2.0 二进制分帧层，封装 HTTP 消息并在客户端与服务器之间传输</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/zqjflash/http2-protocol/master/binary-frame-layout.png" alt="Alt text"></p>
+<ul>
+<li><p>HTTP2.0 将所有传输的信息分割为更小的消息和帧，并对它们采用二进制格式的编码。</p>
+</li>
+<li><p>注：HTTPS 是二进制分帧的另一个典型示例：所有 HTTP 消息都以透明的方式为我们编码和解码，不必对应用进行任何修改。HTTP2.0 工作原理有点类似</p>
+</li>
+</ul>
+</li>
+<li><p>流、消息和帧</p>
+<ul>
+<li>流：流是连接中的一个虚拟信道，可以承载双向的消息；每个流都有一个唯一的整数标识符（1、2…N）；</li>
+<li>消息：是指逻辑上的 HTTP 消息，比如请求、响应等，由一或多个帧组成。</li>
+<li>帧：HTTP 2.0 通信的最小单位，每个帧包含帧首部，至少也会标识出当前帧所属的流，承载着特定类型的数据，如 HTTP 首部、负荷，等等</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/zqjflash/http2-protocol/master/http2-connect-stream.png" alt="Alt text"></p>
+<ul>
+<li>HTTP 2.0 的所有帧都采用二进制编码，所有首部数据都会被压缩。</li>
+<li>所有通信都在一个 TCP 连接上完成。</li>
+<li>HTTP 2.0 把 HTTP 协议通信的基本单位缩小为一个一个的帧，这些帧对应着逻辑流中的消息。相应地，很多流可以并行地在同一个 TCP 连接上交换消息</li>
+</ul>
+</li>
+<li><p>多向请求与响应</p>
+<ul>
+<li><p>HTTP 2.0 中新的二进制分帧层突破了这些限制，实现了多向请求和响应：客户端和服务器可以把 HTTP 消息分解为互不依赖的帧，然后乱序发送，最后再在另一端把它们重新组合起来</p>
+<p><img src="https://raw.githubusercontent.com/zqjflash/http2-protocol/master/http2-request-more.png" alt="Alt text"></p>
+</li>
+<li><p>图中包含了同一个连接上多个传输中的数据流：客户端正在向服务器传输一个 DATA 帧（stream 5），与此同时，服务器正向客户端乱序发送 stream 1 和 stream 3 的一系列帧。此时，一个连接上有 3 个请求 / 响应并行交换！</p>
+</li>
+<li><p>把 HTTP 消息分解为独立的帧，交错发送，然后在另一端重新组装是 HTTP 2.0 最重要的一项增强。这个机制会在整个 Web 技术栈中引发一系列连锁反应，从而带来巨大的性能提升。</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 可以并行交错地发送请求，请求之间互不影响；</span><br><span class="line">* 可以并行交错地发送响应，响应之间互不干扰；</span><br><span class="line">* 只使用一个连接即可并行发送多个请求和响应；</span><br><span class="line">* 消除不必要的延迟，从而减少页面加载的时间；</span><br><span class="line">* 不必再为绕过 HTTP 1.x 限制而多做很多工作；</span><br></pre></td></tr></table></figure>
+<ul>
+<li>HTTP 2.0 的二进制分帧机制解决了 HTTP 1.x 中存在的队首阻塞问题，也消除了并行处理和发送请求及响应时对多个连接的依赖。</li>
+</ul>
+</li>
+<li><p>请求优先级</p>
+<ul>
+<li>把 HTTP 消息分解为很多独立的帧之后，就可以通过优化这些帧的交错和传输顺序，每个流都可以带有一个 31 比特的优先值：0 表示最高优先级；2 的 31 次方 - 1 表示最低优先级。</li>
+<li>服务器可以根据流的优先级，控制资源分配（CPU、内存、带宽），而在响应数据准备好之后，优先将最高优先级的帧发送给客户端。</li>
+<li>HTTP 2.0 一举解决了所有这些低效的问题：浏览器可以在发现资源时立即分派请求，指定每个流的优先级，让服务器决定最优的响应次序。这样请求就不必排队了，既节省了时间，也最大限度地利用了每个连接。</li>
+</ul>
+</li>
+<li><p>每个来源一个连接</p>
+<ul>
+<li>有了新的分帧机制后，HTTP 2.0 不再依赖多个 TCP 连接去实现多流并行了。每个数据流都拆分成很多帧，而这些帧可以交错，还可以分别优先级。HTTP 2.0 连接都是持久化的，而且客户端与服务器之间也只需要一个连接即可。<ul>
+<li>实验表明，客户端使用更少的连接肯定可以降低延迟时间。HTTP 2.0 发送的总分组数量比 HTTP 差不多要少 40%。</li>
+<li>大多数 HTTP 连接的时间都很短，而且是突发性的，但 TCP 只在长时间连接传输大块数据时效率才最高。HTTP 2.0 通过让所有数据流共用同一个连接，可以更有效地使用 TCP 连接。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>流量控制</p>
+<ul>
+<li>HTTP 2.0 为数据流和连接的流量控制提供了一个简单的机制：<ul>
+<li>流量控制基于每一跳进行，而非端到端的控制；</li>
+<li>流量控制基于窗口更新帧进行，即接收方广播自己准备接收某个数据流的多少字节，以及对整个连接要接收多少字节；</li>
+<li>流量控制窗口大小通过 WINDOW_UPDATE 帧更新，这个字段指定了流 ID 和窗口大小递增值；</li>
+<li>流量控制有方向性，即接收方可能根据自己的情况为每个流乃至整个连接设置任意窗口大小；</li>
+<li>流量控制可以由接收方禁用，包括针对个别的流和针对整个连接。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>服务器推送</p>
+<ul>
+<li><p>HTTP 2.0 新增的一个强大的新功能，就是服务器可以对一个客户端请求发送多个响应。服务器向客户端推送资源无需客户端明确地请求。</p>
+<p><img src="https://raw.githubusercontent.com/zqjflash/http2-protocol/master/http2-server-push.png" alt="Alt text"></p>
+</li>
+<li><p>HTTP 2.0 连接后，客户端与服务器交换 SETTINGS 帧，借此可以限定双向并发的流的最大数量。因此，客户端可以限定推送流的数量，或者通过把这个值设置为 0 而完全禁用服务器推送。</p>
+</li>
+<li><p>所有推送的资源都遵守同源策略。换句话说，服务器不能随便将第三方资源推送给客户端，而必须是经过双方确认才行。</p>
+</li>
+<li><p>PUSH_PROMISE：所有服务器推送流都由 PUSH_PROMISE 发端，服务器向客户端发出的有意推送所述资源的信号。客户端接收到 PUSH_PROMISE 帧之后，可以视自身需求选择拒绝这个流</p>
+</li>
+<li><p>几点限制：</p>
+<ul>
+<li>服务器必须遵循请求 - 响应的循环，只能借着对请求的响应推送资源</li>
+<li>PUSH_PROMISE 帧必须在返回响应之前发送，以免客户端出现竞态条件。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>首部压缩（HPACK 压缩算法，一边用 index mapping table 压缩，一边编码，这个 table 由静态表和动态表组成）</p>
+<ul>
+<li><p>http2.0 会压缩首部元数据：在客户端和服务器端使用 “首部表” 来跟踪和存储之前发送的键值对，对于相同的数据，不再通过每次请求和响应发送；“首部表”在 http2.0 的连接存续期内始终存在，由客户端和服务器共同渐进地更新；每个新的首部键值对要么追加到当前表的末尾，要么替换表中之前的值。</p>
+</li>
+<li><p>http2.0 首部差异化传输</p>
+<p><img src="https://raw.githubusercontent.com/zqjflash/http2-protocol/master/http2-header-diff.png" alt="Alt text"></p>
+<ul>
+<li>请求与响应首部的定义在 HTTP2.0 中基本没有改变，只是所有首部键必须全部小写，而且请求行要独立为 :method、:scheme、:host、:path 这些键值对。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>有效的 HTTP2.0 升级与发现</p>
+<ul>
+<li><p>大多数现代浏览器都内置有高效的后台升级机制，支持 HTTP2.0 的客户端在发起新请求之前，必须能发现服务器及所有中间设备是否支持 HTTP2.0 协议。有三种可能的情况：</p>
+<ul>
+<li>通过 TLS 和 ALPN 发起新的 HTTPS 连接；</li>
+<li>根据之前的信息发起新的 HTTP 连接；</li>
+<li>没有之前的信息而发起新的 HTTP 连接。</li>
+</ul>
+</li>
+<li><p>HTTPS 协商过程中有一个环节会使用 ALPN（应用层协议协商）。减少网络延迟是 HTTP 2.0 的关键条件，因此在建立 HTTPS 连接时一定会用到 ALPN 协商。</p>
+</li>
+<li><p>通过常规非加密信道建立 HTTP2.0 连接需要多做一点工作。因为 HTTP1.0 和 HTTP2.0 都使用同一个端口（80），有没有服务器是否支持 HTTP2.0 的其他任何信息，此时客户端只能使用 HTTP Upgrade 机制通过协调确定适当的协议：</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Upgrade: HTTP/<span class="number">2.0</span> ➊</span><br><span class="line">HTTP2-Settings: (SETTINGS payload) ➋</span><br><span class="line">HTTP/<span class="number">1.1</span> <span class="number">200</span> OK ➌</span><br><span class="line">HTTP/<span class="number">1.1</span> <span class="number">101</span> Switching Protocols ➍</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➊ 发起带有 HTTP 2.0 Upgrade 首部的 HTTP 1.1 请求</span><br><span class="line">➋ HTTP/2.0 SETTINGS 净荷的 Base64 URL 编码</span><br><span class="line">➌ 服务器拒绝升级，通过 HTTP 1.1 返回响应</span><br><span class="line">➍ 服务器接受 HTTP 2.0 升级，切换到新分帧</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+            <a href="/tags/HTTP/" rel="tag"># HTTP</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/archives/data-types-designing-of-javascript.html" rel="next" title="细说 javascript 的数据类型">
+                <i class="fa fa-chevron-left"></i> 细说 javascript 的数据类型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/archives/vue-data-driving-tutorial-links.html" rel="prev" title="Vue 数据驱动原理教程链接集合">
+                Vue 数据驱动原理教程链接集合 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/icons/icon-128x128.png" alt="BangZ">
+            
+              <p class="site-author-name" itemprop="name">BangZ</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">81</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/istobran" target="_blank" title="GitHub" rel="external nofollow noopener noreferrer"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:i@bangz.me" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-状态码"><span class="nav-text">HTTP 状态码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#完整的-HTTP-状态码表"><span class="nav-text">完整的 HTTP 状态码表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1xx-————-信息状态码"><span class="nav-text">1xx ———— 信息状态码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2xx-————-成功状态码"><span class="nav-text">2xx ———— 成功状态码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3xx-————-重定向状态码"><span class="nav-text">3xx ———— 重定向状态码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4xx-————-客户端错误状态码"><span class="nav-text">4xx ———— 客户端错误状态码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5xx-————-服务器错误状态码"><span class="nav-text">5xx ———— 服务器错误状态码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-头部字段"><span class="nav-text">HTTP 头部字段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-通用头字段"><span class="nav-text">HTTP 通用头字段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Cache-Control"><span class="nav-text">一、Cache-Control</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、connection"><span class="nav-text">二、connection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Date"><span class="nav-text">三、Date</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、Pragma"><span class="nav-text">四、Pragma</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、Trailer"><span class="nav-text">五、Trailer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、Transfer-Encoding"><span class="nav-text">六、Transfer-Encoding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、Upgrade"><span class="nav-text">七、Upgrade</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#八、Via"><span class="nav-text">八、Via</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#九、Warning"><span class="nav-text">九、Warning</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-请求头字段"><span class="nav-text">HTTP 请求头字段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Accept"><span class="nav-text">一、Accept</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Accept-Charset"><span class="nav-text">二、Accept-Charset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Accept-Encoding"><span class="nav-text">三、Accept-Encoding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、Accept-Language"><span class="nav-text">四、Accept-Language</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、Authorization"><span class="nav-text">五、Authorization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、Expect"><span class="nav-text">六、Expect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、From"><span class="nav-text">七、From</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#八、Host"><span class="nav-text">八、Host</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#九、If-Match"><span class="nav-text">九、If-Match</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十、If-Modified-Since"><span class="nav-text">十、If-Modified-Since</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十一、If-None-Match"><span class="nav-text">十一、If-None-Match</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十二、If-Range"><span class="nav-text">十二、If-Range</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十三、If-Unmodified-Since"><span class="nav-text">十三、If-Unmodified-Since</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十四、Max-Forwards"><span class="nav-text">十四、Max-Forwards</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十五、Proxy-Authorization"><span class="nav-text">十五、Proxy-Authorization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十六、Range"><span class="nav-text">十六、Range</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十七、Referer"><span class="nav-text">十七、Referer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十八、TE"><span class="nav-text">十八、TE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十九、User-Agent"><span class="nav-text">十九、User-Agent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-响应头字段"><span class="nav-text">HTTP 响应头字段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Accept-Ranges"><span class="nav-text">一、Accept-Ranges</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Age"><span class="nav-text">二、Age</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、ETag"><span class="nav-text">三、ETag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、Location"><span class="nav-text">四、Location</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、Proxy-Authenticate"><span class="nav-text">五、Proxy-Authenticate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、Retry-After"><span class="nav-text">六、Retry-After</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、Server"><span class="nav-text">七、Server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#八、Vary"><span class="nav-text">八、Vary</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#九、WWW-Authenticate"><span class="nav-text">九、WWW-Authenticate</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-实体头字段"><span class="nav-text">HTTP 实体头字段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Allow"><span class="nav-text">一、Allow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Content-Encoding"><span class="nav-text">二、Content-Encoding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Content-Language"><span class="nav-text">三、Content-Language</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、Content-Length"><span class="nav-text">四、Content-Length</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、Content-Location"><span class="nav-text">五、Content-Location</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、Content-MD5"><span class="nav-text">六、Content-MD5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、Content-Range"><span class="nav-text">七、Content-Range</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#八、Content-Type"><span class="nav-text">八、Content-Type</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#九、Expires"><span class="nav-text">九、Expires</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十、Last-Modified"><span class="nav-text">十、Last-Modified</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-请求过程"><span class="nav-text">HTTP 请求过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-2-0-的特性"><span class="nav-text">HTTP 2.0 的特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、HTTP-2-0：改进传输性能"><span class="nav-text">一、HTTP 2.0：改进传输性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、HTTP2-0-历史及其与-SPDY-的渊源"><span class="nav-text">二、HTTP2.0 历史及其与 SPDY 的渊源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SPDY-协议设定的目标"><span class="nav-text">SPDY 协议设定的目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注：为了达到降低-50-页面加载时间的目标，SPDY-引入了一个新的二进制分帧数据层，以实现多向请求和响应、优先次序、最小化及消除不必要的网络延迟，目的是更有效地利用底层-TCP-连接；"><span class="nav-text">注：为了达到降低 50% 页面加载时间的目标，SPDY 引入了一个新的二进制分帧数据层，以实现多向请求和响应、优先次序、最小化及消除不必要的网络延迟，目的是更有效地利用底层 TCP 连接；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-WG（HTTP-Working-Group）在-2012-年初把-HTTP-2-0-提到了议事日程，吸取-SPDY-的经验教训，并在此基础上制定官方标准"><span class="nav-text">HTTP-WG（HTTP Working Group）在 2012 年初把 HTTP 2.0 提到了议事日程，吸取 SPDY 的经验教训，并在此基础上制定官方标准</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、HTTP2-0-深入探究"><span class="nav-text">三、HTTP2.0 深入探究</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-2-0-致力于突破上一代标准众所周知的性能限制，但它也是对之前-1-x-标准的扩展，而非替代。之所以要递增一个大版本到-2-0，主要是因为它改变了客户端与服务器之间交换数据的方式，HTTP-2-0-增加了新的二进制分帧数据层"><span class="nav-text">HTTP 2.0 致力于突破上一代标准众所周知的性能限制，但它也是对之前 1.x 标准的扩展，而非替代。之所以要递增一个大版本到 2.0，主要是因为它改变了客户端与服务器之间交换数据的方式，HTTP 2.0 增加了新的二进制分帧数据层</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、HTTP2-0-设计和技术目标"><span class="nav-text">四、HTTP2.0 设计和技术目标</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BangZ</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow noopener noreferrer">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next" rel="external nofollow noopener noreferrer">NexT.Muse</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("4MAiIplUcsxIjad83U2IW99g-gzGzoHsz", "nxvNFChEQkVNNMr7yClwBekv");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.get('time'));
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1590725382900')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script></body>
+</html>

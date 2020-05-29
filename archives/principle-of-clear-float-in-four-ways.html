@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><link rel="manifest" href="/manifest.json">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="转自：https://juejin.im/post/59e7190bf265da4307025d91 本文介绍了四种清除浮动的方法，并尝试解释其原理。在理解了各种清除浮动的原理之后，你会发现，很多清除浮动的方法本质上其实是一样的。掌握这些原理，相信你可以根据场景和需求，灵活运用原则发展出不同的清除浮动的方法，而不再死记或拘泥于文中提到的方法。">
+<meta name="keywords" content="HTML5,CSS3,前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="清除浮动的四种方式及其原理理解">
+<meta property="og:url" content="https://hexo.bangz.me/archives/principle-of-clear-float-in-four-ways.html">
+<meta property="og:site_name" content="BangZ&#39;s 梦工厂">
+<meta property="og:description" content="转自：https://juejin.im/post/59e7190bf265da4307025d91 本文介绍了四种清除浮动的方法，并尝试解释其原理。在理解了各种清除浮动的原理之后，你会发现，很多清除浮动的方法本质上其实是一样的。掌握这些原理，相信你可以根据场景和需求，灵活运用原则发展出不同的清除浮动的方法，而不再死记或拘泥于文中提到的方法。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hexo.bangz.me/images/2018/08/2af797ffc0918352ac8d381994ff1a27.webp">
+<meta property="og:image" content="https://hexo.bangz.me/images/2018/08/23e815f13d70590629b3a9d2020b955b.webp">
+<meta property="og:image" content="https://hexo.bangz.me/images/2018/08/7e3621e15592ac42f86c70734fe4e1dc.webp">
+<meta property="og:image" content="https://hexo.bangz.me/images/2018/08/cb75fb0469d3316e2ca6192f8316f7cb.webp">
+<meta property="og:image" content="https://hexo.bangz.me/images/2018/08/aa859ff15404ede93450f03430b2d3ba.webp">
+<meta property="og:updated_time" content="2018-08-15T02:40:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="清除浮动的四种方式及其原理理解">
+<meta name="twitter:description" content="转自：https://juejin.im/post/59e7190bf265da4307025d91 本文介绍了四种清除浮动的方法，并尝试解释其原理。在理解了各种清除浮动的原理之后，你会发现，很多清除浮动的方法本质上其实是一样的。掌握这些原理，相信你可以根据场景和需求，灵活运用原则发展出不同的清除浮动的方法，而不再死记或拘泥于文中提到的方法。">
+<meta name="twitter:image" content="https://hexo.bangz.me/images/2018/08/2af797ffc0918352ac8d381994ff1a27.webp">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="BangZ's 梦工厂" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://hexo.bangz.me/archives/principle-of-clear-float-in-four-ways.html">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>清除浮动的四种方式及其原理理解 | BangZ's 梦工厂</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78277428-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-78277428-2');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BangZ's 梦工厂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">FutureTech Research Center</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives menu-item-active">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-pdf">
+    <a href="/pdfs/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-file"></i> <br>PDF</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hexo.bangz.me/archives/principle-of-clear-float-in-four-ways.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BangZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/icons/icon-128x128.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BangZ's 梦工厂">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">清除浮动的四种方式及其原理理解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-14 21:37:10" itemprop="dateCreated datePublished" datetime="2018-08-14T21:37:10+08:00">2018-08-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-15 10:40:54" itemprop="dateModified" datetime="2018-08-15T10:40:54+08:00">2018-08-15</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术研究/" itemprop="url" rel="index"><span itemprop="name">技术研究</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/archives/principle-of-clear-float-in-four-ways.html" class="leancloud_visitors" data-flag-title="清除浮动的四种方式及其原理理解">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>转自：<a href="https://juejin.im/post/59e7190bf265da4307025d91" rel="external nofollow noopener noreferrer" target="_blank">https://juejin.im/post/59e7190bf265da4307025d91</a></p>
+<p>本文介绍了四种清除浮动的方法，并尝试解释其原理。在理解了各种清除浮动的原理之后，你会发现，很多清除浮动的方法本质上其实是一样的。掌握这些原理，相信你可以根据场景和需求，灵活运用原则发展出不同的清除浮动的方法，而不再死记或拘泥于文中提到的方法。</p>
+<a id="more"></a>
+<h1 id="一、为什么要清除浮动"><a href="#一、为什么要清除浮动" class="headerlink" title="一、为什么要清除浮动"></a>一、为什么要清除浮动</h1><p>在讲清除浮动的方法之前，我们先来了解一下为什么要清除浮动，清除浮动的目的是什么，即，要解决什么样的问题。来看一个浮动的例子(略去了文字内容)：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"topDiv"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"floatDiv"</span>&gt;</span>float left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"textDiv"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"bottomDiv"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>其样式为：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.topDiv</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid black;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.floatDiv</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> dotted red;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">4px</span>;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.bottomDiv</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">5px</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> dotted black;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.textDiv</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在 chrome 中渲染的效果如下图所示：<br><img src="/images/2018/08/2af797ffc0918352ac8d381994ff1a27.webp" alt=""></p>
+<p>这肯定不是我们想要的渲染效果，它可能存在如下问题：</p>
+<ol>
+<li>文字围绕浮动元素排版，但我们可能希望文字（<code>.textDiv</code>）排列在浮动元素下方，或者，我们并不希望 <code>.textDiv</code> 两边有浮动元素存在。</li>
+<li>浮动元素排版超出了其父级元素（<code>.topDiv</code>），父元素的高度出现了塌缩，若没有文字高度的支撑，不考虑边框，父级元素高度会塌缩成零。</li>
+<li>浮动元素甚至影响到了其父元素的兄弟元素（<code>.bottomDiv</code>）排版。因为浮动元素脱离了文档流，<code>.bottomDiv</code> 在计算元素位置的时候会忽略其影响，紧接着上一个元素的位置继续排列。</li>
+</ol>
+<p>解决第一个问题，需要清除 <code>.textDiv</code> 周围的浮动，而解决第二个问题，因为父元素的兄弟元素位置只受父元素位置的影响，就需要一种方法将父级元素的高度撑起来，将浮动元素包裹在其中，避免浮动元素影响父元素外部的元素排列。</p>
+<p>接下来开始介绍清除浮动的方法。</p>
+<h1 id="二、清除浮动的方法"><a href="#二、清除浮动的方法" class="headerlink" title="二、清除浮动的方法"></a>二、清除浮动的方法</h1><h2 id="1-利用-clear-样式"><a href="#1-利用-clear-样式" class="headerlink" title="1. 利用 clear 样式"></a>1. 利用 clear 样式</h2><p>还是开篇的例子，我们给需要清除浮动的元素添加如下样式：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.textDiv</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid blue;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">clear</span>: left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>清除浮动后的渲染效果如下：<br><img src="/images/2018/08/23e815f13d70590629b3a9d2020b955b.webp" alt=""></p>
+<p>解释一下：  </p>
+<p>通过上面的样式，<code>.textDiv</code> 告诉浏览器，我的左边不允许有浮动的元素存在，请清除掉我左边的浮动元素。然而，因为浮动元素（<code>.floatDiv</code>）位置已经确定，浏览器在计算 <code>.textDiv</code> 的位置时，为满足其需求，将 <code>.textDiv</code> 渲染在浮动元素下方，保证了 <code>.textDiv</code> 左边没有浮动元素。同时可以看出，父元素的高度也被撑起来了，其兄弟元素的渲染也不再受到浮动的影响，这是因为 <code>.textDiv</code> 仍然在文档流中，它必须在父元素的边界内，父元素只有增加其高度才能达到此目的，可以说是一个意外收获。(<code>clear</code> 的值为 <code>both</code> 也有相同的效果，通俗理解就是，哪边不允许有浮动元素，<code>clear</code> 就是对应方向的值，两边都不允许就是 <code>both</code>)<br>但是，如果我们把 HTML 中的 <code>.floatDiv</code> 和 <code>.textDiv</code> 交换一下位置呢？<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"topDiv"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"textDiv"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"floatDiv"</span>&gt;</span>float left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"bottomDiv"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>无论 <code>.textDiv</code> 是否应用清除浮动，情况都是下面的样子：</p>
+<p><code>.textDiv</code> 的位置先确定了，于是浮动元素就紧接着 <code>.textDiv</code> 下方渲染在父元素的左侧。然而，父元素的高度并没有被撑起来，没有将浮动影响“内化”，导致浮动影响到了接下来的元素排版。<br>看来，为达到撑起父元素高度的目的，使用 <code>clear</code> 清除浮动的方法还是有适用范围的。我们需要更加通用和可靠的方法。<br>（这里澄清一下，单从元素清除浮动的角度，<code>clear</code> 完全已经达到了目的，它已经使得 <code>.textDiv</code> 特定的方向上不再有浮动元素，清除浮动其实仅仅针对需要清除浮动的元素本身而言，只关注自身需求是否达到，和外界没有什么关系，它不关注浮动是否超出父元素，以及浮动是否影响到后续元素排列。我们只是利用了浮动的一些特性达到某些目的，但这不是清除浮动关心的问题，只不过，相对于清除浮动，我们可能更加关心这些特性能为我们做些什么而已。我的理解是，清除浮动和撑起父元素高度其实是两个不同的问题，在这里，可以简单地理解为工具和目的之间的关系，接下来要讨论的两个方法都是在利用清除浮动这个工具在解决问题，它并不是清除浮动这个工具本身。不过，我们经常将两者混为一谈。sorry，有点啰嗦，看不懂就是我没表达清楚，跳过即可。。。）</p>
+<h2 id="2-父元素结束标签之前插入清除浮动的块级元素"><a href="#2-父元素结束标签之前插入清除浮动的块级元素" class="headerlink" title="2. 父元素结束标签之前插入清除浮动的块级元素"></a>2. 父元素结束标签之前插入清除浮动的块级元素</h2><p>HTML 结构如下，在有浮动的父级元素的末尾插入了一个没有内容的块级元素 div：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"topDiv"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"textDiv"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"floatDiv"</span>&gt;</span>float left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"blankDiv"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"bottomDiv"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>应用样式：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.topDiv</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid black;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.floatDiv</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> dotted red;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">4px</span>;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.bottomDiv</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">5px</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> dotted black;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.textDiv</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid blue;</span><br><span class="line">&#125;</span><br><span class="line">// 区别在这里</span><br><span class="line"><span class="selector-class">.blankDiv</span> &#123;</span><br><span class="line">    clear: both; // or left</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>渲染效果如下：<br><img src="/images/2018/08/7e3621e15592ac42f86c70734fe4e1dc.webp" alt=""></p>
+<p>原理无需多讲，和第一个例子里 <code>.textDiv</code> 应用 clear 清除浮动，撑起父级元素高度的原理完全一样。这里强调一点，即，在父级元素末尾添加的元素必须是一个 <strong> 块级元素 </strong>，否则无法撑起父级元素高度。</p>
+<h2 id="3-利用伪元素（clearfix）"><a href="#3-利用伪元素（clearfix）" class="headerlink" title="3. 利用伪元素（clearfix）"></a>3. 利用伪元素（clearfix）</h2><p>HTML 结构如下，为了惯例相符，在 <code>.topDiv</code> 的 div 上再添加一个 clearfix 类：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"topDiv clearfix"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"textDiv"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"floatDiv"</span>&gt;</span>float left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"bottomDiv"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>样式应用如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 省略基本的样式</span><br><span class="line">// 区别在这里</span><br><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">'.'</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">clear</span>: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>该样式在 <code>clearfix</code> ，即父级元素的最后，添加了一个 <code>:after</code> 伪元素，通过清除伪元素的浮动，达到撑起父元素高度的目的。注意到该伪元素的 <code>display</code> 值为 <code>block</code>，即，它是一个不可见的块级元素（有的地方使用 <code>table</code>，因为 <code>table</code> 也是一个块级元素）。你可能已经意识到，这也只不过是前一种清除浮动方法（添加空白 div）的另一种变形，其底层逻辑也是完全一样的。前面的三种方法，其本质上是一样的。</p>
+<h2 id="4-利用-overflow-清除浮动"><a href="#4-利用-overflow-清除浮动" class="headerlink" title="4. 利用 overflow 清除浮动"></a>4. 利用 overflow 清除浮动</h2><p>首先直观地看看，<code>overflow</code> 是如何清除浮动的。<br>HTML 结构如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"topDiv"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"floatDiv"</span>&gt;</span>float left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"textDiv"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"bottomDiv"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>样式应用如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.topDiv</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">4px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid black;</span><br><span class="line"></span><br><span class="line">    // 区别在这里</span><br><span class="line">    <span class="selector-tag">overflow</span>: <span class="selector-tag">auto</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.floatDiv</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> dotted red;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">4px</span>;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.bottomDiv</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">5px</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> dotted black;</span><br><span class="line">    <span class="attribute">clear</span>: both;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.textDiv</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>不应用上面标识出来的 CSS 时，渲染结果和本文开始的第一个图形效果相同，应用 CSS 后的渲染效果如下：<br><img src="/images/2018/08/cb75fb0469d3316e2ca6192f8316f7cb.webp" alt=""></p>
+<p>仅仅只在父级元素上添加了一个值为 auto 的 overflow 属性，父元素的高度立即被撑起，将浮动元素包裹在内。看起来，浮动被清除了，浮动不再会影响到后续元素的渲染（严格讲，这和清除浮动没有一点关系，因为不存在哪个元素的浮动被清除，不纠结这个问题）。其实，这里的 overflow 值，还可以是除了 “visible” 之外的任何有效值，它们都能达到撑起父元素高度，清除浮动的目的。不过，有的值可能会带来副作用，比如，scroll 值会导致滚动条始终可见，hidden 会使得超出边框部分不可见等。那它们是如何做到浮动清除的呢？</p>
+<p>要讲清楚这个解决方案的原理，有一个概念始终是绕不过去，那就是<a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context" rel="external nofollow noopener noreferrer" target="_blank">块格式化上下文(BFC)</a>, 然而这又是一个非常抽象的概念，如果要清楚地把这个概念讲出来，恐怕需要非常大的篇幅，这里仅提及和理解该问题相关的内容。</p>
+<p>这是从 <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Block_formatting_context" rel="external nofollow noopener noreferrer" target="_blank">MDN</a> 上摘下来的 BFC 定义：</p>
+<blockquote>
+<p>A block formatting context is a part of a visual CSS rendering of a Web page. It is the region in which the layout of block boxes occurs and in which floats interact with each other.</p>
+</blockquote>
+<p>翻译过来就是：块级格式化上下文是 CSS 可视化渲染的一部分。它是一块区域，规定了内部块盒的渲染方式，以及浮动相互之间的影响关系。<br>块格式化上下文（BFC）有下面几个特点：</p>
+<ol>
+<li>BFC 是就像一道屏障，隔离出了 BFC 内部和外部，内部和外部区域的渲染相互之间不影响。BFC 有自己的一套内部子元素渲染的规则，不影响外部渲染，也不受外部渲染影响。</li>
+<li>BFC 的区域不会和外部浮动盒子的外边距区域发生叠加。也就是说，外部任何浮动元素区域和 BFC 区域是泾渭分明的，不可能重叠。</li>
+<li>BFC 在计算高度的时候，内部浮动元素的高度也要计算在内。也就是说，即使 BFC 区域内只有一个浮动元素，BFC 的高度也不会发生塌缩，高度是大于等于浮动元素的高度的。</li>
+<li>HTML 结构中，当构建 BFC 区域的元素紧接着一个浮动盒子时，即，是该浮动盒子的兄弟节点，BFC 区域会首先尝试在浮动盒子的旁边渲染，但若宽度不够，就在浮动元素的下方渲染。<a href="https://www.w3.org/TR/CSS2/visuren.html#bfc-next-to-float" rel="external nofollow noopener noreferrer" target="_blank">[看这里]</a></li>
+</ol>
+<p>有了这几点，就可以尝试解释为什么 <code>overflow</code> （值不为 <code>visible</code>）可以清除浮动了。<br>当元素设置了 <code>overflow</code> 样式，且值不为 <code>visible</code> 时，该元素就建构了一个 BFC(哪些情况下，元素可以建构出 BFC，可以看查看 CSS 文档对 BFC 的定义)。在我们的例子中，<code>.topDiv</code> 因设置了值为 <code>auto</code> 的 <code>overflow</code> 样式，所以该元素建构出一个 BFC，按照第三个特点，BFC 的高度是要包括浮动元素的，所以 <code>.topDiv</code> 的高度被撑起来，达到了清除浮动影响的目的。(至于为什么值为 <code>visible</code> 的 <code>overflow</code> 不能建构 BFC，<a href="https://stackoverflow.com/questions/9943503/why-does-css2-1-define-overflow-values-other-than-visible-to-establish-a-new-b?answertab=votes#tab-top" rel="external nofollow noopener noreferrer" target="_blank">这个答案</a>给了一个解释)</p>
+<p>其实，这里 overflow 的作用就是为了构建一个 BFC 区域，让内部浮动的影响都得以“内化”。如果你看了<a href="https://www.w3.org/TR/CSS2/visuren.html#block-formatting" rel="external nofollow noopener noreferrer" target="_blank">BFC 的定义</a>，你会发现，构建一个 BFC 区域的方法有很多种，<code>overflow</code> 只是其中的一种，那在这里，我们是否也可以利用其它的方式构建 BFC，且同样能达到清除浮动的目的呢？</p>
+<p>BFC 定义中说，<code>inline-block</code> 同样也能构建 BFC，那我们就用该样式来试试：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.topDiv</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">4px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid black;</span><br><span class="line"></span><br><span class="line">    // 区别在这里</span><br><span class="line">    <span class="selector-tag">display</span>: <span class="selector-tag">inline-block</span>;</span><br><span class="line">&#125;</span><br><span class="line">// 其他样式相同，省略</span><br></pre></td></tr></table></figure></p>
+<p>渲染效果如下：<br><img src="/images/2018/08/aa859ff15404ede93450f03430b2d3ba.webp" alt=""></p>
+<p>效果完全一样！只要我们理解了原理，就可以灵活演变出不同的清除浮动的方法，而不必死记某种手段。</p>
+<p>当然，要说明的是，在实际项目中选择采用哪种方式构建 BFC 是要具体问题具体分析的，因为要考虑到选用的样式自身的作用和影响。这个例子中，选用 <code>inline-block</code> 和选用 <code>overflow</code> 效果完全一样，没有看出有什么副作用，但不代表在其他项目中一样能行得通。甚至对 <code>overflow</code> 值的选择也要考虑其表现和影响。在各种构建 BFC 的方式中，<code>overflow</code> 方式可能是外部影响更可控的一种，我猜想这也许就是为什么普遍采用 <code>overflow</code> 来清除浮动的原因吧。</p>
+<p>到这里，我要分享的清除浮动的方法已经讲完了。其实，如果在不同的使用场景下，对这几个方法进行拆分组合(其实是对底层原理的拆分组合)，还可以实现其他形式不同的清除浮动的方法，最重要的还是对底层原理的把握。知其然，亦知其所以然才是最有效的学习方式。</p>
+<p>下面是文中涉及的链接汇总：</p>
+<ol>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Block_formatting_context" rel="external nofollow noopener noreferrer" target="_blank">MDN 对 BFC 的定义</a></li>
+<li><a href="https://www.w3.org/TR/CSS2/visuren.html#block-formatting" rel="external nofollow noopener noreferrer" target="_blank">CSS 文档对 BFC 的定义和解释，BFC 如何创建，BFC 内部渲染规则</a></li>
+<li><a href="https://stackoverflow.com/questions/9943503/why-does-css2-1-define-overflow-values-other-than-visible-to-establish-a-new-b?answertab=votes#tab-top" rel="external nofollow noopener noreferrer" target="_blank">为什么 overflow 的值为 visible 时，无法清除浮动，而其他值可以，Stack Overflow 上的一个回答</a></li>
+<li><a href="https://www.w3.org/TR/CSS2/visuren.html#bfc-next-to-float" rel="external nofollow noopener noreferrer" target="_blank">BFC 紧跟浮动元素时如何渲染</a></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/HTML5/" rel="tag"># HTML5</a>
+          
+            <a href="/tags/CSS3/" rel="tag"># CSS3</a>
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/archives/sort-algorithm-implement-in-browser.html" rel="next" title="深入浅出浏览器 js 的数组排序算法">
+                <i class="fa fa-chevron-left"></i> 深入浅出浏览器 js 的数组排序算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/archives/openwrt-compile-and-mwan3-config-in-netgear-wndr4300.html" rel="prev" title="在网件 WNDR4300v1 上编译 OpenWRT 并实现多线多拨">
+                在网件 WNDR4300v1 上编译 OpenWRT 并实现多线多拨 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/icons/icon-128x128.png" alt="BangZ">
+            
+              <p class="site-author-name" itemprop="name">BangZ</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">81</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/istobran" target="_blank" title="GitHub" rel="external nofollow noopener noreferrer"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:i@bangz.me" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、为什么要清除浮动"><span class="nav-text">一、为什么要清除浮动</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、清除浮动的方法"><span class="nav-text">二、清除浮动的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-利用-clear-样式"><span class="nav-text">1. 利用 clear 样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-父元素结束标签之前插入清除浮动的块级元素"><span class="nav-text">2. 父元素结束标签之前插入清除浮动的块级元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-利用伪元素（clearfix）"><span class="nav-text">3. 利用伪元素（clearfix）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-利用-overflow-清除浮动"><span class="nav-text">4. 利用 overflow 清除浮动</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BangZ</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow noopener noreferrer">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next" rel="external nofollow noopener noreferrer">NexT.Muse</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("4MAiIplUcsxIjad83U2IW99g-gzGzoHsz", "nxvNFChEQkVNNMr7yClwBekv");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.get('time'));
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1590725382900')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script></body>
+</html>
