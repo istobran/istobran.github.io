@@ -4,8 +4,32 @@
 
     
   <url>
+    <loc>https://hexo.bangz.me/archives/novalogic-wac-script-api-reference.html</loc>
+    <lastmod>2022-12-22T04:13:36.670Z</lastmod>
+    <data>
+        <display>
+        <title>三角洲特种部队 WAC 脚本帮助</title>
+        <pubTime>2022-12-22T03:58:29.000Z</pubTime>
+        
+        <tag>三角洲特种部队</tag>
+         
+        <tag>联合行动</tag>
+         
+        <tag>地图制作</tag>
+         
+         
+           
+             
+              <breadCrumb title="游戏" url="https://hexo.bangz.me/categories/%E6%B8%B8%E6%88%8F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://hexo.bangz.me/archives/data-types-designing-of-javascript.html</loc>
-    <lastmod>2020-05-29T04:08:53.148Z</lastmod>
+    <lastmod>2022-01-25T09:32:43.975Z</lastmod>
     <data>
         <display>
         <title>细说 javascript 的数据类型</title>
@@ -26,6 +50,7 @@
     </data>
     </url>
 
+    
     
   <url>
     <loc>https://hexo.bangz.me/archives/vue-best-ways-to-pass-props-data-in-different-component-relations.html</loc>

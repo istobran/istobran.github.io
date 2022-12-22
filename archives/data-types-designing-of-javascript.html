@@ -128,7 +128,7 @@
 <meta property="og:description" content="现在出来写前端有一段时间了，现在来回头看看，当初大学刚学搞前端的时候，为了快速适应新的语言，直接看后面的内容去了，跳过了基本数据类型的介绍，想当然的觉得 javascript 的数据类型应该也跟其他弱类型语言差不了太多，从而忽略了基本数据类型上的细节。最近随着对 js 语言了解和应用的加深，发现 js 的基本数据类型里面真的大有文章，甚至有不少的语言设计缺陷在里面。所以我打算专门写一篇关于基本数据">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hexo.bangz.me/images/2018/06/data-transformation-of-abstract-equality-omparison.jpeg">
-<meta property="og:updated_time" content="2020-05-29T04:08:53.148Z">
+<meta property="og:updated_time" content="2022-01-25T09:32:43.975Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="细说 javascript 的数据类型">
 <meta name="twitter:description" content="现在出来写前端有一段时间了，现在来回头看看，当初大学刚学搞前端的时候，为了快速适应新的语言，直接看后面的内容去了，跳过了基本数据类型的介绍，想当然的觉得 javascript 的数据类型应该也跟其他弱类型语言差不了太多，从而忽略了基本数据类型上的细节。最近随着对 js 语言了解和应用的加深，发现 js 的基本数据类型里面真的大有文章，甚至有不少的语言设计缺陷在里面。所以我打算专门写一篇关于基本数据">
@@ -421,7 +421,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-05-29 12:08:53" itemprop="dateModified" datetime="2020-05-29T12:08:53+08:00">2020-05-29</time>
+                <time title="修改时间：2022-01-25 17:32:43" itemprop="dateModified" datetime="2022-01-25T17:32:43+08:00">2022-01-25</time>
               
             
           </span>
@@ -696,6 +696,16 @@ L = ObjectL.__proto__ = Function.prototype
 <li>数值 NaN 与任何值都不相等，包括 NaN 本身也不相等（<a href="https://en.wikipedia.org/wiki/IEEE_754" rel="external nofollow noopener noreferrer" target="_blank">IEEE-754 浮点数标准</a>定义的）</li>
 </ul>
 <p>通过这个转换规则就可以很容易解释前面为什么 <code>[] == ![]</code> 的结果为 true 了</p>
+<h1 id="8-加法运算符在运算时的类型转换"><a href="#8-加法运算符在运算时的类型转换" class="headerlink" title="8. 加法运算符在运算时的类型转换"></a>8. 加法运算符在运算时的类型转换</h1><p>这个也是前端的面试中经常会遇到的问题，下面列出几个例子和输出的结果</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> + <span class="string">"2"</span> <span class="comment">// "12"</span></span><br><span class="line"><span class="number">1</span> - <span class="string">"2"</span> <span class="comment">// -1</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>] + [<span class="number">3</span>, <span class="number">4</span>] <span class="comment">// "1,23,4"</span></span><br></pre></td></tr></table></figure>
+<p>可以发现跟前面 == 号在类型转换的时候，流程是不一样的，可以看到 <code>1 + &quot;2&quot;</code> 在运算的过程中，并不是字符串 “2” 转换成了数字 2，而是 1 变成了字符串 “1”</p>
+<p><a href="JavaScript 中加号运算符的类型转换优先级是什么？ - zenoven 的回答 - 知乎 https://www.zhihu.com/question/21484710/answer/52389636">翻了一圈</a>，发现转换规则是这样的：  </p>
+<ol>
+<li>将 A 和 B 都转换为原始值(primitive，执行 ToPrimitive)，这里记为 A1，B1</li>
+<li>如果 A1 和 B1 中有一个值为 string，则将 A1、B1 都转换为 string（执行 ToString），其值记为 A2、B2，将 A2 B2 连接后就是 A+B 的结果</li>
+<li>否则的话将 A1、B1 都转换为 number（执行 ToNumber），其值记为 A3、B3，将 A3 B3 相加即为 A+B 的结果</li>
+</ol>
+<p>在这里最重要的是第二点，string 类型的判断会优先于 number，加法运算两边的操作数任意一个为 string，整个结果就应该为 string 类型的！</p>
 
       
     </div>
@@ -836,7 +846,7 @@ L = ObjectL.__proto__ = Function.prototype
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">81</span>
+                    <span class="site-state-item-count">82</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -859,7 +869,9 @@ L = ObjectL.__proto__ = Function.prototype
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -946,7 +958,13 @@ L = ObjectL.__proto__ = Function.prototype
                     
                       
                     
-                    <span class="site-state-item-count">37</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1003,7 +1021,7 @@ L = ObjectL.__proto__ = Function.prototype
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-javascript-的诞生背景"><span class="nav-text">1. javascript 的诞生背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-基础数据类型表"><span class="nav-text">2. 基础数据类型表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-typeof-操作符上的问题"><span class="nav-text">3. typeof 操作符上的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-typeof-null-的值为-“object”"><span class="nav-text">3.1. typeof null 的值为 “object”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-为什么要多出个-“function”-类型出来"><span class="nav-text">3.2. 为什么要多出个 “function” 类型出来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-“number”-类型中的特殊值"><span class="nav-text">3.3. “number” 类型中的特殊值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-instanceof-操作符上的问题"><span class="nav-text">4. instanceof 操作符上的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-当页面中存在一个或多个-frame-的时候"><span class="nav-text">4.1. 当页面中存在一个或多个 frame 的时候</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-一些相对特殊的判断"><span class="nav-text">4.2. 一些相对特殊的判断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-关于原始类型的包装类"><span class="nav-text">4.3. 关于原始类型的包装类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-关于-null-和-undefined"><span class="nav-text">5. 关于 null 和 undefined</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-这两者在定义上的区别"><span class="nav-text">5.1. 这两者在定义上的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-同时存在的历史原因"><span class="nav-text">5.2. 同时存在的历史原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-二者的缺陷"><span class="nav-text">5.3. 二者的缺陷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-巧用-void-关键字"><span class="nav-text">5.4. 巧用 void 关键字</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-利用-Class-精确判断数据类型"><span class="nav-text">6. 利用 [[Class]] 精确判断数据类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-弱相等运算符在判断时的类型转换"><span class="nav-text">7. 弱相等运算符在判断时的类型转换</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-javascript-的诞生背景"><span class="nav-text">1. javascript 的诞生背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-基础数据类型表"><span class="nav-text">2. 基础数据类型表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-typeof-操作符上的问题"><span class="nav-text">3. typeof 操作符上的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-typeof-null-的值为-“object”"><span class="nav-text">3.1. typeof null 的值为 “object”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-为什么要多出个-“function”-类型出来"><span class="nav-text">3.2. 为什么要多出个 “function” 类型出来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-“number”-类型中的特殊值"><span class="nav-text">3.3. “number” 类型中的特殊值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-instanceof-操作符上的问题"><span class="nav-text">4. instanceof 操作符上的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-当页面中存在一个或多个-frame-的时候"><span class="nav-text">4.1. 当页面中存在一个或多个 frame 的时候</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-一些相对特殊的判断"><span class="nav-text">4.2. 一些相对特殊的判断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-关于原始类型的包装类"><span class="nav-text">4.3. 关于原始类型的包装类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-关于-null-和-undefined"><span class="nav-text">5. 关于 null 和 undefined</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-这两者在定义上的区别"><span class="nav-text">5.1. 这两者在定义上的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-同时存在的历史原因"><span class="nav-text">5.2. 同时存在的历史原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-二者的缺陷"><span class="nav-text">5.3. 二者的缺陷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-巧用-void-关键字"><span class="nav-text">5.4. 巧用 void 关键字</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-利用-Class-精确判断数据类型"><span class="nav-text">6. 利用 [[Class]] 精确判断数据类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-弱相等运算符在判断时的类型转换"><span class="nav-text">7. 弱相等运算符在判断时的类型转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-加法运算符在运算时的类型转换"><span class="nav-text">8. 加法运算符在运算时的类型转换</span></a></li></ol></div>
             
 
           </div>
@@ -1023,7 +1041,7 @@ L = ObjectL.__proto__ = Function.prototype
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -1656,7 +1674,7 @@ L = ObjectL.__proto__ = Function.prototype
   
 
 <script>if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js?t=1590725382900')
+  navigator.serviceWorker.register('/sw.js?t=1671683491098')
     .then(function () {console.log('ServiceWorker Register Successfully.')})
     .catch(function (e) {console.error(e)});
 }
