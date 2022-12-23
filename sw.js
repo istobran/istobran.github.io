@@ -26,13 +26,13 @@ var precacheUrls = [];
 
   precacheUrls.push('/archives/configure-remote-desktop-multi-session-on-windows-10.html');
 
-  precacheUrls.push('/archives/pyqt4-design-beautiful-ui-with-qss-stylesheet.html');
-
   precacheUrls.push('/archives/pyqt4-using-qt-designer-to-draw-gui.html');
 
-  precacheUrls.push('/archives/mysql-data-restore-after-reinstall-system.html');
+  precacheUrls.push('/archives/pyqt4-design-beautiful-ui-with-qss-stylesheet.html');
 
-  precacheUrls.push('/archives/pyqt4-bind-ui-event-by-signal-and-slot.html');
+  precacheUrls.push('/archives/pyqt4-load-photo-image-resources-with-qrc.html');
+
+  precacheUrls.push('/archives/mysql-data-restore-after-reinstall-system.html');
 
 toolbox.precache(precacheUrls);
 toolbox.options = {"networkTimeoutSeconds":5};
